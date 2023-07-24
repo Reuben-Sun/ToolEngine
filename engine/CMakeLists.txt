@@ -4,4 +4,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_subdirectory(client)
 add_subdirectory(core)
-#add_subdirectory(third_party)
+add_subdirectory(third_party)
