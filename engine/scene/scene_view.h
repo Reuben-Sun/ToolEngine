@@ -2,6 +2,8 @@
 
 #include "GLFW/glfw3.h"
 #include <iostream>
+#include "include/vulkan/vulkan.h"
+#include "include/math/vector3.h"
 
 namespace ToolEngine
 {
