@@ -1,4 +1,5 @@
-add_executable(client main.cpp)
+add_executable(client main.cpp client_framework.h client_framework.cpp)
 target_link_libraries(client PRIVATE core)
 target_link_libraries(client PRIVATE imgui)
 target_link_libraries(client PRIVATE glfw)
+target_link_libraries(client PRIVATE scene)
