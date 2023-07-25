@@ -37,3 +37,11 @@ if (NOT TARGET imgui)
 endif()
 
 set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui" PARENT_SCOPE)
+
+if(NOT TARGET tbb)
+  set(TBB_TEST OFF)
+  set(TBB_EXAMPLES OFF)
+  add_subdirectory(tbb)
+  set_property(TARGET tbb PROPERTY FOLDER "ThirdParty")
+  set(TBB_Headers "${CMAKE_CURRENT_SOURCE_DIR}/tbb/include" PARENT_SCOPE)
+endif()

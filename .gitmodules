@@ -4,3 +4,6 @@
 [submodule "engine/third_party/glfw"]
 	path = engine/third_party/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "engine/third_party/tbb"]
+	path = engine/third_party/tbb
+	url = https://github.com/oneapi-src/oneTBB.git
