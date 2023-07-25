@@ -5,7 +5,8 @@ namespace ToolEngine
     void ClientFramework::run()
     {
         SceneView view;
-        view.init();
+        view.viewInit();
+        view.vulkanInit();
         view.run();
         view.cleanup();
     }

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "GLFW/glfw3.h"
 #include <iostream>
-#include "include/vulkan/vulkan.h"
-#include "include/math/vector3.h"
+#include "GLFW/glfw3.h"
+#include "render.h"
 
 namespace ToolEngine
 {
@@ -12,16 +11,20 @@ namespace ToolEngine
     public:
         SceneView();
         ~SceneView();
-        void init();
+        void viewInit();
+        void vulkanInit();
         void run();
         void cleanup();
         static void onErrorCallback(int error_code, const char* description)
         {
             std::cout << "Error" << std::endl;
         }
-        const int SAMPLE_WIDTH = 800;
-        const int SAMPLE_HEIGHT = 400;
+        
     private:
         GLFWwindow* window;
+        Render* render;
+
+        const int SAMPLE_WIDTH = 800;
+        const int SAMPLE_HEIGHT = 400;
     };
 }
