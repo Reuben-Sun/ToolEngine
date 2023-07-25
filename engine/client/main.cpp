@@ -2,7 +2,6 @@
 
 int main()
 {
-    ToolEngine::ClientFramework framework;
-    framework.onStart();
+    ToolEngine::ClientFramework::run();
     return 0;
 }

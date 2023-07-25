@@ -12,14 +12,16 @@ namespace ToolEngine
     public:
         SceneView();
         ~SceneView();
-        static void run();
+        void init();
+        void run();
+        void cleanup();
         static void onErrorCallback(int error_code, const char* description)
         {
             std::cout << "Error" << std::endl;
         }
-        const static int SAMPLE_WIDTH = 800;
-        const static int SAMPLE_HEIGHT = 400;
+        const int SAMPLE_WIDTH = 800;
+        const int SAMPLE_HEIGHT = 400;
     private:
-
+        GLFWwindow* window;
     };
 }

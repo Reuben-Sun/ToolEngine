@@ -9,18 +9,26 @@ namespace ToolEngine
     SceneView::~SceneView()
     {
     }
-    
-    void SceneView::run()
+
+    void SceneView::init()
     {
         glfwSetErrorCallback(onErrorCallback);
         if (!glfwInit()) { return; }
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         char* PROJECT_NAME = "Test";
-        GLFWwindow* window = glfwCreateWindow(SAMPLE_WIDTH, SAMPLE_HEIGHT, PROJECT_NAME, nullptr, nullptr);
+        window = glfwCreateWindow(SAMPLE_WIDTH, SAMPLE_HEIGHT, PROJECT_NAME, nullptr, nullptr);
+    }
+    
+    void SceneView::run()
+    {
         while (!glfwWindowShouldClose(window))
         {
             glfwPollEvents();
         }
+    }
+
+    void SceneView::cleanup()
+    {
         glfwDestroyWindow(window);
         glfwTerminate();
     }
