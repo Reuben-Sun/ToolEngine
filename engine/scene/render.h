@@ -3,8 +3,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <vector>
-#include "include/vulkan/vulkan.h"
 #include "include/math/vector3.h"
+#include <vulkan/vulkan.h>
 
 
 namespace ToolEngine
@@ -24,6 +24,7 @@ namespace ToolEngine
         }
     private:
         VkInstance instance;
+        VkDebugUtilsMessengerEXT debugMessenger;
 
         const std::vector<const char*> validationLayers = {
             "VK_LAYER_KHRONOS_validation"
