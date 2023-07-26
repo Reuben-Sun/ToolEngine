@@ -7,7 +7,7 @@ namespace ToolEngine
         SceneView view;
         view.viewInit();
         view.vulkanInit();
-        view.run();
+        view.mainLoop();
         view.cleanup();
     }
 }

@@ -16,7 +16,8 @@ namespace ToolEngine
         ~Render();
         void createInstance(std::vector<const char*> requiredExtensions);
         void setupDebugMessenger();
-        void setupDevice();
+        void setupPhysicalDevice();
+        void setupLogicalDevice();
         void destroyInstance();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 

@@ -13,7 +13,7 @@ namespace ToolEngine
         ~SceneView();
         void viewInit();
         void vulkanInit();
-        void run();
+        void mainLoop();
         void cleanup();
         static void onErrorCallback(int error_code, const char* description)
         {

@@ -105,7 +105,7 @@ namespace ToolEngine
         }
     }
 
-    void Render::setupDevice()
+    void Render::setupPhysicalDevice()
     {
         uint32_t deviceCount = 0;
         vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
@@ -128,6 +128,11 @@ namespace ToolEngine
         {
             throw std::runtime_error("failed to find a suitable GPU!");
         }
+    }
+
+    void Render::setupLogicalDevice()
+    {
+
     }
 
     void Render::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) 
