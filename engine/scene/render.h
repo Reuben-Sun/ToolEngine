@@ -1,7 +1,11 @@
+#pragma once
+
 #include <stdexcept>
+#include <iostream>
 #include <vector>
 #include "include/vulkan/vulkan.h"
 #include "include/math/vector3.h"
+
 
 namespace ToolEngine
 {
@@ -12,6 +16,12 @@ namespace ToolEngine
         ~Render();
         void createInstance(std::vector<const char*> requiredExtensions);
         void destroyInstance();
+
+        static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
+        {
+            std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+            return VK_FALSE;
+        }
     private:
         VkInstance instance;
 
@@ -25,5 +35,9 @@ namespace ToolEngine
         const bool enableValidationLayers = true;
 #endif
         bool checkValidationLayerSupport();
+        void setupDebugMessenger();
+        void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+        VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
+        void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
     };
 }

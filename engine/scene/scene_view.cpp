@@ -21,17 +21,8 @@ namespace ToolEngine
 
     void SceneView::vulkanInit()
     {
-        uint32_t glfwExtensionCount = 0;
-        const char** glfwExtensions;
-        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-        std::vector<const char*> requiredExtensions;
-        for (uint32_t i = 0; i < glfwExtensionCount; i++) {
-            requiredExtensions.emplace_back(glfwExtensions[i]);
-        }
-        requiredExtensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
-
         render = new Render();
-        render->createInstance(requiredExtensions);
+        render->createInstance(getRequiredExtensions());
     }
     
     void SceneView::run()
@@ -47,6 +38,15 @@ namespace ToolEngine
         render->destroyInstance();
         glfwDestroyWindow(window);
         glfwTerminate();
+    }
+
+    std::vector<const char*> SceneView::getRequiredExtensions()
+    {
+        uint32_t glfwExtensionCount = 0;
+        const char** glfwExtensions;
+        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+        std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+        return extensions;
     }
 
 }

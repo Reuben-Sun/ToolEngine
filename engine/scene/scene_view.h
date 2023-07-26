@@ -26,5 +26,6 @@ namespace ToolEngine
 
         const int SAMPLE_WIDTH = 800;
         const int SAMPLE_HEIGHT = 400;
+        std::vector<const char*> getRequiredExtensions();
     };
 }
