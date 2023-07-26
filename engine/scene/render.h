@@ -15,6 +15,7 @@ namespace ToolEngine
         Render();
         ~Render();
         void createInstance(std::vector<const char*> requiredExtensions);
+        void setupDebugMessenger();
         void destroyInstance();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
@@ -36,7 +37,7 @@ namespace ToolEngine
         const bool enableValidationLayers = true;
 #endif
         bool checkValidationLayerSupport();
-        void setupDebugMessenger();
+        
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
         VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
         void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
