@@ -3,9 +3,9 @@
 #include <stdexcept>
 #include <iostream>
 #include <vector>
-#include "include/math/vector3.h"
 #include <vulkan/vulkan.h>
 
+#include "queue_family_indices.h"
 
 namespace ToolEngine
 {
@@ -16,6 +16,7 @@ namespace ToolEngine
         ~Render();
         void createInstance(std::vector<const char*> requiredExtensions);
         void setupDebugMessenger();
+        void setupDevice();
         void destroyInstance();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
@@ -26,6 +27,7 @@ namespace ToolEngine
     private:
         VkInstance instance;
         VkDebugUtilsMessengerEXT debugMessenger;
+        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 
         const std::vector<const char*> validationLayers = {
             "VK_LAYER_KHRONOS_validation"
@@ -41,5 +43,7 @@ namespace ToolEngine
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
         VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
         void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
+        bool isDeviceSuitable(VkPhysicalDevice device);
+        QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     };
 }

@@ -24,6 +24,7 @@ namespace ToolEngine
         render = new Render();
         render->createInstance(getRequiredExtensions());
         render->setupDebugMessenger();
+        render->setupDevice();
     }
     
     void SceneView::run()
