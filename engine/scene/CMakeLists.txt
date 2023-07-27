@@ -7,7 +7,7 @@ target_link_libraries(scene PRIVATE imgui)
 target_link_libraries(scene PRIVATE glfw)
 target_link_libraries(scene PRIVATE core)
 target_link_libraries(scene PRIVATE tbb)
-target_link_libraries(scene PRIVATE OptickCore)
+target_link_libraries(scene PUBLIC OptickCore)
 target_include_directories(scene PRIVATE ${TBB_Headers})
 target_include_directories(scene PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

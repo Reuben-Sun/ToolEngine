@@ -33,6 +33,7 @@ namespace ToolEngine
     {
         while (!glfwWindowShouldClose(window))
         {
+            OPTICK_FRAME("MainThread")
             glfwPollEvents();
         }
     }
