@@ -8,11 +8,12 @@ namespace ToolEngine
     struct QueueFamilyIndices 
     {
         std::optional<uint32_t> graphicsFamily;
+        std::optional<uint32_t> presentFamily;
 
         bool isComplete() 
         {
             // C++17 feature, similar with NULL Object in Java
-            return graphicsFamily.has_value();
+            return graphicsFamily.has_value() && presentFamily.has_value();
         }
     };
 }

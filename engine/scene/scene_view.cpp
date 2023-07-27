@@ -24,6 +24,7 @@ namespace ToolEngine
         render = new Render();
         render->createInstance(getRequiredExtensions());
         render->setupDebugMessenger();
+        render->setupSurface(window);
         render->setupPhysicalDevice();
         render->setupLogicalDevice();
     }
@@ -38,6 +39,7 @@ namespace ToolEngine
 
     void SceneView::cleanup()
     {
+        render->destroySurface();
         render->destroyInstance();
         glfwDestroyWindow(window);
         glfwTerminate();
