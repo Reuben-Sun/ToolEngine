@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <string>
 #include <vulkan/vulkan.h>
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -45,6 +46,11 @@ namespace ToolEngine
             "VK_LAYER_KHRONOS_validation"
         };
 
+        // not all graphics cards can present image, so we should check whether swapchain is supported 
+        const std::vector<const char*> deviceExtensions = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+        };
+
 #ifdef NDEBUG
         const bool enableValidationLayers = false;
 #else
@@ -55,7 +61,8 @@ namespace ToolEngine
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
         VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
         void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
-        bool isDeviceSuitable(VkPhysicalDevice device);
+        bool checkDeviceSupport(VkPhysicalDevice device);
+        bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     };
 }
