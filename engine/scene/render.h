@@ -10,6 +10,7 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
 #include "queue_family_indices.h"
+#include "swap_chain_support_details.h"
 
 namespace ToolEngine
 {
@@ -56,12 +57,12 @@ namespace ToolEngine
         const bool enableValidationLayers = true;
 #endif
         bool checkValidationLayerSupport();
-        
         void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
         VkResult CreateDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
         void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
         bool checkDeviceSupport(VkPhysicalDevice device);
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-        QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+        QueueFamilyIndices getQueueFamilyIndices(VkPhysicalDevice device);
+        SwapChainSupportDetails getSwapChainSupportDetails(VkPhysicalDevice device);
     };
 }
