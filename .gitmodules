@@ -9,3 +9,6 @@
 [submodule "engine/third_party/tbb"]
 	path = engine/third_party/tbb
 	url = https://github.com/oneapi-src/oneTBB.git
+[submodule "engine/third_party/optick"]
+	path = engine/third_party/optick
+	url = https://github.com/Reuben-Sun/optick.git

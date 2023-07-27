@@ -38,6 +38,7 @@ endif()
 
 set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui" PARENT_SCOPE)
 
+# tbb
 if(NOT TARGET tbb)
   set(TBB_TEST OFF)
   set(TBB_EXAMPLES OFF)
@@ -47,3 +48,8 @@ if(NOT TARGET tbb)
   set(TBB_Headers "${CMAKE_CURRENT_SOURCE_DIR}/tbb/include" PARENT_SCOPE)
 endif()
 
+# optick
+set(OPTICK_INSTALL_TARGETS OFF)
+set(OPTICK_USE_VULKAN ON)
+add_subdirectory(Optick)
+set_property(TARGET OptickCore PROPERTY FOLDER "ThirdParty")
