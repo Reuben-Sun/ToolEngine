@@ -6,6 +6,9 @@
 #include <set>
 #include <string>
 #include <vulkan/vulkan.h>
+#include <limits>
+#include <cstdint>
+#include <algorithm>
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
@@ -24,6 +27,8 @@ namespace ToolEngine
         void setupSurface(GLFWwindow* window);
         void setupPhysicalDevice();
         void setupLogicalDevice();
+        void setupSwapChain();
+
         void destroySurface();
         void destroyInstance();
 
@@ -32,6 +37,10 @@ namespace ToolEngine
             std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
             return VK_FALSE;
         }
+
+        int frameWidth = 0;
+        int frameHeight = 0;
+
     private:
         VkInstance instance;
         VkDebugUtilsMessengerEXT debugMessenger;
@@ -64,5 +73,8 @@ namespace ToolEngine
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         QueueFamilyIndices getQueueFamilyIndices(VkPhysicalDevice device);
         SwapChainSupportDetails getSwapChainSupportDetails(VkPhysicalDevice device);
+        VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+        VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+        VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
     };
 }

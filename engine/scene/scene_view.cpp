@@ -22,11 +22,14 @@ namespace ToolEngine
     void SceneView::vulkanInit()
     {
         render = new Render();
+        glfwGetFramebufferSize(window, &render->frameWidth, &render->frameHeight);
         render->createInstance(getRequiredExtensions());
         render->setupDebugMessenger();
         render->setupSurface(window);
         render->setupPhysicalDevice();
         render->setupLogicalDevice();
+        render->setupSwapChain();
+        
     }
     
     void SceneView::mainLoop()
