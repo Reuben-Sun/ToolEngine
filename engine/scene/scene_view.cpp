@@ -43,6 +43,7 @@ namespace ToolEngine
 
     void SceneView::cleanup()
     {
+        render->destroySwapChain();
         render->destroySurface();
         render->destroyInstance();
         glfwDestroyWindow(window);
