@@ -30,7 +30,7 @@ namespace ToolEngine
         render->setupLogicalDevice();
         render->setupSwapChain();
         render->setupImageViews();
-        
+        render->setupGraphicsPipeline();
     }
     
     void SceneView::mainLoop()

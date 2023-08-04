@@ -281,6 +281,11 @@ namespace ToolEngine
         }
     }
 
+    void Render::setupGraphicsPipeline()
+    {
+
+    }
+
     void Render::destroySurface()
     {
         vkDestroySurfaceKHR(instance, surface, nullptr);

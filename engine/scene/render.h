@@ -29,6 +29,7 @@ namespace ToolEngine
         void setupLogicalDevice();
         void setupSwapChain();
         void setupImageViews();
+        void setupGraphicsPipeline();
 
         void destroySurface();
         void destroyInstance();
