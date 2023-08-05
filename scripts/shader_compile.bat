@@ -1,7 +1,7 @@
 @echo off
 
-set SHADER_DIR=../shaders/
-set TARGET_DIR=../shaders/SPV/
+set SHADER_DIR=../engine/shaders/
+set TARGET_DIR=../engine/shaders/spv/
 set COMPILER_TOOL=C:/Programs/Vulkan/Bin/glslc.exe
 
 %COMPILER_TOOL% %SHADER_DIR%shader.vert -o %TARGET_DIR%vert.spv

@@ -283,7 +283,7 @@ namespace ToolEngine
 
     void Render::setupGraphicsPipeline()
     {
-
+        auto vertShaderCode = FileUtils::readFile("Debug/shaders/vert.spv");
     }
 
     void Render::destroySurface()

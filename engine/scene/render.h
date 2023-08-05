@@ -14,6 +14,7 @@
 #include "GLFW/glfw3native.h"
 #include "queue_family_indices.h"
 #include "swap_chain_support_details.h"
+#include "include/file/file_utils.h"
 
 namespace ToolEngine
 {

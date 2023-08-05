@@ -6,8 +6,17 @@ target_link_libraries(client PRIVATE scene)
 target_link_libraries(client PRIVATE tbb)
 target_include_directories(client PRIVATE ${TBB_Headers})
 
+# Optick dll
 add_custom_command(TARGET client POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     $<TARGET_FILE:OptickCore>
     $<TARGET_FILE_DIR:client>
+)
+
+# Copy shaders
+message(STATUS ${CMAKE_SOURCE_DIR})
+add_custom_command(TARGET client POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${CMAKE_SOURCE_DIR}/shaders/spv
+	$<TARGET_FILE_DIR:client>/shaders
 )
