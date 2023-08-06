@@ -35,6 +35,7 @@ namespace ToolEngine
         render->setupFrameBuffers();
         render->setupCommandPool();
         render->setupCommandBuffer();
+        render->setupSyncObjects();
     }
     
     void SceneView::mainLoop()
@@ -43,11 +44,13 @@ namespace ToolEngine
         {
             OPTICK_FRAME("MainThread")
             glfwPollEvents();
+            render->drawFrame();
         }
     }
 
     void SceneView::cleanup()
     {
+        render->destroySyncObjects();
         render->destroyCommandPool();
         render->destroyFrameBuffers();
         render->destroyPipeline();
