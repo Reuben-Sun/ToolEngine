@@ -25,8 +25,8 @@ namespace ToolEngine
         GLFWwindow* window;
         Render* render;
 
-        const int SAMPLE_WIDTH = 800;
-        const int SAMPLE_HEIGHT = 400;
+        const int SAMPLE_WIDTH = 1920;
+        const int SAMPLE_HEIGHT = 1080;
         std::vector<const char*> getRequiredExtensions();
     };
 }
