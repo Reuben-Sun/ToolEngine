@@ -30,6 +30,7 @@ namespace ToolEngine
         render->setupLogicalDevice();
         render->setupSwapChain();
         render->setupImageViews();
+        render->createRenderPass();
         render->setupGraphicsPipeline();
     }
     
@@ -45,6 +46,7 @@ namespace ToolEngine
     void SceneView::cleanup()
     {
         render->destroyPipeline();
+        render->destroyRenderPass();
         render->destroyImageViews();
         render->destroySwapChain();
         render->destroySurface();

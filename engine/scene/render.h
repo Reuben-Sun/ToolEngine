@@ -30,12 +30,14 @@ namespace ToolEngine
         void setupLogicalDevice();
         void setupSwapChain();
         void setupImageViews();
+        void createRenderPass();
         void setupGraphicsPipeline();
 
         void destroySurface();
         void destroyInstance();
         void destroySwapChain();
         void destroyImageViews();
+        void destroyRenderPass();
         void destroyPipeline();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
@@ -61,6 +63,8 @@ namespace ToolEngine
         VkExtent2D swapChainExtent;
         std::vector<VkImageView> swapChainImageViews;
         VkPipelineLayout pipelineLayout;
+        VkRenderPass renderPass;
+        VkPipeline graphicsPipeline;
 
         // vulkan have very limited error check for minimal driver, but we can attach validation layer to get more debug info
         const std::vector<const char*> validationLayers = {
