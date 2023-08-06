@@ -33,6 +33,8 @@ namespace ToolEngine
         void createRenderPass();
         void setupGraphicsPipeline();
         void setupFrameBuffers();
+        void setupCommandPool();
+        void setupCommandBuffer();
 
         void destroySurface();
         void destroyInstance();
@@ -41,6 +43,7 @@ namespace ToolEngine
         void destroyRenderPass();
         void destroyPipeline();
         void destroyFrameBuffers();
+        void destroyCommandPool();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
         {
@@ -68,6 +71,8 @@ namespace ToolEngine
         VkRenderPass renderPass;
         VkPipeline graphicsPipeline;
         std::vector<VkFramebuffer> swapChainFramebuffers;
+        VkCommandPool commandPool;
+        VkCommandBuffer commandBuffer;
 
         // vulkan have very limited error check for minimal driver, but we can attach validation layer to get more debug info
         const std::vector<const char*> validationLayers = {
@@ -98,5 +103,6 @@ namespace ToolEngine
         VkShaderModule createShaderModule(const std::vector<char>& code);
         void createPipelineLayout();
         void destoryPipelineLayout();
+        void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
     };
 }
