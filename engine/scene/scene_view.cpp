@@ -32,6 +32,7 @@ namespace ToolEngine
         render->setupImageViews();
         render->createRenderPass();
         render->setupGraphicsPipeline();
+        render->setupFrameBuffers();
     }
     
     void SceneView::mainLoop()
@@ -45,6 +46,7 @@ namespace ToolEngine
 
     void SceneView::cleanup()
     {
+        render->destroyFrameBuffers();
         render->destroyPipeline();
         render->destroyRenderPass();
         render->destroyImageViews();
