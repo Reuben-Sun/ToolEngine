@@ -48,7 +48,6 @@ namespace ToolEngine
 
     void SceneView::cleanup()
     {
-        render->destroyCommandBuffer();
         render->destroyCommandPool();
         render->destroyFrameBuffers();
         render->destroyPipeline();
