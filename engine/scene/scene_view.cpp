@@ -44,6 +44,7 @@ namespace ToolEngine
 
     void SceneView::cleanup()
     {
+        render->destroyPipeline();
         render->destroyImageViews();
         render->destroySwapChain();
         render->destroySurface();

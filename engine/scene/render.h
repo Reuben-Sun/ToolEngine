@@ -36,6 +36,7 @@ namespace ToolEngine
         void destroyInstance();
         void destroySwapChain();
         void destroyImageViews();
+        void destroyPipeline();
 
         static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) 
         {
@@ -59,6 +60,7 @@ namespace ToolEngine
         VkFormat swapChainImageFormat;
         VkExtent2D swapChainExtent;
         std::vector<VkImageView> swapChainImageViews;
+        VkPipelineLayout pipelineLayout;
 
         // vulkan have very limited error check for minimal driver, but we can attach validation layer to get more debug info
         const std::vector<const char*> validationLayers = {
@@ -86,5 +88,8 @@ namespace ToolEngine
         VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
         VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+        VkShaderModule createShaderModule(const std::vector<char>& code);
+        void createPipelineLayout();
+        void destoryPipelineLayout();
     };
 }
