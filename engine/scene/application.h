@@ -20,7 +20,7 @@ namespace ToolEngine
 		ExitCode init();
 		ExitCode mainLoop();
 	private:
-		GlfwWindow* m_window;
+		std::unique_ptr<GlfwWindow> m_window;
 		// TODO: Timer
 	};
 }

@@ -7,7 +7,7 @@ namespace ToolEngine
 		Window::Properties properties;
 		properties.title = "Tool Engine";
 		properties.extent = { 1280, 720 };
-		m_window = new GlfwWindow(properties);
+		m_window = std::make_unique<GlfwWindow>(properties);
 	}
 	Application::~Application()
 	{
