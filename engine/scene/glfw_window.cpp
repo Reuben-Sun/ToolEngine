@@ -14,6 +14,7 @@ namespace ToolEngine
     }
     GlfwWindow::~GlfwWindow()
     {
+        glfwTerminate();
     }
     VkSurfaceKHR GlfwWindow::createSurface(Instance& instance)
     {
