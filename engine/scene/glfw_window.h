@@ -1,19 +1,24 @@
 #pragma once
 
+#include <iostream>
+#include <string>
+#include "GLFW/glfw3.h"
 #include "window.h"
 
 namespace ToolEngine
 {
-	class GLFWWindow: public Window
+	class GlfwWindow: public Window
 	{
 	public:
-		GLFWWindow(const Properties& properties);
-		virtual ~GLFWWindow();
+		GlfwWindow(const Properties& properties);
+		virtual ~GlfwWindow();
 
 		VkSurfaceKHR createSurface(Instance& instance) override;
 		bool shouldClose() override;
 		void processEvents() override;
+
+		static void onErrorCallback(int error_code, const char* description);
 	private:
-		GLFWWindow* m_window = nullptr;
+		GLFWwindow* m_window = nullptr;
 	};
 }
