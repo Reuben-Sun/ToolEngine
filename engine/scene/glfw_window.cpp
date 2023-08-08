@@ -12,13 +12,20 @@ namespace ToolEngine
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         m_window = glfwCreateWindow(m_properties.extent.width, m_properties.extent.height, m_properties.title.c_str(), nullptr, nullptr);
     }
+
     GlfwWindow::~GlfwWindow()
     {
         glfwTerminate();
     }
+
     VkSurfaceKHR GlfwWindow::createSurface(Instance& instance)
     {
-        return VkSurfaceKHR();
+        VkSurfaceKHR surface;
+        if (glfwCreateWindowSurface(instance.getHandle(), m_window, nullptr, &surface) != VK_SUCCESS)
+        {
+            throw std::runtime_error("failed to set up debug messenger!");
+        }
+        return surface;
     }
 
     bool GlfwWindow::shouldClose()

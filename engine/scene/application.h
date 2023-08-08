@@ -22,5 +22,6 @@ namespace ToolEngine
 	private:
 		std::unique_ptr<GlfwWindow> m_window;
 		// TODO: Timer
+		// scene, device, rendercontext, pipeline...
 	};
 }
