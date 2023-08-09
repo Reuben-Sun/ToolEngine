@@ -5,6 +5,8 @@
 #include <vulkan/vulkan.h>
 #include "instance.h"
 #include <optional>
+#include "include/common/queue_family_indices.h"
+#include "include/common/swap_chain_support_details.h"
 
 namespace ToolEngine
 {
@@ -13,24 +15,6 @@ namespace ToolEngine
 	public:
 		PhysicalDevice(Instance& instance, VkSurfaceKHR& surface);
 		~PhysicalDevice();
-
-		struct QueueFamilyIndices
-		{
-			std::optional<uint32_t> graphics_family;
-			std::optional<uint32_t> present_family;
-
-			bool isComplete()
-			{
-				return graphics_family.has_value() && present_family.has_value();
-			}
-		};
-
-		struct SwapChainSupportDetails
-		{
-			VkSurfaceCapabilitiesKHR capabilities;
-			std::vector<VkSurfaceFormatKHR> formats;
-			std::vector<VkPresentModeKHR> presentModes;
-		};
 
 		VkPhysicalDevice getPhysicalDevice() const { return m_physical_device; }
 

@@ -45,9 +45,9 @@ namespace ToolEngine
         return indices.isComplete() && extension_supported && swap_chain_adequate;
     }
 
-    PhysicalDevice::QueueFamilyIndices PhysicalDevice::getQueueFamilyIndices(VkPhysicalDevice device)
+    QueueFamilyIndices PhysicalDevice::getQueueFamilyIndices(VkPhysicalDevice device)
     {
-        PhysicalDevice::QueueFamilyIndices indices;
+        QueueFamilyIndices indices;
 
         uint32_t queue_family_count = 0;
         vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, nullptr);
@@ -92,9 +92,9 @@ namespace ToolEngine
         return requiredExtensions.empty();
     }
 
-    PhysicalDevice::SwapChainSupportDetails PhysicalDevice::getSwapChainSupportDetails(VkPhysicalDevice device)
+    SwapChainSupportDetails PhysicalDevice::getSwapChainSupportDetails(VkPhysicalDevice device)
     {
-        PhysicalDevice::SwapChainSupportDetails details;
+        SwapChainSupportDetails details;
         vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, m_surface_handle, &details.capabilities);
         uint32_t formatCount;
         vkGetPhysicalDeviceSurfaceFormatsKHR(device, m_surface_handle, &formatCount, nullptr);
