@@ -2,9 +2,9 @@
 
 namespace ToolEngine
 {
-    Device::Device(Instance& instance, PhysicalDevice& physical_device)
+    Device::Device(Instance& instance, PhysicalDevice& physical_device, VkSurfaceKHR& surface)
     {
-        /*ueueFamilyIndices indices = getQueueFamilyIndices(physicalDevice);
+        QueueFamilyIndices indices = QueueFamilyIndices::getQueueFamilyIndices(physical_device.getHandle(), surface);
 
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
         std::set<uint32_t> uniqueQueueFamilies =
@@ -30,26 +30,26 @@ namespace ToolEngine
         createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
         createInfo.pQueueCreateInfos = queueCreateInfos.data();
         createInfo.pEnabledFeatures = &deviceFeatures;
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
-        createInfo.ppEnabledExtensionNames = deviceExtensions.data();
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(physical_device.m_device_extensions.size());
+        createInfo.ppEnabledExtensionNames = physical_device.m_device_extensions.data();
 
-        if (enableValidationLayers)
+        if (instance.isValidationLayersEnabled())
         {
-            createInfo.enabledLayerCount = static_cast<uint32_t>(validationLayers.size());
-            createInfo.ppEnabledLayerNames = validationLayers.data();
+            createInfo.enabledLayerCount = static_cast<uint32_t>(instance.m_validation_layers.size());
+            createInfo.ppEnabledLayerNames = instance.m_validation_layers.data();
         }
         else
         {
             createInfo.enabledLayerCount = 0;
         }
 
-        if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device) != VK_SUCCESS)
+        if (vkCreateDevice(physical_device.getHandle(), &createInfo, nullptr, &m_device) != VK_SUCCESS)
         {
             throw std::runtime_error("failed to create logical device!");
         }
 
-        vkGetDeviceQueue(device, indices.graphics_family.value(), 0, &graphicsQueue);
-        vkGetDeviceQueue(device, indices.present_family.value(), 0, &presentQueue);*/
+        //vkGetDeviceQueue(m_device, indices.graphics_family.value(), 0, &graphicsQueue);
+        //vkGetDeviceQueue(m_device, indices.present_family.value(), 0, &presentQueue);
     }
 
     Device::~Device()
