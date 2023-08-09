@@ -4,6 +4,7 @@
 #include "glfw_window.h"
 #include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"
+#include "include/rhi/device.h"
 
 namespace ToolEngine
 {
@@ -26,6 +27,7 @@ namespace ToolEngine
 		std::unique_ptr<Instance> m_instance;
 		VkSurfaceKHR m_surface{ VK_NULL_HANDLE };
 		std::unique_ptr<PhysicalDevice> m_physical_device;
+		std::unique_ptr<Device> m_device;
 		// TODO: Timer
 		// scene, device, rendercontext, pipeline...
 	};

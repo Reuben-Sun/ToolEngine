@@ -11,6 +11,7 @@ namespace ToolEngine
 		m_instance = std::make_unique<Instance>(properties.title, m_window->getRequiredSurfaceExtensions());
 		m_surface = m_window->createSurface(*m_instance);
 		m_physical_device = std::make_unique<PhysicalDevice>(*m_instance, m_surface);
+		m_device = std::make_unique<Device>(*m_instance, *m_physical_device, m_surface);
 	}
 	Application::~Application()
 	{
