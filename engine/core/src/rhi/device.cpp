@@ -48,8 +48,10 @@ namespace ToolEngine
             throw std::runtime_error("failed to create logical device!");
         }
 
-        //vkGetDeviceQueue(m_device, indices.graphics_family.value(), 0, &graphicsQueue);
-        //vkGetDeviceQueue(m_device, indices.present_family.value(), 0, &presentQueue);
+        VkBool32 present_supported = physical_device.checkPresentSupported(surface, indices.graphics_family.value());
+        m_graphics_queue = std::make_unique<Queue>(m_device, indices.graphics_family.value(), present_supported, 0);
+        present_supported = physical_device.checkPresentSupported(surface, indices.present_family.value());
+        m_present_queue = std::make_unique<Queue>(m_device, indices.present_family.value(), present_supported, 0);
     }
 
     Device::~Device()

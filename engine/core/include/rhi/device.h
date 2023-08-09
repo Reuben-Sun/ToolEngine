@@ -3,10 +3,13 @@
 #include <vulkan/vulkan.h>
 #include "instance.h"
 #include "physical_device.h"
+#include "queue.h"
 #include "include/common/queue_family_indices.h"
 
 namespace ToolEngine
 {
+	class Queue;	// circular reference, need a pre-declaration
+
 	class Device
 	{
 	public:
@@ -17,6 +20,7 @@ namespace ToolEngine
 
 	private:
 		VkDevice m_device;
-		// Queue
+		std::unique_ptr<Queue> m_graphics_queue;
+		std::unique_ptr<Queue> m_present_queue;
 	};
 }

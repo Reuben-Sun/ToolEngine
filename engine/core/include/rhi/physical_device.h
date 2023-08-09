@@ -17,6 +17,7 @@ namespace ToolEngine
 		~PhysicalDevice();
 
 		VkPhysicalDevice getHandle() const { return m_physical_device; }
+		VkBool32 checkPresentSupported(VkSurfaceKHR surface, uint32_t queue_family_index) const;
 
 		// not all graphics cards can present image (such as AI card), so we should check whether swapchain is supported 
 		const std::vector<const char*> m_device_extensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };

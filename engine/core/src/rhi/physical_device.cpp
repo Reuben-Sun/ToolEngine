@@ -32,6 +32,18 @@ namespace ToolEngine
     {
     }
 
+    VkBool32 PhysicalDevice::checkPresentSupported(VkSurfaceKHR surface, uint32_t queue_family_index) const
+    {
+        VkBool32 present_supported{ VK_FALSE };
+
+        if (surface != VK_NULL_HANDLE)
+        {
+            vkGetPhysicalDeviceSurfaceSupportKHR(m_physical_device, queue_family_index, surface, &present_supported);
+        }
+
+        return present_supported;
+    }
+
     bool PhysicalDevice::checkDeviceSupport(VkPhysicalDevice device)
     {
         QueueFamilyIndices indices = QueueFamilyIndices::getQueueFamilyIndices(device, m_surface_handle);
