@@ -6,44 +6,44 @@ namespace ToolEngine
     {
         QueueFamilyIndices indices = QueueFamilyIndices::getQueueFamilyIndices(physical_device.getHandle(), surface);
 
-        std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-        std::set<uint32_t> uniqueQueueFamilies =
+        std::vector<VkDeviceQueueCreateInfo> queue_create_infos;
+        std::set<uint32_t> unique_queue_families =
         {
             indices.graphics_family.value(),
             indices.present_family.value()
         };
         float queuePriority = 1.0f;
-        for (uint32_t queueFamilyIndex : uniqueQueueFamilies)
+        for (uint32_t queue_family_index : unique_queue_families)
         {
-            VkDeviceQueueCreateInfo queueCreateInfo{};
-            queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-            queueCreateInfo.queueFamilyIndex = queueFamilyIndex;
-            queueCreateInfo.queueCount = 1;
-            queueCreateInfo.pQueuePriorities = &queuePriority;
-            queueCreateInfos.push_back(queueCreateInfo);
+            VkDeviceQueueCreateInfo queue_create_info{};
+            queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+            queue_create_info.queueFamilyIndex = queue_family_index;
+            queue_create_info.queueCount = 1;
+            queue_create_info.pQueuePriorities = &queuePriority;
+            queue_create_infos.push_back(queue_create_info);
         }
 
-        VkPhysicalDeviceFeatures deviceFeatures{};
+        VkPhysicalDeviceFeatures device_features{};
 
-        VkDeviceCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-        createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
-        createInfo.pQueueCreateInfos = queueCreateInfos.data();
-        createInfo.pEnabledFeatures = &deviceFeatures;
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(physical_device.m_device_extensions.size());
-        createInfo.ppEnabledExtensionNames = physical_device.m_device_extensions.data();
+        VkDeviceCreateInfo create_info{};
+        create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+        create_info.queueCreateInfoCount = static_cast<uint32_t>(queue_create_infos.size());
+        create_info.pQueueCreateInfos = queue_create_infos.data();
+        create_info.pEnabledFeatures = &device_features;
+        create_info.enabledExtensionCount = static_cast<uint32_t>(physical_device.m_device_extensions.size());
+        create_info.ppEnabledExtensionNames = physical_device.m_device_extensions.data();
 
         if (instance.isValidationLayersEnabled())
         {
-            createInfo.enabledLayerCount = static_cast<uint32_t>(instance.m_validation_layers.size());
-            createInfo.ppEnabledLayerNames = instance.m_validation_layers.data();
+            create_info.enabledLayerCount = static_cast<uint32_t>(instance.m_validation_layers.size());
+            create_info.ppEnabledLayerNames = instance.m_validation_layers.data();
         }
         else
         {
-            createInfo.enabledLayerCount = 0;
+            create_info.enabledLayerCount = 0;
         }
 
-        if (vkCreateDevice(physical_device.getHandle(), &createInfo, nullptr, &m_device) != VK_SUCCESS)
+        if (vkCreateDevice(physical_device.getHandle(), &create_info, nullptr, &m_device) != VK_SUCCESS)
         {
             throw std::runtime_error("failed to create logical device!");
         }
