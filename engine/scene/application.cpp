@@ -12,6 +12,8 @@ namespace ToolEngine
 		m_surface = m_window->createSurface(*m_instance);
 		m_physical_device = std::make_unique<PhysicalDevice>(*m_instance, m_surface);
 		m_device = std::make_unique<Device>(*m_instance, *m_physical_device, m_surface);
+		VkExtent2D app_extent = { properties.extent.width, properties.extent.height };
+		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, app_extent);
 	}
 	Application::~Application()
 	{

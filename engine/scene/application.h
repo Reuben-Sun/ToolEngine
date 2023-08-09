@@ -5,6 +5,7 @@
 #include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
+#include "include/rhi/swapchain.h"
 
 namespace ToolEngine
 {
@@ -28,6 +29,7 @@ namespace ToolEngine
 		VkSurfaceKHR m_surface{ VK_NULL_HANDLE };
 		std::unique_ptr<PhysicalDevice> m_physical_device;
 		std::unique_ptr<Device> m_device;
+		std::unique_ptr<SwapChain> m_swap_chain;
 		// TODO: Timer
 		// scene, device, rendercontext, pipeline...
 	};
