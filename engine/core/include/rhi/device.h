@@ -17,5 +17,6 @@ namespace ToolEngine
 
 	private:
 		VkDevice m_device;
+		// Queue
 	};
 }
