@@ -3,9 +3,10 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
-#include<unordered_map>
+#include <unordered_map>
 #include <vulkan/vulkan.h>
 #include <iostream>
+#include "debug_utils.h"
 
 namespace ToolEngine
 {
@@ -24,10 +25,5 @@ namespace ToolEngine
 		const std::vector<const char*> m_validation_layers = { "VK_LAYER_KHRONOS_validation" };
 
 		bool checkValidationLayerSupport();
-
-		VkResult createDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
-		void destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator);
-
-		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 	};
 }

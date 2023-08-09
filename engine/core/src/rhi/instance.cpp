@@ -38,7 +38,7 @@ namespace ToolEngine
             debug_create_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
             debug_create_info.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
             debug_create_info.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-            debug_create_info.pfnUserCallback = debugCallback;
+            debug_create_info.pfnUserCallback = DebugUtils::debugCallback;
 
             create_info.pNext = (VkDebugUtilsMessengerCreateInfoEXT*)&debug_create_info;
         }
@@ -60,9 +60,9 @@ namespace ToolEngine
 			debug_create_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 			debug_create_info.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 			debug_create_info.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-			debug_create_info.pfnUserCallback = debugCallback;
+			debug_create_info.pfnUserCallback = DebugUtils::debugCallback;
 
-            if (createDebugUtilsMessengerEXT(m_instance, &debug_create_info, nullptr, &debug_utils_messenger) != VK_SUCCESS)
+            if (DebugUtils::createDebugUtilsMessengerEXT(m_instance, &debug_create_info, nullptr, &debug_utils_messenger) != VK_SUCCESS)
             {
 				throw std::runtime_error("failed to set up debug messenger!");
 			}
@@ -73,7 +73,7 @@ namespace ToolEngine
 	{
         if (m_enable_validation_layers)
         {
-            destroyDebugUtilsMessengerEXT(m_instance, debug_utils_messenger, nullptr);
+            DebugUtils::destroyDebugUtilsMessengerEXT(m_instance, debug_utils_messenger, nullptr);
         }
 
 		if (m_instance != VK_NULL_HANDLE) 
@@ -110,33 +110,7 @@ namespace ToolEngine
         return true;
     }
 
-    VkResult Instance::createDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* create_info, const VkAllocationCallbacks* allocator, VkDebugUtilsMessengerEXT* debug_messenger)
-    {
-        auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
-        if (func != nullptr)
-        {
-            return func(instance, create_info, allocator, debug_messenger);
-        }
-        else
-        {
-            return VK_ERROR_EXTENSION_NOT_PRESENT;
-        }
-    }
-
-    void Instance::destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debug_messenger, const VkAllocationCallbacks* allocator)
-    {
-        auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
-        if (func != nullptr) 
-        {
-            func(instance, debug_messenger, allocator);
-        }
-    }
-
-    VKAPI_ATTR VkBool32 VKAPI_CALL Instance::debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity, VkDebugUtilsMessageTypeFlagsEXT message_type, const VkDebugUtilsMessengerCallbackDataEXT* callback_data, void* user_data)
-    {
-        std::cerr << "validation layer: " << callback_data->pMessage << std::endl;
-        return VK_FALSE;
-    }
+   
 }
 
 
