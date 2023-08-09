@@ -29,8 +29,6 @@
 
 ## Render框架
 
-刚刚看了[Vulkan官方样例](https://github.com/KhronosGroup/Vulkan-Samples/tree/main)，深感框架的重要性，于是我想先搭建一个看的顺眼的框架
-
 ### main
 
 程序运行的入口函数，通过调用framework中的静态函数来运行整个程序
@@ -89,3 +87,10 @@ platform中的draw就是render的函数，这个类似于官方样例中`vulkan_
 
 可以说，这个就是整个vulkan执行的核心函数，这些成员是对vulkan中相关接口的封装
 
+## 参考
+
+[Vulkan Tutorial](https://vulkan-tutorial.com/Introduction)
+
+[Vulkan Tutorial Github](https://github.com/Overv/VulkanTutorial/blob/main/code/00_base_code.cpp)
+
+[Vulkan Sample](https://github.com/KhronosGroup/Vulkan-Samples/tree/main)
