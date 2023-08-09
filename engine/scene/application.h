@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "glfw_window.h"
+#include "include/rhi/instance.h"
 
 namespace ToolEngine
 {
@@ -21,6 +22,7 @@ namespace ToolEngine
 		ExitCode mainLoop();
 	private:
 		std::unique_ptr<GlfwWindow> m_window;
+		std::unique_ptr<Instance> m_instance;
 		// TODO: Timer
 		// scene, device, rendercontext, pipeline...
 	};

@@ -8,6 +8,7 @@ namespace ToolEngine
 		properties.title = "Tool Engine";
 		properties.extent = { 1280, 720 };
 		m_window = std::make_unique<GlfwWindow>(properties);
+		m_instance = std::make_unique<Instance>(properties.title, m_window->getRequiredSurfaceExtensions());
 	}
 	Application::~Application()
 	{
