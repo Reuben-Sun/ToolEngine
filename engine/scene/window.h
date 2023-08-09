@@ -26,6 +26,7 @@ namespace ToolEngine
 		virtual VkSurfaceKHR createSurface(Instance &instance) = 0;
 		virtual bool shouldClose() = 0;
 		virtual void processEvents() = 0;
+		virtual std::vector<const char*> getRequiredSurfaceExtensions() const = 0;
 
 		const Extent& getExtent() const { return m_properties.extent; }
 		Extent resize(const Extent& extent);

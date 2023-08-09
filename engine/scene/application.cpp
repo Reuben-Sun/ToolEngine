@@ -22,6 +22,7 @@ namespace ToolEngine
 		while (!m_window->shouldClose()) 
 		{
 			m_window->processEvents();
+			// TODO: draw frame
 		}
 		return ExitCode::Failed;
 	}

@@ -19,6 +19,7 @@ namespace ToolEngine
 		VkSurfaceKHR createSurface(Instance& instance) override;
 		bool shouldClose() override;
 		void processEvents() override;
+		std::vector<const char*> getRequiredSurfaceExtensions() const override;
 
 		static void onErrorCallback(int error_code, const char* description);
 	private:

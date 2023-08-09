@@ -38,6 +38,13 @@ namespace ToolEngine
         glfwPollEvents();
     }
 
+    std::vector<const char*> GlfwWindow::getRequiredSurfaceExtensions() const
+    {
+        uint32_t glfw_extension_count { 0 };
+        const char** glfw_extensions { glfwGetRequiredInstanceExtensions(&glfw_extension_count) };
+        return { glfw_extensions, glfw_extensions + glfw_extension_count };
+    }
+
     void GlfwWindow::onErrorCallback(int error_code, const char* description)
     {
         std::cout << "GLFW Run Error" << std::endl;
