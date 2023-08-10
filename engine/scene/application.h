@@ -7,6 +7,7 @@
 #include "include/rhi/device.h"
 #include "include/rhi/swapchain.h"
 #include "include/rhi/image_view.h"
+#include "include/rhi/render_pass.h"
 
 namespace ToolEngine
 {
@@ -32,6 +33,7 @@ namespace ToolEngine
 		std::unique_ptr<Device> m_device;
 		std::unique_ptr<SwapChain> m_swap_chain;
 		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
+		std::unique_ptr<RenderPass> m_render_pass;
 		// TODO: Timer
 		// scene, device, rendercontext, pipeline...
 	};
