@@ -16,6 +16,9 @@ namespace ToolEngine
 		~SwapChain();
 
 		VkSwapchainKHR getHandle() const { return m_swap_chain; }
+		VkFormat getFormat() const { return m_swap_chain_image_format; }
+		VkExtent2D getExtent() const { return m_swap_chain_extent; }
+		std::vector<VkImage> getImages() const { return m_swap_chain_images; }
 
 	private:
 		VkSurfaceKHR m_surface;

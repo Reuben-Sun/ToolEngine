@@ -6,6 +6,7 @@
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
 #include "include/rhi/swapchain.h"
+#include "include/rhi/image_view.h"
 
 namespace ToolEngine
 {
@@ -30,6 +31,7 @@ namespace ToolEngine
 		std::unique_ptr<PhysicalDevice> m_physical_device;
 		std::unique_ptr<Device> m_device;
 		std::unique_ptr<SwapChain> m_swap_chain;
+		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
 		// TODO: Timer
 		// scene, device, rendercontext, pipeline...
 	};
