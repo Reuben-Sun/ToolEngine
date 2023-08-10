@@ -20,6 +20,7 @@ namespace ToolEngine
 		}
 		m_render_pass = std::make_unique<RenderPass>(*m_device, m_swap_chain->getFormat());
 	}
+
 	Application::~Application()
 	{
 		if (m_surface != VK_NULL_HANDLE)
@@ -32,6 +33,7 @@ namespace ToolEngine
 	{
 		return ExitCode();
 	}
+
 	ExitCode Application::mainLoop()
 	{
 		while (!m_window->shouldClose()) 
