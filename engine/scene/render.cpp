@@ -190,8 +190,8 @@ namespace ToolEngine
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
         std::set<uint32_t> uniqueQueueFamilies =
         {
-            indices.graphicsFamily.value(),
-            indices.presentFamily.value()
+            indices.graphics_family.value(),
+            indices.present_family.value()
         };
         float queuePriority = 1.0f;
         for (uint32_t queueFamilyIndex : uniqueQueueFamilies)
@@ -229,8 +229,8 @@ namespace ToolEngine
             throw std::runtime_error("failed to create logical device!");
         }
 
-        vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
-        vkGetDeviceQueue(device, indices.presentFamily.value(), 0, &presentQueue);
+        vkGetDeviceQueue(device, indices.graphics_family.value(), 0, &graphicsQueue);
+        vkGetDeviceQueue(device, indices.present_family.value(), 0, &presentQueue);
     }
 
     void Render::setupSwapChain()
@@ -256,8 +256,8 @@ namespace ToolEngine
         createInfo.imageArrayLayers = 1;
 		createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
 		QueueFamilyIndices indices = getQueueFamilyIndices(physicalDevice);
-		uint32_t queueFamilyIndices[] = { indices.graphicsFamily.value(), indices.presentFamily.value() };
-		if (indices.graphicsFamily != indices.presentFamily)
+		uint32_t queueFamilyIndices[] = { indices.graphics_family.value(), indices.present_family.value() };
+		if (indices.graphics_family != indices.present_family)
 		{
             createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
             createInfo.queueFamilyIndexCount = 2;
@@ -489,7 +489,7 @@ namespace ToolEngine
         VkCommandPoolCreateInfo poolInfo{};
         poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
         poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-        poolInfo.queueFamilyIndex = queueFamilyIndices.graphicsFamily.value();
+        poolInfo.queueFamilyIndex = queueFamilyIndices.graphics_family.value();
 
         if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) 
         {
@@ -651,13 +651,13 @@ namespace ToolEngine
         {
             if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) 
             {
-                indices.graphicsFamily = familyIndex;
+                indices.graphics_family = familyIndex;
             }
             VkBool32 presentSupport = false;
             vkGetPhysicalDeviceSurfaceSupportKHR(device, familyIndex, surface, &presentSupport);
             if (presentSupport)
             {
-                indices.presentFamily = familyIndex;
+                indices.present_family = familyIndex;
             }
             if (indices.isComplete()) 
             {

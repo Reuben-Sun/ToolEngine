@@ -11,10 +11,4 @@ target_link_libraries(scene PUBLIC OptickCore)
 target_include_directories(scene PRIVATE ${TBB_Headers})
 target_include_directories(scene PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-find_package(Vulkan REQUIRED)
-message(STATUS "Vulkan FOUND - ${Vulkan_FOUND}")
-message(STATUS "Vulkan LIBRARIES - ${Vulkan_LIBRARIES}")
-message(STATUS "Vulkan INCLUDE DIR - ${Vulkan_INCLUDE_DIR}")
-target_link_libraries(scene PRIVATE ${Vulkan_LIBRARIES})  
-# if other target use scene (such as client) allow use vulkan, we should include vulkan's header PUBLIC
-target_include_directories(scene PUBLIC ${Vulkan_INCLUDE_DIR})
+
