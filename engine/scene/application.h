@@ -39,6 +39,12 @@ namespace ToolEngine
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
 		std::unique_ptr<CommandBuffer> m_command_buffer;
+
+		VkSemaphore m_image_available_semaphore;
+		VkSemaphore m_render_finished_semaphore;
+		VkFence m_in_flight_fence;
 		// TODO: Timer, scene, rendercontext
+
+		void drawFrame();
 	};
 }

@@ -63,4 +63,19 @@ namespace ToolEngine
 			vkDestroyDevice(m_device, nullptr);
 		}
     }
+    void Device::present(VkSemaphore* wait_semaphores, uint32_t image_index, VkSwapchainKHR* swap_chains)
+    {
+        VkPresentInfoKHR presentInfo{};
+        presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+
+        presentInfo.waitSemaphoreCount = 1;
+        presentInfo.pWaitSemaphores = wait_semaphores;
+
+        presentInfo.swapchainCount = 1;
+        presentInfo.pSwapchains = swap_chains;
+
+        presentInfo.pImageIndices = &image_index;
+
+        vkQueuePresentKHR(m_present_queue->getHandle(), &presentInfo);
+    }
 }

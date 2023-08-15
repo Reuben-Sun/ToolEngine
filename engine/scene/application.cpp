@@ -24,6 +24,19 @@ namespace ToolEngine
 			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
 		}
 		m_command_buffer = std::make_unique<CommandBuffer>(*m_device);
+		
+		// sync
+		VkSemaphoreCreateInfo semaphore_info{};
+		semaphore_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+		VkFenceCreateInfo fence_info{};
+		fence_info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+		fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+		if (vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_image_available_semaphore) != VK_SUCCESS ||
+			vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_render_finished_semaphore) != VK_SUCCESS ||
+			vkCreateFence(m_device->getHandle(), &fence_info, nullptr, &m_in_flight_fence) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create synchronization objects for a frame!");
+		}
 	}
 
 	Application::~Application()
@@ -31,6 +44,19 @@ namespace ToolEngine
 		if (m_surface != VK_NULL_HANDLE)
 		{
 			vkDestroySurfaceKHR(m_instance->getHandle(), m_surface, nullptr);
+		}
+		// sync
+		if (m_image_available_semaphore != VK_NULL_HANDLE)
+		{
+			vkDestroySemaphore(m_device->getHandle(), m_image_available_semaphore, nullptr);
+		}
+		if (m_render_finished_semaphore != VK_NULL_HANDLE)
+		{
+			vkDestroySemaphore(m_device->getHandle(), m_render_finished_semaphore, nullptr);
+		}
+		if (m_in_flight_fence != VK_NULL_HANDLE)
+		{
+			vkDestroyFence(m_device->getHandle(), m_in_flight_fence, nullptr);
 		}
 	}
 
@@ -44,8 +70,59 @@ namespace ToolEngine
 		while (!m_window->shouldClose()) 
 		{
 			m_window->processEvents();
-			// TODO: draw frame
+			drawFrame();
 		}
 		return ExitCode::Failed;
+	}
+	void Application::drawFrame()
+	{
+		vkWaitForFences(m_device->getHandle(), 1, &m_in_flight_fence, VK_TRUE, UINT64_MAX);
+		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fence);
+		uint32_t image_index;
+		vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphore, VK_NULL_HANDLE, &image_index);
+
+		m_command_buffer->resetCommandBuffer();
+		// record
+		m_command_buffer->beginRecord();
+
+		VkRenderPassBeginInfo render_pass_info{};
+		render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+		render_pass_info.renderPass = m_blit_pipeline->getRenderPass().getHandle();
+		render_pass_info.framebuffer = m_frame_buffers[image_index]->getHandle();
+		render_pass_info.renderArea.offset = { 0, 0 };
+		render_pass_info.renderArea.extent = m_swap_chain->getExtent();
+		VkClearValue clear_color = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
+		render_pass_info.clearValueCount = 1;
+		render_pass_info.pClearValues = &clear_color;
+		m_command_buffer->beginRenderPass(render_pass_info);
+
+		m_command_buffer->bindPipeline(m_blit_pipeline->getPipeline().getHandle());
+
+		VkViewport viewport{};
+		viewport.x = 0.0f;
+		viewport.y = 0.0f;
+		viewport.width = (float)m_swap_chain->getExtent().width;
+		viewport.height = (float)m_swap_chain->getExtent().height;
+		viewport.minDepth = 0.0f;
+		viewport.maxDepth = 1.0f;
+		m_command_buffer->setViewport(viewport, 0, 1);
+
+		VkRect2D scissor{};
+		scissor.offset = { 0, 0 };
+		scissor.extent = m_swap_chain->getExtent();
+		m_command_buffer->setScissor(scissor, 0, 1);
+
+		m_command_buffer->draw(3, 1, 0, 0);
+
+		m_command_buffer->endRenderPass();
+
+		m_command_buffer->endRecord();
+		// submit
+		VkSemaphore wait_semaphores[] = { m_image_available_semaphore };
+		VkSemaphore signal_semaphores[] = { m_render_finished_semaphore };
+		m_command_buffer->submitCommandBuffer(wait_semaphores, signal_semaphores, m_in_flight_fence);
+		// present
+		VkSwapchainKHR swap_chains[] = { m_swap_chain->getHandle() };
+		m_device->present(signal_semaphores, image_index, swap_chains);
 	}
 }

@@ -20,6 +20,10 @@ namespace ToolEngine
 		VkDevice getHandle() const { return m_device; }
 		VkResult waitIdle() const { return vkDeviceWaitIdle(m_device); }
 		CommandPool& getCommandPool() const { return *m_command_pool; }
+		Queue& getGraphicsQueue() const { return *m_graphics_queue; }
+		Queue& getPresentQueue() const { return *m_present_queue; }
+
+		void present(VkSemaphore* wait_semaphores, uint32_t image_index, VkSwapchainKHR* swap_chains);
 		// request fence from fence pool
 		// request command buffer from command pool
 

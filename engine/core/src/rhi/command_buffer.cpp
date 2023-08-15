@@ -18,8 +18,70 @@ namespace ToolEngine
 	CommandBuffer::~CommandBuffer()
 	{
 	}
-	void CommandBuffer::reset()
+	void CommandBuffer::resetCommandBuffer()
 	{
 		vkResetCommandBuffer(m_command_buffer, 0);
+	}
+	void CommandBuffer::submitCommandBuffer(VkSemaphore* wait_semaphores, VkSemaphore* signal_semaphores, VkFence in_flight_fence)
+	{
+		VkSubmitInfo submitInfo{};
+		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+
+		VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+		submitInfo.waitSemaphoreCount = 1;
+		submitInfo.pWaitSemaphores = wait_semaphores;
+		submitInfo.pWaitDstStageMask = waitStages;
+
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &m_command_buffer;
+
+		submitInfo.signalSemaphoreCount = 1;
+		submitInfo.pSignalSemaphores = signal_semaphores;
+
+		if (vkQueueSubmit(m_device.getGraphicsQueue().getHandle(), 1, &submitInfo, in_flight_fence) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to submit draw command buffer!");
+		}
+	}
+	void CommandBuffer::beginRecord()
+	{
+		VkCommandBufferBeginInfo begin_info{};
+		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+
+		if (vkBeginCommandBuffer(m_command_buffer, &begin_info) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to begin recording command buffer!");
+		}
+	}
+	void CommandBuffer::endRecord()
+	{
+		if (vkEndCommandBuffer(m_command_buffer) != VK_SUCCESS) 
+		{
+			throw std::runtime_error("failed to record command buffer!");
+		}
+	}
+	void CommandBuffer::beginRenderPass(VkRenderPassBeginInfo render_pass_info)
+	{
+		vkCmdBeginRenderPass(m_command_buffer, &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
+	}
+	void CommandBuffer::endRenderPass()
+	{
+		vkCmdEndRenderPass(m_command_buffer);
+	}
+	void CommandBuffer::bindPipeline(VkPipeline pipeline)
+	{
+		vkCmdBindPipeline(m_command_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+	}
+	void CommandBuffer::setViewport(VkViewport viewport, uint32_t first_viewport_index, uint32_t viewport_count)
+	{
+		vkCmdSetViewport(m_command_buffer, first_viewport_index, viewport_count, &viewport);
+	}
+	void CommandBuffer::setScissor(VkRect2D scissor, uint32_t first_scissor_index, uint32_t scissor_count)
+	{
+		vkCmdSetScissor(m_command_buffer, first_scissor_index, scissor_count, &scissor);
+	}
+	void CommandBuffer::draw(uint32_t vertex_count, uint32_t instance_count, uint32_t first_vertex_index, uint32_t first_instance_index)
+	{
+		vkCmdDraw(m_command_buffer, vertex_count, instance_count, first_vertex_index, first_instance_index);
 	}
 }
