@@ -15,6 +15,7 @@ namespace ToolEngine
 	public:
 		BlitPipeline(Device& device, VkFormat format);
 		~BlitPipeline();
+		RenderPass& getRenderPass() { return *m_render_pass; }
 	private:
 		Device& m_device;
 
