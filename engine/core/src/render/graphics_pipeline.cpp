@@ -5,8 +5,8 @@ namespace ToolEngine
 	GraphicsPipeline::GraphicsPipeline(Device& device, PipelineState& pipeline_state): Pipeline{device}
 	{
         // shader
-		ShaderModule vertex_shader_module(device, "Debug/shaders/vert.spv");
-		ShaderModule fragment_shader_module(device, "Debug/shaders/frag.spv");
+		ShaderModule vertex_shader_module(m_device, "Debug/shaders/vert.spv");
+		ShaderModule fragment_shader_module(m_device, "Debug/shaders/frag.spv");
 
         VkPipelineShaderStageCreateInfo vert_shader_stage_info{};
         vert_shader_stage_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;

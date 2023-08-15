@@ -14,7 +14,6 @@ namespace ToolEngine
 		~ShaderModule();
 
 		VkShaderModule getHandle() const { return m_shader_module; }
-
 	private:
 		VkShaderModule m_shader_module;
 		std::string m_shader_path;
