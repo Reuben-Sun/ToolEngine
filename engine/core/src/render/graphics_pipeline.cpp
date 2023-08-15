@@ -4,21 +4,7 @@ namespace ToolEngine
 {
 	GraphicsPipeline::GraphicsPipeline(Device& device, PipelineState& pipeline_state): Pipeline{device}
 	{
-        // shader
-		ShaderModule vertex_shader_module(m_device, "Debug/shaders/vert.spv");
-		ShaderModule fragment_shader_module(m_device, "Debug/shaders/frag.spv");
-
-        VkPipelineShaderStageCreateInfo vert_shader_stage_info{};
-        vert_shader_stage_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        vert_shader_stage_info.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vert_shader_stage_info.module = vertex_shader_module.getHandle();
-        vert_shader_stage_info.pName = "main";
-        VkPipelineShaderStageCreateInfo frag_shader_stage_info{};
-        frag_shader_stage_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        frag_shader_stage_info.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        frag_shader_stage_info.module = fragment_shader_module.getHandle();
-        frag_shader_stage_info.pName = "main";
-        VkPipelineShaderStageCreateInfo shader_stages[] = { vert_shader_stage_info, frag_shader_stage_info };
+        VkPipelineShaderStageCreateInfo shader_stages[] = { pipeline_state.getVertexShaderStage(), pipeline_state.getFragmentShaderStage() };
 
         VkGraphicsPipelineCreateInfo pipeline_info{};
         pipeline_info.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;

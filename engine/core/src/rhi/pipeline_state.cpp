@@ -4,6 +4,8 @@ namespace ToolEngine
 {
 	void PipelineState::reset()
 	{
+		m_vertex_shader_stage = {};
+		m_fragment_shader_stage = {};
 		m_pipeline_layout = nullptr;
 		m_render_pass = nullptr;
 		m_vertex_input_state = {};
@@ -20,6 +22,18 @@ namespace ToolEngine
 	void PipelineState::clearDirty()
 	{
 		dirty = false;
+	}
+
+	void PipelineState::setVertexShaderStage(const VkPipelineShaderStageCreateInfo& vertex_shader_stage)
+	{
+		m_vertex_shader_stage = vertex_shader_stage;
+		dirty = true;
+	}
+
+	void PipelineState::setFragmentShaderStage(const VkPipelineShaderStageCreateInfo& fragment_shader_stage)
+	{
+		m_fragment_shader_stage = fragment_shader_stage;
+		dirty = true;
 	}
 
 	void PipelineState::setPipelineLayout(PipelineLayout& pipeline_layout)

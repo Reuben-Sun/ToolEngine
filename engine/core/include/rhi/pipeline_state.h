@@ -13,6 +13,10 @@ namespace ToolEngine
 		bool isDirty() const { return dirty; }
 		void clearDirty();
 
+		void setVertexShaderStage(const VkPipelineShaderStageCreateInfo& vertex_shader_stage);
+		VkPipelineShaderStageCreateInfo getVertexShaderStage() const { return m_vertex_shader_stage; }
+		void setFragmentShaderStage(const VkPipelineShaderStageCreateInfo& fragment_shader_stage);
+		VkPipelineShaderStageCreateInfo getFragmentShaderStage() const { return m_fragment_shader_stage; }
 		void setPipelineLayout(PipelineLayout& pipeline_layout);
 		PipelineLayout* getPipelineLayout() const { return m_pipeline_layout; }
 		void setRenderPass(const RenderPass& render_pass);
@@ -36,6 +40,8 @@ namespace ToolEngine
 
 	private:
 		bool dirty{ false };
+		VkPipelineShaderStageCreateInfo m_vertex_shader_stage{};
+		VkPipelineShaderStageCreateInfo m_fragment_shader_stage{};
 		PipelineLayout* m_pipeline_layout{ nullptr };	// pipeline layout
 		const RenderPass* m_render_pass{ nullptr };	// render pass
 		// constant state
