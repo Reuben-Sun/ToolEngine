@@ -18,4 +18,8 @@ namespace ToolEngine
 	CommandBuffer::~CommandBuffer()
 	{
 	}
+	void CommandBuffer::reset()
+	{
+		vkResetCommandBuffer(m_command_buffer, 0);
+	}
 }

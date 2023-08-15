@@ -13,6 +13,7 @@ namespace ToolEngine
 		~CommandBuffer();
 
 		VkCommandBuffer getHandle() const { return m_command_buffer; }
+		void reset();
 	private:
 		VkCommandBuffer m_command_buffer;
 		Device& m_device;
