@@ -69,17 +69,29 @@ namespace ToolEngine
 	{
 		while (!m_window->shouldClose()) 
 		{
+			OPTICK_FRAME("MainThread");
+			OPTICK_PUSH("process glfw events")
 			m_window->processEvents();
+			OPTICK_POP();
 			drawFrame();
 		}
 		return ExitCode::Failed;
 	}
 	void Application::drawFrame()
 	{
+		OPTICK_EVENT();
+
+		OPTICK_PUSH("wait for fence");
 		vkWaitForFences(m_device->getHandle(), 1, &m_in_flight_fence, VK_TRUE, UINT64_MAX);
+		OPTICK_POP();
+
+		OPTICK_PUSH("reset fence");
 		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fence);
+		OPTICK_POP();
+		OPTICK_PUSH("need next image");
 		uint32_t image_index;
 		vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphore, VK_NULL_HANDLE, &image_index);
+		OPTICK_POP();
 
 		m_command_buffer->resetCommandBuffer();
 		// record

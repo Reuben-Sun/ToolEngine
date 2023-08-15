@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <optick.h>
 #include "glfw_window.h"
 #include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"

@@ -3,6 +3,7 @@
 #include <vulkan/vulkan.h>
 #include <stdexcept>
 #include "device.h"
+#include <optick.h>
 
 namespace ToolEngine
 {

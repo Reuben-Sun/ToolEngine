@@ -65,6 +65,7 @@ namespace ToolEngine
     }
     void Device::present(VkSemaphore* wait_semaphores, uint32_t image_index, VkSwapchainKHR* swap_chains)
     {
+        OPTICK_EVENT();
         VkPresentInfoKHR presentInfo{};
         presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 
