@@ -19,6 +19,7 @@ namespace ToolEngine
 
 		VkDevice getHandle() const { return m_device; }
 		VkResult waitIdle() const { return vkDeviceWaitIdle(m_device); }
+		CommandPool& getCommandPool() const { return *m_command_pool; }
 		// request fence from fence pool
 		// request command buffer from command pool
 

@@ -10,6 +10,7 @@
 #include "include/rhi/render_pass.h"
 #include "include/render/blit_pipeline.h"
 #include "include/rhi/frame_buffer.h"
+#include "include/rhi/command_buffer.h"
 
 namespace ToolEngine
 {
@@ -37,6 +38,7 @@ namespace ToolEngine
 		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
+		std::unique_ptr<CommandBuffer> m_command_buffer;
 		// TODO: Timer, scene, rendercontext
 	};
 }

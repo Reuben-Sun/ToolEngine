@@ -23,6 +23,7 @@ namespace ToolEngine
 		{
 			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
 		}
+		m_command_buffer = std::make_unique<CommandBuffer>(*m_device);
 	}
 
 	Application::~Application()
