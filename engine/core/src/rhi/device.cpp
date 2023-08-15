@@ -52,6 +52,8 @@ namespace ToolEngine
         m_graphics_queue = std::make_unique<Queue>(m_device, indices.graphics_family.value(), present_supported, 0);
         present_supported = physical_device.checkPresentSupported(surface, indices.present_family.value());
         m_present_queue = std::make_unique<Queue>(m_device, indices.present_family.value(), present_supported, 0);
+
+        m_command_pool = std::make_unique<CommandPool>(m_device, indices.graphics_family.value());
     }
 
     Device::~Device()

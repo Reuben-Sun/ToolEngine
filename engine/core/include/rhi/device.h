@@ -5,6 +5,7 @@
 #include "physical_device.h"
 #include "queue.h"
 #include "include/common/queue_family_indices.h"
+#include "include/rhi/command_pool.h"
 
 namespace ToolEngine
 {
@@ -25,7 +26,7 @@ namespace ToolEngine
 		VkDevice m_device;
 		std::unique_ptr<Queue> m_graphics_queue;
 		std::unique_ptr<Queue> m_present_queue;
-		// command pool
+		std::unique_ptr<CommandPool> m_command_pool;
 		// fence pool
 	};
 }
