@@ -17,10 +17,15 @@ namespace ToolEngine
 		~Device();
 
 		VkDevice getHandle() const { return m_device; }
+		VkResult waitIdle() const { return vkDeviceWaitIdle(m_device); }
+		// request fence from fence pool
+		// request command buffer from command pool
 
 	private:
 		VkDevice m_device;
 		std::unique_ptr<Queue> m_graphics_queue;
 		std::unique_ptr<Queue> m_present_queue;
+		// command pool
+		// fence pool
 	};
 }

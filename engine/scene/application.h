@@ -35,8 +35,6 @@ namespace ToolEngine
 		std::unique_ptr<SwapChain> m_swap_chain;
 		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
-		//std::unique_ptr<RenderPass> m_render_pass;
-		// TODO: Timer
-		// scene, device, rendercontext, pipeline...
+		// TODO: Timer, scene, rendercontext
 	};
 }

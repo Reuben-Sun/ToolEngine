@@ -18,7 +18,6 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views.emplace_back(std::make_unique<ImageView>(*m_device, image, m_swap_chain->getFormat()));
 		}
-		//m_render_pass = std::make_unique<RenderPass>(*m_device, m_swap_chain->getFormat());
 		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat());
 	}
 
