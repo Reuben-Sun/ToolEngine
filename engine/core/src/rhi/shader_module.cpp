@@ -11,8 +11,7 @@ namespace ToolEngine
 		create_info.codeSize = shader_code.size();
 		create_info.pCode = reinterpret_cast<const uint32_t*>(shader_code.data());
 
-		VkShaderModule shader_module;
-		if (vkCreateShaderModule(m_device.getHandle(), &create_info, nullptr, &shader_module) != VK_SUCCESS)
+		if (vkCreateShaderModule(m_device.getHandle(), &create_info, nullptr, &m_shader_module) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create shader module!");
 		}
