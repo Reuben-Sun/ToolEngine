@@ -123,8 +123,9 @@ namespace ToolEngine
 		scissor.offset = { 0, 0 };
 		scissor.extent = m_swap_chain->getExtent();
 		m_command_buffer->setScissor(scissor, 0, 1);
-
-		m_command_buffer->draw(3, 1, 0, 0);
+		uint32_t vertex_count = 3;
+		OPTICK_TAG("VertexCount", vertex_count);
+		m_command_buffer->draw(vertex_count, 1, 0, 0);
 
 		m_command_buffer->endRenderPass();
 
