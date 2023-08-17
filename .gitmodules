@@ -12,3 +12,6 @@
 [submodule "engine/third_party/optick"]
 	path = engine/third_party/optick
 	url = https://github.com/Reuben-Sun/optick.git
+[submodule "engine/third_party/glm"]
+	path = engine/third_party/glm
+	url = https://github.com/Reuben-Sun/glm.git
