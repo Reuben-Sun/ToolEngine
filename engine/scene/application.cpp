@@ -77,6 +77,12 @@ namespace ToolEngine
 		}
 		return ExitCode::Failed;
 	}
+
+	ExitCode Application::cleanup()
+	{
+		return ExitCode();
+	}
+
 	void Application::drawFrame()
 	{
 		OPTICK_EVENT();

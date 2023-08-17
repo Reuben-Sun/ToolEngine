@@ -4,12 +4,9 @@ namespace ToolEngine
 {
     void ClientFramework::run()
     {
-        /*SceneView view;
-        view.viewInit();
-        view.vulkanInit();
-        view.mainLoop();
-        view.cleanup();*/
         Application app;
+        app.init();
         app.mainLoop();
+        app.cleanup();
     }
 }

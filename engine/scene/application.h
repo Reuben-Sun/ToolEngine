@@ -29,6 +29,7 @@ namespace ToolEngine
 
 		ExitCode init();
 		ExitCode mainLoop();
+		ExitCode cleanup();
 	private:
 		std::unique_ptr<GlfwWindow> m_window;
 		std::unique_ptr<Instance> m_instance;

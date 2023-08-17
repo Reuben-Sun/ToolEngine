@@ -1,6 +1,5 @@
 #pragma once
 
-#include "scene_view.h"
 #include "application.h"
 
 namespace ToolEngine
