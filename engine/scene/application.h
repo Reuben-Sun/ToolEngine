@@ -40,13 +40,15 @@ namespace ToolEngine
 		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
-		std::unique_ptr<CommandBuffer> m_command_buffer;
+		std::unique_ptr<CommandBuffer> m_command_buffers;
 
-		VkSemaphore m_image_available_semaphore;
-		VkSemaphore m_render_finished_semaphore;
-		VkFence m_in_flight_fence;
+		std::vector<VkSemaphore> m_image_available_semaphores;
+		std::vector<VkSemaphore> m_render_finished_semaphores;
+		std::vector<VkFence> m_in_flight_fences;
 		// TODO: Timer, scene, rendercontext
-
+		uint32_t m_current_frame = 0;
 		void drawFrame();
+		uint32_t getModFrame() { return m_current_frame % MAX_FRAMES_IN_FLIGHT; }
+		const int MAX_FRAMES_IN_FLIGHT = 2;
 	};
 }

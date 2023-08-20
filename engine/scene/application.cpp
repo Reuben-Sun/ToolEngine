@@ -23,20 +23,28 @@ namespace ToolEngine
 		{
 			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
 		}
-		m_command_buffer = std::make_unique<CommandBuffer>(*m_device);
+		
+		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
 		
 		// sync
+		m_image_available_semaphores.resize(MAX_FRAMES_IN_FLIGHT);
+		m_render_finished_semaphores.resize(MAX_FRAMES_IN_FLIGHT);
+		m_in_flight_fences.resize(MAX_FRAMES_IN_FLIGHT);
 		VkSemaphoreCreateInfo semaphore_info{};
 		semaphore_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 		VkFenceCreateInfo fence_info{};
 		fence_info.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
 		fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
-		if (vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_image_available_semaphore) != VK_SUCCESS ||
-			vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_render_finished_semaphore) != VK_SUCCESS ||
-			vkCreateFence(m_device->getHandle(), &fence_info, nullptr, &m_in_flight_fence) != VK_SUCCESS)
+		for (int i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i)
 		{
-			throw std::runtime_error("failed to create synchronization objects for a frame!");
+			if (vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_image_available_semaphores[i]) != VK_SUCCESS ||
+				vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_render_finished_semaphores[i]) != VK_SUCCESS ||
+				vkCreateFence(m_device->getHandle(), &fence_info, nullptr, &m_in_flight_fences[i]) != VK_SUCCESS)
+			{
+				throw std::runtime_error("failed to create synchronization objects for a frame!");
+			}
 		}
+		
 	}
 
 	Application::~Application()
@@ -46,18 +54,22 @@ namespace ToolEngine
 			vkDestroySurfaceKHR(m_instance->getHandle(), m_surface, nullptr);
 		}
 		// sync
-		if (m_image_available_semaphore != VK_NULL_HANDLE)
+		for (int i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i)
 		{
-			vkDestroySemaphore(m_device->getHandle(), m_image_available_semaphore, nullptr);
+			if (m_image_available_semaphores[i] != VK_NULL_HANDLE)
+			{
+				vkDestroySemaphore(m_device->getHandle(), m_image_available_semaphores[i], nullptr);
+			}
+			if (m_render_finished_semaphores[i] != VK_NULL_HANDLE)
+			{
+				vkDestroySemaphore(m_device->getHandle(), m_render_finished_semaphores[i], nullptr);
+			}
+			if (m_in_flight_fences[i] != VK_NULL_HANDLE)
+			{
+				vkDestroyFence(m_device->getHandle(), m_in_flight_fences[i], nullptr);
+			}
 		}
-		if (m_render_finished_semaphore != VK_NULL_HANDLE)
-		{
-			vkDestroySemaphore(m_device->getHandle(), m_render_finished_semaphore, nullptr);
-		}
-		if (m_in_flight_fence != VK_NULL_HANDLE)
-		{
-			vkDestroyFence(m_device->getHandle(), m_in_flight_fence, nullptr);
-		}
+		
 	}
 
 	ExitCode Application::init()
@@ -86,22 +98,22 @@ namespace ToolEngine
 	void Application::drawFrame()
 	{
 		OPTICK_EVENT();
-
+		uint32_t current_frame_index = getModFrame();
 		OPTICK_PUSH("wait for fence");
-		vkWaitForFences(m_device->getHandle(), 1, &m_in_flight_fence, VK_TRUE, UINT64_MAX);
+		vkWaitForFences(m_device->getHandle(), 1, &m_in_flight_fences[current_frame_index], VK_TRUE, UINT64_MAX);
 		OPTICK_POP();
 
 		OPTICK_PUSH("reset fence");
-		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fence);
+		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fences[current_frame_index]);
 		OPTICK_POP();
 		OPTICK_PUSH("need next image");
 		uint32_t image_index;
-		vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphore, VK_NULL_HANDLE, &image_index);
+		vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphores[current_frame_index], VK_NULL_HANDLE, &image_index);
 		OPTICK_POP();
 
-		m_command_buffer->resetCommandBuffer();
+		m_command_buffers->resetCommandBuffer(current_frame_index);
 		// record
-		m_command_buffer->beginRecord();
+		m_command_buffers->beginRecord(current_frame_index);
 
 		VkRenderPassBeginInfo render_pass_info{};
 		render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
@@ -112,9 +124,9 @@ namespace ToolEngine
 		VkClearValue clear_color = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
 		render_pass_info.clearValueCount = 1;
 		render_pass_info.pClearValues = &clear_color;
-		m_command_buffer->beginRenderPass(render_pass_info);
+		m_command_buffers->beginRenderPass(current_frame_index, render_pass_info);
 
-		m_command_buffer->bindPipeline(m_blit_pipeline->getPipeline().getHandle());
+		m_command_buffers->bindPipeline(current_frame_index, m_blit_pipeline->getPipeline().getHandle());
 
 		VkViewport viewport{};
 		viewport.x = 0.0f;
@@ -123,25 +135,27 @@ namespace ToolEngine
 		viewport.height = (float)m_swap_chain->getExtent().height;
 		viewport.minDepth = 0.0f;
 		viewport.maxDepth = 1.0f;
-		m_command_buffer->setViewport(viewport, 0, 1);
+		m_command_buffers->setViewport(current_frame_index, viewport, 0, 1);
 
 		VkRect2D scissor{};
 		scissor.offset = { 0, 0 };
 		scissor.extent = m_swap_chain->getExtent();
-		m_command_buffer->setScissor(scissor, 0, 1);
+		m_command_buffers->setScissor(current_frame_index, scissor, 0, 1);
 		uint32_t vertex_count = 3;
 		OPTICK_TAG("VertexCount", vertex_count);
-		m_command_buffer->draw(vertex_count, 1, 0, 0);
+		m_command_buffers->draw(current_frame_index, vertex_count, 1, 0, 0);
 
-		m_command_buffer->endRenderPass();
+		m_command_buffers->endRenderPass(current_frame_index);
 
-		m_command_buffer->endRecord();
+		m_command_buffers->endRecord(current_frame_index);
 		// submit
-		VkSemaphore wait_semaphores[] = { m_image_available_semaphore };
-		VkSemaphore signal_semaphores[] = { m_render_finished_semaphore };
-		m_command_buffer->submitCommandBuffer(wait_semaphores, signal_semaphores, m_in_flight_fence);
+		VkSemaphore wait_semaphores[] = { m_image_available_semaphores[current_frame_index]};
+		VkSemaphore signal_semaphores[] = { m_render_finished_semaphores[current_frame_index]};
+		m_command_buffers->submitCommandBuffer(current_frame_index, wait_semaphores, signal_semaphores, m_in_flight_fences[current_frame_index]);
 		// present
 		VkSwapchainKHR swap_chains[] = { m_swap_chain->getHandle() };
 		m_device->present(signal_semaphores, image_index, swap_chains);
+
+		++m_current_frame;
 	}
 }
