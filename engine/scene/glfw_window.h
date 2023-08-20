@@ -20,6 +20,7 @@ namespace ToolEngine
 		bool shouldClose() override;
 		void processEvents() override;
 		std::vector<const char*> getRequiredSurfaceExtensions() const override;
+		Extent resize() override;
 
 		static void onErrorCallback(int error_code, const char* description);
 	private:

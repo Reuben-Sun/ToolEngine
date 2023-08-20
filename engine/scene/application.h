@@ -30,6 +30,8 @@ namespace ToolEngine
 		ExitCode init();
 		ExitCode mainLoop();
 		ExitCode cleanup();
+
+		const int MAX_FRAMES_IN_FLIGHT = 2;
 	private:
 		std::unique_ptr<GlfwWindow> m_window;
 		std::unique_ptr<Instance> m_instance;
@@ -49,6 +51,6 @@ namespace ToolEngine
 		uint32_t m_current_frame = 0;
 		void drawFrame();
 		uint32_t getModFrame() { return m_current_frame % MAX_FRAMES_IN_FLIGHT; }
-		const int MAX_FRAMES_IN_FLIGHT = 2;
+		void resizeFrame();
 	};
 }

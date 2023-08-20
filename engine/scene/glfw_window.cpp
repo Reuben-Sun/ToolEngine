@@ -45,6 +45,20 @@ namespace ToolEngine
         return { glfw_extensions, glfw_extensions + glfw_extension_count };
     }
 
+    GlfwWindow::Extent GlfwWindow::resize()
+    {
+        int width = 0, height = 0;
+        glfwGetFramebufferSize(m_window, &width, &height);
+        while (width == 0 || height == 0) 
+        {
+            glfwGetFramebufferSize(m_window, &width, &height);
+            glfwWaitEvents();
+        }
+        m_properties.extent.width = width;
+        m_properties.extent.height = height;
+        return m_properties.extent;
+    }
+
     void GlfwWindow::onErrorCallback(int error_code, const char* description)
     {
         std::cout << "GLFW Run Error" << std::endl;

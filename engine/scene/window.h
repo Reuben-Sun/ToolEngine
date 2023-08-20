@@ -29,7 +29,7 @@ namespace ToolEngine
 		virtual std::vector<const char*> getRequiredSurfaceExtensions() const = 0;
 
 		const Extent& getExtent() const { return m_properties.extent; }
-		Extent resize(const Extent& extent);
+		virtual Extent resize() = 0;
 	protected:
 		Properties m_properties;
 	};

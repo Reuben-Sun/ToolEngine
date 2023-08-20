@@ -103,12 +103,22 @@ namespace ToolEngine
 		vkWaitForFences(m_device->getHandle(), 1, &m_in_flight_fences[current_frame_index], VK_TRUE, UINT64_MAX);
 		OPTICK_POP();
 
-		OPTICK_PUSH("reset fence");
-		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fences[current_frame_index]);
-		OPTICK_POP();
 		OPTICK_PUSH("need next image");
 		uint32_t image_index;
-		vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphores[current_frame_index], VK_NULL_HANDLE, &image_index);
+		VkResult result = vkAcquireNextImageKHR(m_device->getHandle(), m_swap_chain->getHandle(), UINT64_MAX, m_image_available_semaphores[current_frame_index], VK_NULL_HANDLE, &image_index);
+		if (result == VK_ERROR_OUT_OF_DATE_KHR)
+		{
+			resizeFrame();
+			return;
+		}
+		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		{
+			throw std::runtime_error("failed to acquire swap chain image!");
+		}
+		OPTICK_POP();
+
+		OPTICK_PUSH("reset fence");
+		vkResetFences(m_device->getHandle(), 1, &m_in_flight_fences[current_frame_index]);
 		OPTICK_POP();
 
 		m_command_buffers->resetCommandBuffer(current_frame_index);
@@ -157,5 +167,32 @@ namespace ToolEngine
 		m_device->present(signal_semaphores, image_index, swap_chains);
 
 		++m_current_frame;
+	}
+	void Application::resizeFrame()
+	{
+		Window::Extent app_extent = m_window->resize();
+
+		m_device->waitIdle();
+		m_swap_chain = nullptr;
+		for (int i = 0; i < m_frame_buffers.size(); ++i)
+		{
+			m_frame_buffers[i] = nullptr;
+		}
+		for (int i = 0; i < m_swap_chain_image_views.size(); ++i)
+		{
+			m_swap_chain_image_views[i] = nullptr;
+		}
+		
+		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, VkExtent2D{ app_extent.width, app_extent.height });
+		for (int i = 0; i < m_swap_chain_image_views.size(); ++i)
+		{
+			m_swap_chain_image_views[i] = std::make_unique<ImageView>(*m_device, m_swap_chain->getImages()[i], m_swap_chain->getFormat());
+		}
+		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat());
+		for (int i = 0; i < m_frame_buffers.size(); ++i)
+		{
+			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], app_extent.width, app_extent.height);
+		}
+		
 	}
 }
