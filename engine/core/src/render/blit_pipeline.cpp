@@ -23,10 +23,14 @@ namespace ToolEngine
 		m_render_pass = std::make_unique<RenderPass>(m_device, format);
 
         // vertex input
+        auto vertex_binding_description = Vertex::getBindingDescription();
+        auto vertex_attribute_descriptions = Vertex::getAttributeDescriptions();
         VkPipelineVertexInputStateCreateInfo vertex_input_state{};
         vertex_input_state.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-        vertex_input_state.vertexBindingDescriptionCount = 0;
-        vertex_input_state.vertexAttributeDescriptionCount = 0;
+        vertex_input_state.vertexBindingDescriptionCount = 1;
+        vertex_input_state.pVertexBindingDescriptions = &vertex_binding_description;
+        vertex_input_state.vertexAttributeDescriptionCount = static_cast<uint32_t>(vertex_attribute_descriptions.size());
+        vertex_input_state.pVertexAttributeDescriptions = vertex_attribute_descriptions.data();
 
         // input assembly
         VkPipelineInputAssemblyStateCreateInfo input_assembly_state{};

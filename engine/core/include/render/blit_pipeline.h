@@ -7,6 +7,7 @@
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
+#include "vertex.h"
 
 namespace ToolEngine
 {
