@@ -95,4 +95,9 @@ namespace ToolEngine
 		OPTICK_EVENT();
 		vkCmdDraw(m_command_buffers[current_frame], vertex_count, instance_count, first_vertex_index, first_instance_index);
 	}
+	void CommandBuffer::bindVertexBuffer(uint32_t current_frame, VkBuffer* buffer, VkDeviceSize* offset, uint32_t first_binding_index, uint32_t binding_count)
+	{
+		OPTICK_EVENT();
+		vkCmdBindVertexBuffers(m_command_buffers[current_frame], first_binding_index, binding_count, buffer, offset);
+	}
 }
