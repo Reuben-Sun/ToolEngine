@@ -13,6 +13,7 @@
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/command_buffer.h"
 #include "include/rhi/vertex_buffer.h"
+#include "include/rhi/index_buffer.h"
 
 namespace ToolEngine
 {
@@ -45,6 +46,7 @@ namespace ToolEngine
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
 		std::unique_ptr<CommandBuffer> m_command_buffers;
 		std::unique_ptr<VertexBuffer> m_vertex_buffer;
+		std::unique_ptr<IndexBuffer> m_index_buffer;
 
 		std::vector<VkSemaphore> m_image_available_semaphores;
 		std::vector<VkSemaphore> m_render_finished_semaphores;

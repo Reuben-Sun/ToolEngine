@@ -26,6 +26,7 @@ namespace ToolEngine
 		
 		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
 		m_vertex_buffer = std::make_unique<VertexBuffer>(*m_device, *m_physical_device, VERTEX_BUFFER);
+		m_index_buffer = std::make_unique<IndexBuffer>(*m_device, *m_physical_device, INDEX_BUFFER);
 		
 		// sync
 		m_image_available_semaphores.resize(MAX_FRAMES_IN_FLIGHT);
@@ -157,9 +158,12 @@ namespace ToolEngine
 		VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
 		VkDeviceSize offsets[] = { 0 };
 		uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
+		uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
 		OPTICK_TAG("VertexCount", vertex_count);
 		m_command_buffers->bindVertexBuffer(current_frame_index, vertex_buffers, offsets, 0, 1);
-		m_command_buffers->draw(current_frame_index, vertex_count, 1, 0, 0);
+		m_command_buffers->bindIndexBuffer(current_frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
+		
+		m_command_buffers->draw(current_frame_index, index_count, 1, 0, 0, 0);
 
 		m_command_buffers->endRenderPass(current_frame_index);
 

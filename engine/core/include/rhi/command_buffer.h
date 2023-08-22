@@ -24,7 +24,9 @@ namespace ToolEngine
 		void setViewport(uint32_t current_frame, VkViewport viewport, uint32_t first_viewport_index, uint32_t viewport_count);
 		void setScissor(uint32_t current_frame, VkRect2D scissor, uint32_t first_scissor_index, uint32_t scissor_count);
 		void draw(uint32_t current_frame, uint32_t vertex_count, uint32_t instance_count, uint32_t first_vertex_index, uint32_t first_instance_index);
+		void draw(uint32_t current_frame, uint32_t index_count, uint32_t instance_count, uint32_t first_index, uint32_t vertex_offset, uint32_t first_instance);
 		void bindVertexBuffer(uint32_t current_frame, VkBuffer* buffer, VkDeviceSize* offset, uint32_t first_binding_index, uint32_t binding_count);
+		void bindIndexBuffer(uint32_t current_frame, VkBuffer buffer, VkDeviceSize offset, VkIndexType index_type);
 	private:
 		std::vector<VkCommandBuffer> m_command_buffers;
 		Device& m_device;

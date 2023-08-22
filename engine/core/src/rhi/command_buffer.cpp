@@ -92,12 +92,24 @@ namespace ToolEngine
 	}
 	void CommandBuffer::draw(uint32_t current_frame, uint32_t vertex_count, uint32_t instance_count, uint32_t first_vertex_index, uint32_t first_instance_index)
 	{
+		// draw vertex buffer
 		OPTICK_EVENT();
 		vkCmdDraw(m_command_buffers[current_frame], vertex_count, instance_count, first_vertex_index, first_instance_index);
+	}
+	void CommandBuffer::draw(uint32_t current_frame, uint32_t index_count, uint32_t instance_count, uint32_t first_index, uint32_t vertex_offset, uint32_t first_instance)
+	{
+		// draw vertex by index buffer
+		OPTICK_EVENT();
+		vkCmdDrawIndexed(m_command_buffers[current_frame], index_count, instance_count, first_index, vertex_offset, first_instance);
 	}
 	void CommandBuffer::bindVertexBuffer(uint32_t current_frame, VkBuffer* buffer, VkDeviceSize* offset, uint32_t first_binding_index, uint32_t binding_count)
 	{
 		OPTICK_EVENT();
 		vkCmdBindVertexBuffers(m_command_buffers[current_frame], first_binding_index, binding_count, buffer, offset);
+	}
+	void CommandBuffer::bindIndexBuffer(uint32_t current_frame, VkBuffer buffer, VkDeviceSize offset, VkIndexType index_type)
+	{
+		OPTICK_EVENT();
+		vkCmdBindIndexBuffer(m_command_buffers[current_frame], buffer, offset, index_type);
 	}
 }
