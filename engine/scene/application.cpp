@@ -25,7 +25,7 @@ namespace ToolEngine
 		}
 		
 		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
-		m_vertex_buffer = std::make_unique<Buffer>(*m_device, *m_physical_device, VERTEX_BUFFER);
+		m_vertex_buffer = std::make_unique<VertexBuffer>(*m_device, *m_physical_device, VERTEX_BUFFER);
 		
 		// sync
 		m_image_available_semaphores.resize(MAX_FRAMES_IN_FLIGHT);

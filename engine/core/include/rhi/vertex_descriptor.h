@@ -40,10 +40,16 @@ namespace ToolEngine
         }
 	};
 
-	const std::vector<Vertex> VERTEX_BUFFER = 
+    const std::vector<Vertex> VERTEX_BUFFER =
+    {
+        {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+        {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}},
+        {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+        {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}}
+    };
+
+    const std::vector<uint16_t> INDEX_BUFFER = 
 	{
-		{{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-		{{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
-		{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+		0, 1, 2, 2, 3, 0
 	};
 }
