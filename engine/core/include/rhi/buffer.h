@@ -3,7 +3,7 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
-#include "include/render/vertex.h"
+#include "vertex.h"
 
 namespace ToolEngine
 {
