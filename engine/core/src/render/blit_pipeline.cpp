@@ -19,9 +19,16 @@ namespace ToolEngine
         frag_shader_stage_info.module = fragment_shader_module.getHandle();
         frag_shader_stage_info.pName = "main";
 
-		m_pipeline_layout = std::make_unique<PipelineLayout>(m_device);
+        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
+
+        VkPipelineLayoutCreateInfo pipeline_layout_info{};
+        pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipeline_layout_info.setLayoutCount = 1;
+        //auto aaa = m_descriptor_set_layout->getHandle();
+        pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
+        
+		m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
 		m_render_pass = std::make_unique<RenderPass>(m_device, format);
-        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, *m_pipeline_layout);
 
         // vertex input
         auto vertex_binding_description = Vertex::getBindingDescription();

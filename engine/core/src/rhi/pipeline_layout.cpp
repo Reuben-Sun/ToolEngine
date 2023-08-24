@@ -2,14 +2,9 @@
 
 namespace ToolEngine
 {
-	PipelineLayout::PipelineLayout(Device& device): m_deivce(device)
+	PipelineLayout::PipelineLayout(Device& device, const VkPipelineLayoutCreateInfo& create_info): m_deivce(device)
 	{
-		VkPipelineLayoutCreateInfo pipeline_layout_info{};
-		pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-		pipeline_layout_info.setLayoutCount = 0;
-		pipeline_layout_info.pushConstantRangeCount = 0;
-
-		if (vkCreatePipelineLayout(m_deivce.getHandle(), &pipeline_layout_info, nullptr, &m_pipeline_layout) != VK_SUCCESS) 
+		if (vkCreatePipelineLayout(m_deivce.getHandle(), &create_info, nullptr, &m_pipeline_layout) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create pipeline layout!");
 		}

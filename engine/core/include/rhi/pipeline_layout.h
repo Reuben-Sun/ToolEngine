@@ -8,7 +8,7 @@ namespace ToolEngine
 	class PipelineLayout
 	{
 	public:
-		PipelineLayout(Device& device);
+		PipelineLayout(Device& device, const VkPipelineLayoutCreateInfo& create_info);
 		~PipelineLayout();
 
 		VkPipelineLayout getHandle() const { return m_pipeline_layout; }

@@ -2,7 +2,7 @@
 
 namespace ToolEngine
 {
-	DescriptorSetLayout::DescriptorSetLayout(Device& device, PipelineLayout& pipeline_layout): m_device(device), m_pipeline_layout(pipeline_layout)
+	DescriptorSetLayout::DescriptorSetLayout(Device& device): m_device(device)
 	{
 		VkDescriptorSetLayoutBinding ubo_layout_binding{};
 		ubo_layout_binding.binding = 0;

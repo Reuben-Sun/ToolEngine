@@ -171,7 +171,7 @@ namespace ToolEngine
 		OPTICK_TAG("VertexCount", vertex_count);
 		m_command_buffers->bindVertexBuffer(current_frame_index, vertex_buffers, offsets, 0, 1);
 		m_command_buffers->bindIndexBuffer(current_frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
-		
+		// TODO: vkCmdBindDescriptorSets
 		m_command_buffers->draw(current_frame_index, index_count, 1, 0, 0, 0);
 
 		m_command_buffers->endRenderPass(current_frame_index);
