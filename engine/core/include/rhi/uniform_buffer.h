@@ -20,6 +20,7 @@ namespace ToolEngine
 	public:
 		UniformBuffer(Device& device, PhysicalDevice& physical_device);
 		virtual ~UniformBuffer();
+		void bindingBuffer(UniformBufferObject ubo);
 	private:
 		void* m_uniform_buffer_mapped;
 	};

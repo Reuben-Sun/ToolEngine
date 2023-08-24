@@ -4,6 +4,7 @@ namespace ToolEngine
 {
 	Application::Application()
 	{
+		Timer::Start();
 		Window::Properties properties;
 		properties.title = "Tool Engine";
 		properties.extent = { 1280, 720 };
@@ -89,6 +90,7 @@ namespace ToolEngine
 		while (!m_window->shouldClose()) 
 		{
 			OPTICK_FRAME("MainThread");
+			Timer::Tick();
 			OPTICK_PUSH("process glfw events")
 			m_window->processEvents();
 			OPTICK_POP();
@@ -104,6 +106,7 @@ namespace ToolEngine
 
 	void Application::drawFrame()
 	{
+		OPTICK_TAG("FrameIndex", m_current_frame);
 		OPTICK_EVENT();
 		uint32_t current_frame_index = getModFrame();
 		OPTICK_PUSH("wait for fence");
@@ -213,8 +216,12 @@ namespace ToolEngine
 	}
 	void Application::updateUniformBuffer(uint32_t current_image)
 	{
-		// time update
-		// create ubo
-		// memcpy
+		UniformBufferObject ubo{};
+		ubo.model_matrix = glm::rotate(glm::mat4(1.0f), Timer::DeltaTime() * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain->getWidthDividedByHeight(), 0.1f, 10.0f);
+		ubo.projection_matrix[1][1] *= -1;
+
+		m_uniform_buffers[current_image]->bindingBuffer(ubo);
 	}
 }

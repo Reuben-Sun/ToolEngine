@@ -15,6 +15,9 @@
 #include "include/rhi/vertex_buffer.h"
 #include "include/rhi/index_buffer.h"
 #include "include/rhi/uniform_buffer.h"
+#include "include/logic/timer.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace ToolEngine
 {

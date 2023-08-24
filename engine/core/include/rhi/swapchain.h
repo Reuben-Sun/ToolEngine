@@ -19,6 +19,7 @@ namespace ToolEngine
 		VkFormat getFormat() const { return m_swap_chain_image_format; }
 		VkExtent2D getExtent() const { return m_swap_chain_extent; }
 		std::vector<VkImage> getImages() const { return m_swap_chain_images; }
+		float getWidthDividedByHeight() const { return static_cast<float>(m_swap_chain_extent.width) / static_cast<float>(m_swap_chain_extent.height); }
 
 	private:
 		VkSurfaceKHR m_surface;
