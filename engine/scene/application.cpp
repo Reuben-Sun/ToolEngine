@@ -27,6 +27,11 @@ namespace ToolEngine
 		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
 		m_vertex_buffer = std::make_unique<VertexBuffer>(*m_device, *m_physical_device, VERTEX_BUFFER);
 		m_index_buffer = std::make_unique<IndexBuffer>(*m_device, *m_physical_device, INDEX_BUFFER);
+		m_uniform_buffers.resize(MAX_FRAMES_IN_FLIGHT);
+		for (int i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i)
+		{
+			m_uniform_buffers[i] = std::make_unique<UniformBuffer>(*m_device, *m_physical_device);
+		}
 		
 		// sync
 		m_image_available_semaphores.resize(MAX_FRAMES_IN_FLIGHT);
@@ -159,6 +164,7 @@ namespace ToolEngine
 		VkDeviceSize offsets[] = { 0 };
 		uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
 		uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
+		updateUniformBuffer(current_frame_index);
 		OPTICK_TAG("VertexCount", vertex_count);
 		m_command_buffers->bindVertexBuffer(current_frame_index, vertex_buffers, offsets, 0, 1);
 		m_command_buffers->bindIndexBuffer(current_frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
@@ -204,5 +210,11 @@ namespace ToolEngine
 			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], app_extent.width, app_extent.height);
 		}
 		
+	}
+	void Application::updateUniformBuffer(uint32_t current_image)
+	{
+		// time update
+		// create ubo
+		// memcpy
 	}
 }
