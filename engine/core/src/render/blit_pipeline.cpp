@@ -21,6 +21,7 @@ namespace ToolEngine
 
 		m_pipeline_layout = std::make_unique<PipelineLayout>(m_device);
 		m_render_pass = std::make_unique<RenderPass>(m_device, format);
+        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, *m_pipeline_layout);
 
         // vertex input
         auto vertex_binding_description = Vertex::getBindingDescription();

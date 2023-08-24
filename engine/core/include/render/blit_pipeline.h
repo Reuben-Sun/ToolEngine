@@ -8,6 +8,7 @@
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
 #include "include/rhi/vertex_descriptor.h"
+#include "include/rhi/descriptor_set_layout.h"
 
 namespace ToolEngine
 {
@@ -25,5 +26,6 @@ namespace ToolEngine
 		std::unique_ptr<PipelineState> m_state;
 		std::unique_ptr<RenderPass> m_render_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
+		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
 	};
 }
