@@ -10,20 +10,28 @@
 #include "include/rhi/vertex_descriptor.h"
 #include "include/rhi/descriptor_set_layout.h"
 #include "include/rhi/descriptor_pool.h"
+#include "include/rhi/command_buffer.h"
+#include "include/rhi/frame_buffer.h"
+#include "include/rhi/vertex_buffer.h"
+#include "include/rhi/index_buffer.h"
+#include "include/rhi/swapchain.h"
+#include "include/logic/timer.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace ToolEngine
 {
 	class BlitPipeline
 	{
 	public:
-		BlitPipeline(Device& device, VkFormat format, uint32_t frames_in_flight_count);
+		BlitPipeline(Device& device, PhysicalDevice& physical_device, SwapChain& swap_chain, uint32_t frames_in_flight_count);
 		~BlitPipeline();
 		RenderPass& getRenderPass() { return *m_render_pass; }
 		GraphicsPipeline& getPipeline() { return *m_pipeline; }
+		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index);
 	private:
 		Device& m_device;
 
-		VkFormat m_format;
 		uint32_t m_frames_in_flight_count;
 		std::unique_ptr<GraphicsPipeline> m_pipeline;
 		std::unique_ptr<PipelineState> m_state;
@@ -31,7 +39,14 @@ namespace ToolEngine
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
 		std::unique_ptr<DescriptorPool> m_descriptor_pool;
+		std::unique_ptr<VertexBuffer> m_vertex_buffer;
+		std::unique_ptr<IndexBuffer> m_index_buffer;
+		std::vector<std::unique_ptr<UniformBuffer>> m_uniform_buffers;
+
+		PhysicalDevice& m_physical_device;
+		SwapChain& m_swap_chain;
 
 		void createPipeline();
+		void updateUniformBuffer(uint32_t current_image);
 	};
 }

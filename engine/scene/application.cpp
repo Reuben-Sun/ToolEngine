@@ -19,20 +19,13 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views.emplace_back(std::make_unique<ImageView>(*m_device, image, m_swap_chain->getFormat()));
 		}
-		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat(), MAX_FRAMES_IN_FLIGHT);
+		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (auto& image_view : m_swap_chain_image_views)
 		{
 			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
 		}
 		
 		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
-		m_vertex_buffer = std::make_unique<VertexBuffer>(*m_device, *m_physical_device, VERTEX_BUFFER);
-		m_index_buffer = std::make_unique<IndexBuffer>(*m_device, *m_physical_device, INDEX_BUFFER);
-		m_uniform_buffers.resize(MAX_FRAMES_IN_FLIGHT);
-		for (int i = 0; i < MAX_FRAMES_IN_FLIGHT; ++i)
-		{
-			m_uniform_buffers[i] = std::make_unique<UniformBuffer>(*m_device, *m_physical_device);
-		}
 		
 		// sync
 		m_image_available_semaphores.resize(MAX_FRAMES_IN_FLIGHT);
@@ -132,51 +125,10 @@ namespace ToolEngine
 		OPTICK_POP();
 
 		m_command_buffers->resetCommandBuffer(current_frame_index);
-		// record
-		m_command_buffers->beginRecord(current_frame_index);
-
-		VkRenderPassBeginInfo render_pass_info{};
-		render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-		render_pass_info.renderPass = m_blit_pipeline->getRenderPass().getHandle();
-		render_pass_info.framebuffer = m_frame_buffers[image_index]->getHandle();
-		render_pass_info.renderArea.offset = { 0, 0 };
-		render_pass_info.renderArea.extent = m_swap_chain->getExtent();
-		VkClearValue clear_color = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
-		render_pass_info.clearValueCount = 1;
-		render_pass_info.pClearValues = &clear_color;
-		m_command_buffers->beginRenderPass(current_frame_index, render_pass_info);
-
-		m_command_buffers->bindPipeline(current_frame_index, m_blit_pipeline->getPipeline().getHandle());
-
-		VkViewport viewport{};
-		viewport.x = 0.0f;
-		viewport.y = 0.0f;
-		viewport.width = (float)m_swap_chain->getExtent().width;
-		viewport.height = (float)m_swap_chain->getExtent().height;
-		viewport.minDepth = 0.0f;
-		viewport.maxDepth = 1.0f;
-		m_command_buffers->setViewport(current_frame_index, viewport, 0, 1);
-
-		VkRect2D scissor{};
-		scissor.offset = { 0, 0 };
-		scissor.extent = m_swap_chain->getExtent();
-		m_command_buffers->setScissor(current_frame_index, scissor, 0, 1);
-
-		// pass vertex data
-		VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
-		VkDeviceSize offsets[] = { 0 };
-		uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
-		uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
-		updateUniformBuffer(current_frame_index);
-		OPTICK_TAG("VertexCount", vertex_count);
-		m_command_buffers->bindVertexBuffer(current_frame_index, vertex_buffers, offsets, 0, 1);
-		m_command_buffers->bindIndexBuffer(current_frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
-		// TODO: vkCmdBindDescriptorSets
-		m_command_buffers->draw(current_frame_index, index_count, 1, 0, 0, 0);
-
-		m_command_buffers->endRenderPass(current_frame_index);
-
-		m_command_buffers->endRecord(current_frame_index);
+		
+		// TODO: move this record to blit pipeline's renderTick()
+		m_blit_pipeline->renderTick(*m_command_buffers, *m_frame_buffers[image_index], current_frame_index);
+		
 		// submit
 		VkSemaphore wait_semaphores[] = { m_image_available_semaphores[current_frame_index]};
 		VkSemaphore signal_semaphores[] = { m_render_finished_semaphores[current_frame_index]};
@@ -207,21 +159,12 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views[i] = std::make_unique<ImageView>(*m_device, m_swap_chain->getImages()[i], m_swap_chain->getFormat());
 		}
-		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat(), MAX_FRAMES_IN_FLIGHT);
+		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (int i = 0; i < m_frame_buffers.size(); ++i)
 		{
 			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], app_extent.width, app_extent.height);
 		}
 		
 	}
-	void Application::updateUniformBuffer(uint32_t current_image)
-	{
-		UniformBufferObject ubo{};
-		ubo.model_matrix = glm::rotate(glm::mat4(1.0f), Timer::DeltaTime() * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain->getWidthDividedByHeight(), 0.1f, 10.0f);
-		ubo.projection_matrix[1][1] *= -1;
-
-		m_uniform_buffers[current_image]->bindingBuffer(ubo);
-	}
+	
 }

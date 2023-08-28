@@ -17,8 +17,6 @@
 #include "include/rhi/uniform_buffer.h"
 #include "include/rhi/descriptor_pool.h"
 #include "include/logic/timer.h"
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
 
 namespace ToolEngine
 {
@@ -50,9 +48,6 @@ namespace ToolEngine
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
 		std::unique_ptr<CommandBuffer> m_command_buffers;
-		std::unique_ptr<VertexBuffer> m_vertex_buffer;
-		std::unique_ptr<IndexBuffer> m_index_buffer;
-		std::vector<std::unique_ptr<UniformBuffer>> m_uniform_buffers;
 
 		std::vector<VkSemaphore> m_image_available_semaphores;
 		std::vector<VkSemaphore> m_render_finished_semaphores;
@@ -63,6 +58,5 @@ namespace ToolEngine
 		void drawFrame();
 		uint32_t getModFrame() { return m_current_frame % MAX_FRAMES_IN_FLIGHT; }
 		void resizeFrame();
-		void updateUniformBuffer(uint32_t current_image);
 	};
 }

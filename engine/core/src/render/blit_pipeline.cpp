@@ -2,16 +2,70 @@
 
 namespace ToolEngine
 {
-	BlitPipeline::BlitPipeline(Device& device, VkFormat format, uint32_t frames_in_flight_count)
-        : m_device(device), m_format(format), m_frames_in_flight_count(frames_in_flight_count)
+	BlitPipeline::BlitPipeline(Device& device, PhysicalDevice& physical_device, SwapChain& swap_chain, uint32_t frames_in_flight_count)
+        : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
         m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, m_frames_in_flight_count);
         createPipeline();
+        m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, VERTEX_BUFFER);
+        m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, INDEX_BUFFER);
+        m_uniform_buffers.resize(m_frames_in_flight_count);
+        for (int i = 0; i < m_frames_in_flight_count; ++i)
+        {
+            m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+        }
 	}
     BlitPipeline::~BlitPipeline()
     {
         
+    }
+    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index)
+    {
+        command_buffer.beginRecord(frame_index);
+
+        VkRenderPassBeginInfo render_pass_info{};
+        render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+        render_pass_info.renderPass = m_render_pass->getHandle();
+        render_pass_info.framebuffer = frame_buffer.getHandle();
+        render_pass_info.renderArea.offset = { 0, 0 };
+        render_pass_info.renderArea.extent = m_swap_chain.getExtent();
+        VkClearValue clear_color = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
+        render_pass_info.clearValueCount = 1;
+        render_pass_info.pClearValues = &clear_color;
+        command_buffer.beginRenderPass(frame_index, render_pass_info);
+
+        command_buffer.bindPipeline(frame_index, m_pipeline->getHandle());
+
+        VkViewport viewport{};
+        viewport.x = 0.0f;
+        viewport.y = 0.0f;
+        viewport.width = (float)m_swap_chain.getExtent().width;
+        viewport.height = (float)m_swap_chain.getExtent().height;
+        viewport.minDepth = 0.0f;
+        viewport.maxDepth = 1.0f;
+        command_buffer.setViewport(frame_index, viewport, 0, 1);
+
+        VkRect2D scissor{};
+        scissor.offset = { 0, 0 };
+        scissor.extent = m_swap_chain.getExtent();
+        command_buffer.setScissor(frame_index, scissor, 0, 1);
+
+        // pass vertex data
+        VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
+        VkDeviceSize offsets[] = { 0 };
+        uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
+        uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
+        updateUniformBuffer(frame_index);
+        OPTICK_TAG("VertexCount", vertex_count);
+        command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
+        command_buffer.bindIndexBuffer(frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
+        // TODO: vkCmdBindDescriptorSets
+        command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
+
+        command_buffer.endRenderPass(frame_index);
+
+        command_buffer.endRecord(frame_index);
     }
     void BlitPipeline::createPipeline()
     {
@@ -100,7 +154,7 @@ namespace ToolEngine
         pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
-        m_render_pass = std::make_unique<RenderPass>(m_device, m_format);
+        m_render_pass = std::make_unique<RenderPass>(m_device, m_swap_chain.getFormat());
 
         m_state = std::make_unique<PipelineState>();
         m_state->setVertexShaderStage(vert_shader_stage_info);
@@ -117,5 +171,16 @@ namespace ToolEngine
         m_state->setSubpassIndex(0);
 
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, *m_state);
+    }
+
+    void BlitPipeline::updateUniformBuffer(uint32_t current_image)
+    {
+        UniformBufferObject ubo{};
+        ubo.model_matrix = glm::rotate(glm::mat4(1.0f), Timer::DeltaTime() * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain.getWidthDividedByHeight(), 0.1f, 10.0f);
+        ubo.projection_matrix[1][1] *= -1;
+
+        m_uniform_buffers[current_image]->bindingBuffer(ubo);
     }
 }
