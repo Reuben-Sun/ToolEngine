@@ -10,6 +10,7 @@
 #include "include/rhi/vertex_descriptor.h"
 #include "include/rhi/descriptor_set_layout.h"
 #include "include/rhi/descriptor_pool.h"
+#include "include/rhi/descriptor_sets.h"
 #include "include/rhi/command_buffer.h"
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/vertex_buffer.h"
@@ -38,6 +39,7 @@ namespace ToolEngine
 		std::unique_ptr<RenderPass> m_render_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
+		std::unique_ptr<DescriptorSets> m_descriptor_sets;
 		std::unique_ptr<DescriptorPool> m_descriptor_pool;
 		std::unique_ptr<VertexBuffer> m_vertex_buffer;
 		std::unique_ptr<IndexBuffer> m_index_buffer;

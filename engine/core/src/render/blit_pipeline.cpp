@@ -15,6 +15,11 @@ namespace ToolEngine
         {
             m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
         }
+        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
+        for (int i = 0; i < m_frames_in_flight_count; ++i)
+        {
+            m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), i);
+        }
 	}
     BlitPipeline::~BlitPipeline()
     {

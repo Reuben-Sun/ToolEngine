@@ -13,6 +13,7 @@ namespace ToolEngine
 	public:
 		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, uint32_t frames_in_flight_count);
 		~DescriptorSets();
+		void updateDescriptorSets(VkBuffer buffer, uint32_t frames_in_flight_index);
 	private:
 		std::vector<VkDescriptorSet> m_descriptor_sets;
 		Device& m_device;
