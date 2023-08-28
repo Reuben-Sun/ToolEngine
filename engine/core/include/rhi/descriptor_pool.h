@@ -11,11 +11,11 @@ namespace ToolEngine
 	class DescriptorPool
 	{
 	public:
-		DescriptorPool();
+		DescriptorPool(Device& device, uint32_t max_frames_in_flight_count);
 		~DescriptorPool();
 	private:
 		VkDescriptorPool m_descriptor_pool;
 		Device& m_device;
-		//std::vector<D> m_descriptor_sets;
+		uint32_t m_max_frames_in_flight_count;
 	};
 }

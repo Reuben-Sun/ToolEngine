@@ -19,7 +19,7 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views.emplace_back(std::make_unique<ImageView>(*m_device, image, m_swap_chain->getFormat()));
 		}
-		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat());
+		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat(), MAX_FRAMES_IN_FLIGHT);
 		for (auto& image_view : m_swap_chain_image_views)
 		{
 			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
@@ -207,7 +207,7 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views[i] = std::make_unique<ImageView>(*m_device, m_swap_chain->getImages()[i], m_swap_chain->getFormat());
 		}
-		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat());
+		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, m_swap_chain->getFormat(), MAX_FRAMES_IN_FLIGHT);
 		for (int i = 0; i < m_frame_buffers.size(); ++i)
 		{
 			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], app_extent.width, app_extent.height);

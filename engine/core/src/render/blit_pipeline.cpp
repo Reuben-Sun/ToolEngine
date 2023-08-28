@@ -2,8 +2,19 @@
 
 namespace ToolEngine
 {
-	BlitPipeline::BlitPipeline(Device& device, VkFormat format): m_device(device)
+	BlitPipeline::BlitPipeline(Device& device, VkFormat format, uint32_t frames_in_flight_count)
+        : m_device(device), m_format(format), m_frames_in_flight_count(frames_in_flight_count)
 	{
+        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
+        m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, 2);
+        createPipeline();
+	}
+    BlitPipeline::~BlitPipeline()
+    {
+        
+    }
+    void BlitPipeline::createPipeline()
+    {
         // shader
         ShaderModule vertex_shader_module(m_device, "Debug/shaders/vert.spv");
         ShaderModule fragment_shader_module(m_device, "Debug/shaders/frag.spv");
@@ -18,17 +29,6 @@ namespace ToolEngine
         frag_shader_stage_info.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
         frag_shader_stage_info.module = fragment_shader_module.getHandle();
         frag_shader_stage_info.pName = "main";
-
-        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
-
-        VkPipelineLayoutCreateInfo pipeline_layout_info{};
-        pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipeline_layout_info.setLayoutCount = 1;
-        //auto aaa = m_descriptor_set_layout->getHandle();
-        pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
-        
-		m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
-		m_render_pass = std::make_unique<RenderPass>(m_device, format);
 
         // vertex input
         auto vertex_binding_description = Vertex::getBindingDescription();
@@ -94,11 +94,19 @@ namespace ToolEngine
         dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
         dynamicState.pDynamicStates = dynamicStates.data();
 
-		m_state = std::make_unique<PipelineState>();
+        VkPipelineLayoutCreateInfo pipeline_layout_info{};
+        pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipeline_layout_info.setLayoutCount = 1;
+        pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
+
+        m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
+        m_render_pass = std::make_unique<RenderPass>(m_device, m_format);
+
+        m_state = std::make_unique<PipelineState>();
         m_state->setVertexShaderStage(vert_shader_stage_info);
         m_state->setFragmentShaderStage(frag_shader_stage_info);
-		m_state->setPipelineLayout(*m_pipeline_layout);
-		m_state->setRenderPass(*m_render_pass);
+        m_state->setPipelineLayout(*m_pipeline_layout);
+        m_state->setRenderPass(*m_render_pass);
         m_state->setVertexInputState(vertex_input_state);
         m_state->setInputAssemblyState(input_assembly_state);
         m_state->setViewportState(viewport_state);
@@ -108,10 +116,6 @@ namespace ToolEngine
         m_state->setDynamicState(dynamicState);
         m_state->setSubpassIndex(0);
 
-		m_pipeline = std::make_unique<GraphicsPipeline>(m_device, *m_state);
-	}
-    BlitPipeline::~BlitPipeline()
-    {
-        
+        m_pipeline = std::make_unique<GraphicsPipeline>(m_device, *m_state);
     }
 }
