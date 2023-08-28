@@ -6,7 +6,7 @@ namespace ToolEngine
         : m_device(device), m_format(format), m_frames_in_flight_count(frames_in_flight_count)
 	{
         m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
-        m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, 2);
+        m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, m_frames_in_flight_count);
         createPipeline();
 	}
     BlitPipeline::~BlitPipeline()
