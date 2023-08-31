@@ -23,6 +23,11 @@ namespace ToolEngine
         {
             return delta_time;
         }
+
+        static float CurrentTime() 
+		{
+			return std::chrono::duration<float>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+		}
 	private:
 		static std::chrono::time_point<std::chrono::high_resolution_clock> last_time;
 		static float delta_time;
