@@ -15,3 +15,6 @@
 [submodule "engine/third_party/glm"]
 	path = engine/third_party/glm
 	url = https://github.com/Reuben-Sun/glm.git
+[submodule "engine/third_party/tinygltf"]
+	path = engine/third_party/tinygltf
+	url = https://github.com/Reuben-Sun/tinygltf.git
