@@ -59,3 +59,9 @@ if(NOT TARGET glm)
   add_subdirectory(glm)
   set_property(TARGET glm PROPERTY FOLDER "ThirdParty")
 endif()
+
+# tiny gltf
+if(NOT TARGET tinygltf)
+  add_subdirectory(tinygltf)
+  set_property(TARGET tinygltf PROPERTY FOLDER "ThirdParty")
+endif()
