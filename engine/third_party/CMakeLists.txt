@@ -2,6 +2,9 @@ project(third_party LANGUAGES C CXX)
 set(THIRDPARTY_LIBRARIES)
 
 ### mandatory dependencies
+# vulkan
+find_package(Vulkan REQUIRED)
+
 # GLFW
 if (NOT TARGET glfw)
   set(GLFW_USE_HYBRID_HPG OFF)
@@ -28,11 +31,14 @@ set(IMGUI_FILES
     "${IMGUI_DIR}/imgui_internal.h"
     "${IMGUI_DIR}/imstb_rectpack.h"
     "${IMGUI_DIR}/imstb_textedit.h"
-    "${IMGUI_DIR}/imstb_truetype.h")
+    "${IMGUI_DIR}/imstb_truetype.h"
+    "${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp")
 
 if (NOT TARGET imgui)
   add_library(imgui STATIC ${IMGUI_FILES})
   target_include_directories(imgui PUBLIC ${IMGUI_DIR})
+  target_link_libraries(imgui PUBLIC ${Vulkan_LIBRARIES})
+  target_include_directories(imgui PUBLIC ${Vulkan_INCLUDE_DIRS})
   set_property(TARGET imgui PROPERTY FOLDER "ThirdParty")
 endif()
 
