@@ -11,5 +11,6 @@ namespace ToolEngine
 	public:
 		static std::vector<char> readFile(const std::string& filename);
 		static std::string getWorkspacePath();
+		static std::string getRootPath();
 	};
 }

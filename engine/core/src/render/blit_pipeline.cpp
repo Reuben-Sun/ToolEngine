@@ -20,6 +20,7 @@ namespace ToolEngine
         {
             m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), i);
         }
+        m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device);
 	}
     BlitPipeline::~BlitPipeline()
     {
