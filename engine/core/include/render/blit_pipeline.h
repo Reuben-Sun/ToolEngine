@@ -16,6 +16,7 @@
 #include "include/rhi/vertex_buffer.h"
 #include "include/rhi/index_buffer.h"
 #include "include/rhi/swapchain.h"
+#include "include/rhi/texture_image.h"
 #include "include/logic/timer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -44,6 +45,7 @@ namespace ToolEngine
 		std::unique_ptr<VertexBuffer> m_vertex_buffer;
 		std::unique_ptr<IndexBuffer> m_index_buffer;
 		std::vector<std::unique_ptr<UniformBuffer>> m_uniform_buffers;
+		std::unique_ptr<TextureImage> m_texture_image;
 
 		PhysicalDevice& m_physical_device;
 		SwapChain& m_swap_chain;
