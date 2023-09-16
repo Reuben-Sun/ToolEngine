@@ -4,6 +4,7 @@
 #include "device.h"
 #include "physical_device.h"
 #include "vertex_descriptor.h"
+#include "single_time_command_buffer.h"
 
 namespace ToolEngine
 {
