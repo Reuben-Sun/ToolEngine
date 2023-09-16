@@ -21,7 +21,10 @@ namespace ToolEngine
 		UniformBuffer(Device& device, PhysicalDevice& physical_device);
 		virtual ~UniformBuffer();
 		void bindingBuffer(UniformBufferObject ubo);
+		VkBuffer getHandle() const { return m_buffer; }
 	private:
+		VkBuffer m_buffer;
+		VkDeviceMemory m_memory;
 		void* m_uniform_buffer_mapped;
 	};
 }
