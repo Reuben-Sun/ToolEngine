@@ -6,7 +6,8 @@
 namespace ToolEngine
 {
 	/// <summary>
-	/// A buffer to execute a one-time command, such as submit texture
+	/// A buffer to execute a one-time command, such as submit texture.
+	/// This buffer is design for std::unique_ptr, needn't free or submit
 	/// </summary>
 	class SingleTimeCommandBuffer
 	{
