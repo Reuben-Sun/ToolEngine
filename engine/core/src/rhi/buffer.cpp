@@ -51,34 +51,10 @@ namespace ToolEngine
 	}
 	void Buffer::copyBuffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size)
 	{
-		VkCommandBufferAllocateInfo alloc_info{};
-		alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		alloc_info.commandPool = m_device.getCommandPool().getHandle();
-		alloc_info.commandBufferCount = 1;
-
-		VkCommandBuffer commandBuffer;
-		vkAllocateCommandBuffers(m_device.getHandle(), &alloc_info, &commandBuffer);
-		VkCommandBufferBeginInfo beginInfo{};
-		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-		beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-		vkBeginCommandBuffer(commandBuffer, &beginInfo);
-
+		std::unique_ptr<SingleTimeCommandBuffer> command_buffer = std::make_unique<SingleTimeCommandBuffer>(m_device);
+		
 		VkBufferCopy copyRegion{};
 		copyRegion.size = size;
-		vkCmdCopyBuffer(commandBuffer, src_buffer, dst_buffer, 1, &copyRegion);
-
-		vkEndCommandBuffer(commandBuffer);
-
-		VkSubmitInfo submitInfo{};
-		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submitInfo.commandBufferCount = 1;
-		submitInfo.pCommandBuffers = &commandBuffer;
-
-		vkQueueSubmit(m_device.getGraphicsQueue().getHandle(), 1, &submitInfo, VK_NULL_HANDLE);
-		vkQueueWaitIdle(m_device.getGraphicsQueue().getHandle());
-
-		vkFreeCommandBuffers(m_device.getHandle(), m_device.getCommandPool().getHandle(), 1, &commandBuffer);
+		vkCmdCopyBuffer(command_buffer->getHandle(), src_buffer, dst_buffer, 1, &copyRegion);
 	}
 }
