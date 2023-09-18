@@ -18,6 +18,7 @@
 #include "include/rhi/swapchain.h"
 #include "include/rhi/texture_image.h"
 #include "include/rhi/image_view.h"
+#include "include/rhi/sampler.h"
 #include "include/logic/timer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -48,6 +49,7 @@ namespace ToolEngine
 		std::vector<std::unique_ptr<UniformBuffer>> m_uniform_buffers;
 		std::unique_ptr<TextureImage> m_texture_image;
 		std::unique_ptr<ImageView> m_texture_image_view;
+		std::unique_ptr<Sampler> m_texture_sampler;
 
 		PhysicalDevice& m_physical_device;
 		SwapChain& m_swap_chain;
