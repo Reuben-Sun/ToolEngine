@@ -5,9 +5,11 @@ namespace ToolEngine
 	BlitPipeline::BlitPipeline(Device& device, PhysicalDevice& physical_device, SwapChain& swap_chain, uint32_t frames_in_flight_count)
         : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
+        // pipeline init
         m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, m_frames_in_flight_count);
         createPipeline();
+        // resource init
         m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, VERTEX_BUFFER);
         m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, INDEX_BUFFER);
         m_uniform_buffers.resize(m_frames_in_flight_count);
@@ -15,14 +17,16 @@ namespace ToolEngine
         {
             m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
         }
-        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
-        for (int i = 0; i < m_frames_in_flight_count; ++i)
-        {
-            m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), i);
-        }
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "\\textures\\CalibrationFloorDiffuse.jpeg");
         m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat());
         m_texture_sampler = std::make_unique<Sampler>(m_device, m_physical_device);
+        // resource descriptor
+        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
+        for (int i = 0; i < m_frames_in_flight_count; ++i)
+        {
+            m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), m_texture_image_view->getHandle(), m_texture_sampler->getHandle(), i);
+        }
+        
 	}
     BlitPipeline::~BlitPipeline()
     {
