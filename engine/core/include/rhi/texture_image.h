@@ -16,6 +16,7 @@ namespace ToolEngine
 		TextureImage(Device& device, PhysicalDevice& physical_device, std::string file_path);
 		~TextureImage();
 		VkImage getHandle() const { return m_texture_image; }
+		VkFormat getFormat() const { return m_format; }
 
 		void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);
 		
