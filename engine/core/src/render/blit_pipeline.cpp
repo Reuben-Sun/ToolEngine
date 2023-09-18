@@ -21,7 +21,7 @@ namespace ToolEngine
             m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), i);
         }
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "\\textures\\CalibrationFloorDiffuse.jpeg");
-        m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image, m_texture_image->getFormat());
+        m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat());
 	}
     BlitPipeline::~BlitPipeline()
     {

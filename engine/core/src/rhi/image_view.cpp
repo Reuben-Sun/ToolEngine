@@ -2,7 +2,7 @@
 
 namespace ToolEngine
 {
-	ImageView::ImageView(Device& device, VkImage& image, VkFormat format)
+	ImageView::ImageView(Device& device, VkImage image, VkFormat format)
         : m_device(device), m_image(image), m_format(format)
 	{
         VkImageViewCreateInfo create_info{};
