@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "pipeline_layout.h"

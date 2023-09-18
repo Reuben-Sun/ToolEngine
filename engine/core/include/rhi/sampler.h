@@ -11,6 +11,8 @@ namespace ToolEngine
 	public:
 		Sampler(Device& device, PhysicalDevice& physical_device);
 		~Sampler();
+
+		VkSampler getHandle() const { return m_sampler; }
 	private:
 		VkSampler m_sampler;
 		Device& m_device;
