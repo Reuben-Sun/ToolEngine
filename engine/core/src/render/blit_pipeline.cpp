@@ -17,7 +17,7 @@ namespace ToolEngine
         {
             m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
         }
-        m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "\\textures\\CalibrationFloorDiffuse.jpeg");
+        m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "\\textures\\CalibrationFloorDiffuse.png");
         m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat());
         m_texture_sampler = std::make_unique<Sampler>(m_device, m_physical_device);
         // resource descriptor
