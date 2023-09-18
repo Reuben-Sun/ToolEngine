@@ -54,7 +54,11 @@ namespace ToolEngine
             SwapChainSupportDetails swap_chain_support = SwapChainSupportDetails::getSwapChainSupportDetails(device, m_surface_handle);
             swap_chain_adequate = !swap_chain_support.formats.empty() && !swap_chain_support.presentModes.empty();
         }
-        return indices.isComplete() && extension_supported && swap_chain_adequate;
+
+        VkPhysicalDeviceFeatures supported_features;
+        vkGetPhysicalDeviceFeatures(device, &supported_features);
+
+        return indices.isComplete() && extension_supported && swap_chain_adequate && supported_features.samplerAnisotropy;
     }
 
     bool PhysicalDevice::checkDeviceExtensionSupport(VkPhysicalDevice device)
