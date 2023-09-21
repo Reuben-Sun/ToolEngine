@@ -9,7 +9,7 @@ namespace ToolEngine
 {
 	struct Vertex
 	{
-		glm::vec2 pos;
+		glm::vec3 pos;
 		glm::vec3 color;
         glm::vec2 texture_coord;
 
@@ -29,7 +29,7 @@ namespace ToolEngine
             // vertex object position
             attribute_descriptions[0].binding = 0;
             attribute_descriptions[0].location = 0;
-            attribute_descriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
+            attribute_descriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
             attribute_descriptions[0].offset = offsetof(Vertex, pos);
             // proper color
             attribute_descriptions[1].binding = 0;
@@ -48,14 +48,20 @@ namespace ToolEngine
 
     const std::vector<Vertex> VERTEX_BUFFER =
     {
-        {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}},
-        {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}},
-        {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}},
-        {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}, {1.0f, 1.0f}}
+        {{-0.5f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+        {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}, {1.0f, 0.0f}},
+        {{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f}},
+
+        {{-0.5f, -0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+        {{0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}, {1.0f, 0.0f}},
+        {{0.5f, 0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f, -0.5f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f}}
     };
 
     const std::vector<uint16_t> INDEX_BUFFER = 
 	{
-		0, 1, 2, 2, 3, 0
+         0, 1, 2, 2, 3, 0,
+        4, 5, 6, 6, 7, 4
 	};
 }
