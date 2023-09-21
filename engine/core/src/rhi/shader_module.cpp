@@ -4,7 +4,8 @@ namespace ToolEngine
 {
 	ShaderModule::ShaderModule(Device& device, std::string shader_path): m_device(device), m_shader_path(shader_path)
 	{
-		auto shader_code = FileUtils::readFile(m_shader_path);
+		std::string final_shader_path = FileUtils::getRootPath() + "\\engine\\shaders\\spv\\" + shader_path;
+		auto shader_code = FileUtils::readFile(final_shader_path);
 
 		VkShaderModuleCreateInfo create_info{};
 		create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
