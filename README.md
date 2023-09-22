@@ -1,5 +1,12 @@
 # Tool Engine
 
+## 构建
+
+- 需要Vulkan环境
+- 根据VS版本运行scripts下的`cmake_generate_20xx`
+- 用vs打开ToolEngine.sln
+- 设client为启动项目，运行
+
 ## Todo
 
 ### Runtime
@@ -21,9 +28,9 @@
 
 ### 进阶目标
 
+- [ ] Volume Light Probe
+- [ ] Terrain
 - [ ] Vulkan Ray Query
-- [ ] Restir GI
-- [ ] Speedtree
 - [ ] Apex
 - [ ] DLSS
 
