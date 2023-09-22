@@ -1,11 +1,11 @@
 # Tool Engine
 
-## 构建
+## 构建 运行
 
-- 需要Vulkan环境
-- 根据VS版本运行scripts下的`cmake_generate_20xx`
-- 用vs打开ToolEngine.sln
-- 设client为启动项目，运行
+- 需要 Vulkan、cmake
+- 根据 VS 版本运行 scripts 下的 `cmake_generate_20xx`
+- 用 Visual Studio 打开 ToolEngine.sln
+- 设 client 为启动项目，运行
 
 ## Todo
 
