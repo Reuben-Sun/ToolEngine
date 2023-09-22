@@ -20,3 +20,10 @@ add_custom_command(TARGET client POST_BUILD
 	${CMAKE_SOURCE_DIR}/shaders/spv
 	$<TARGET_FILE_DIR:client>/shaders
 )
+
+# Copy textures
+add_custom_command(TARGET client POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${CMAKE_SOURCE_DIR}/textures
+	$<TARGET_FILE_DIR:client>/textures
+)

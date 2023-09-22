@@ -20,15 +20,4 @@ namespace ToolEngine
 
         return buffer;
     }
-    std::string FileUtils::getWorkspacePath()
-    {
-        std::filesystem::path current_path = std::filesystem::current_path();
-        return current_path.string();
-    }
-    std::string FileUtils::getRootPath()
-    {
-        std::filesystem::path current_path = std::filesystem::current_path();
-        auto root_path = current_path.parent_path().parent_path();
-        return root_path.string();
-    }
 }

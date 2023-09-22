@@ -8,7 +8,7 @@ namespace ToolEngine
 	{
 		// stb load image
 		int texture_width, texture_height, texture_channels;
-		std::string path = FileUtils::getRootPath() + file_path;
+		std::string path = FileUtils::getInstance().getImagePath() + file_path;
 		stbi_uc* pixels = stbi_load(path.c_str(), &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
 		if (!pixels)
 		{
