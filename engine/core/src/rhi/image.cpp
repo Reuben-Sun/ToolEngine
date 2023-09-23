@@ -43,6 +43,8 @@ namespace ToolEngine
 
 	Image::~Image()
 	{
+		vkDestroyImage(m_device.getHandle(), m_image, nullptr);
+		vkFreeMemory(m_device.getHandle(), m_image_memory, nullptr);
 	}
 
 	void Image::transitionImageLayout(VkImageLayout old_layout, VkImageLayout new_layout)
