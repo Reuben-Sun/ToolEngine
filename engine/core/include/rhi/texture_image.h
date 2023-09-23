@@ -25,7 +25,6 @@ namespace ToolEngine
 	private:
 		std::unique_ptr<Image> m_texture_image;
 
-		void transitionImageLayout(VkImageLayout old_layout, VkImageLayout new_layout);
 		void createImageFormBuffer(VkBuffer buffer, uint32_t width, uint32_t height);
 	};
 }

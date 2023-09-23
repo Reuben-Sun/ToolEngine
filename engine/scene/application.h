@@ -18,6 +18,7 @@
 #include "include/rhi/descriptor_pool.h"
 #include "include/logic/timer.h"
 #include "include/common/depth_support_details.h"
+#include "include/rhi/depth_resources.h"
 
 namespace ToolEngine
 {
@@ -46,8 +47,7 @@ namespace ToolEngine
 		std::unique_ptr<Device> m_device;
 		std::unique_ptr<SwapChain> m_swap_chain;
 		std::vector<std::unique_ptr<ImageView>> m_swap_chain_image_views;
-		
-		// depth image view
+		std::unique_ptr<DepthResources> m_depth_resources;
 		std::unique_ptr<BlitPipeline> m_blit_pipeline;
 		std::vector<std::unique_ptr<FrameBuffer>> m_frame_buffers;
 		std::unique_ptr<CommandBuffer> m_command_buffers;
