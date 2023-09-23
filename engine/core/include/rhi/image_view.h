@@ -8,7 +8,7 @@ namespace ToolEngine
 	class ImageView
 	{
 	public:
-		ImageView(Device& device, VkImage image, VkFormat format);
+		ImageView(Device& device, VkImage image, VkFormat format, VkImageAspectFlags aspect_flags);
 		~ImageView();
 
 		VkImageView getHandle() { return m_image_view; }
