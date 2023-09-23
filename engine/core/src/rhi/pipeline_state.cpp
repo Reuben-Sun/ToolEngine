@@ -99,6 +99,11 @@ namespace ToolEngine
 		m_color_blend_state = color_blend_state;
 		dirty = true;
 	}
+	void PipelineState::setDepthStencilState(const VkPipelineDepthStencilStateCreateInfo& depth_stencil_state)
+	{
+		m_depth_stencil_state = depth_stencil_state;
+		dirty = true;
+	}
 	void PipelineState::setDynamicState(const VkPipelineDynamicStateCreateInfo& dynamic_state)
 	{
 		m_dynamic_state = dynamic_state;

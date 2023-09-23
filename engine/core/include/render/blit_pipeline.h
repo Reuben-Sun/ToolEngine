@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vulkan/vulkan.h>
+#include <array>
 #include "graphics_pipeline.h"
 #include "include/rhi/device.h"
 #include "include/rhi/pipeline_state.h"

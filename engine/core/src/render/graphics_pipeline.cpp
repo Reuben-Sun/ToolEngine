@@ -15,6 +15,7 @@ namespace ToolEngine
         pipeline_info.pViewportState = &pipeline_state.getViewportState();
         pipeline_info.pRasterizationState = &pipeline_state.getRasterizationState();
         pipeline_info.pMultisampleState = &pipeline_state.getMultisampleState();
+        pipeline_info.pDepthStencilState = &pipeline_state.getDepthStencilState();
         pipeline_info.pColorBlendState = &pipeline_state.getColorBlendState();
         pipeline_info.pDynamicState = &pipeline_state.getDynamicState();
         pipeline_info.layout = pipeline_state.getPipelineLayout()->getHandle();
