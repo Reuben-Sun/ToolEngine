@@ -32,6 +32,8 @@ namespace ToolEngine
 		void setMultisampleState(const VkPipelineMultisampleStateCreateInfo& multisample_state);
 		VkPipelineMultisampleStateCreateInfo getMultisampleState() const { return m_multisample_state; }
 		void setColorBlendState(const VkPipelineColorBlendStateCreateInfo& color_blend_state);
+		VkPipelineDepthStencilStateCreateInfo getDepthStencilState() const { return m_depth_stencil_state; }
+		void setDepthStencilState(const VkPipelineDepthStencilStateCreateInfo& depth_stencil_state);
 		VkPipelineColorBlendStateCreateInfo getColorBlendState() const { return m_color_blend_state; }
 		void setDynamicState(const VkPipelineDynamicStateCreateInfo& dynamic_state);
 		VkPipelineDynamicStateCreateInfo getDynamicState() const { return m_dynamic_state; }
@@ -51,7 +53,7 @@ namespace ToolEngine
 		VkPipelineViewportStateCreateInfo m_viewport_state{};	// view port state
 		VkPipelineRasterizationStateCreateInfo m_rasterization_state{};	// rasterization state
 		VkPipelineMultisampleStateCreateInfo m_multisample_state{};	// multisample state
-		// depth stencil state	
+		VkPipelineDepthStencilStateCreateInfo m_depth_stencil_state{};	// depth stencil state	
 		VkPipelineColorBlendStateCreateInfo m_color_blend_state{};	// color blend state
 		VkPipelineDynamicStateCreateInfo m_dynamic_state{};	// dynamic state
 		uint32_t m_subpass_index{ 0 };	// subpass index

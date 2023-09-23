@@ -42,9 +42,12 @@ namespace ToolEngine
         render_pass_info.framebuffer = frame_buffer.getHandle();
         render_pass_info.renderArea.offset = { 0, 0 };
         render_pass_info.renderArea.extent = m_swap_chain.getExtent();
-        VkClearValue clear_color = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
-        render_pass_info.clearValueCount = 1;
-        render_pass_info.pClearValues = &clear_color;
+        std::array<VkClearValue, 2> clear_colors {};
+        clear_colors[0].color = { {0.0f, 0.0f, 0.0f, 1.0f} };
+        clear_colors[1].depthStencil = { 1.0f, 0 };
+        render_pass_info.clearValueCount = static_cast<uint32_t>(clear_colors.size());
+        render_pass_info.pClearValues = clear_colors.data();
+
         command_buffer.beginRenderPass(frame_index, render_pass_info);
 
         command_buffer.bindPipeline(frame_index, m_pipeline->getHandle());
@@ -135,6 +138,19 @@ namespace ToolEngine
         multi_sample_state.sampleShadingEnable = VK_FALSE;
         multi_sample_state.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
 
+        // depth stencil
+        VkPipelineDepthStencilStateCreateInfo depth_stencil_state{};
+        depth_stencil_state.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+        depth_stencil_state.depthTestEnable = VK_TRUE;
+        depth_stencil_state.depthWriteEnable = VK_TRUE;
+        depth_stencil_state.depthCompareOp = VK_COMPARE_OP_LESS;
+        depth_stencil_state.depthBoundsTestEnable = VK_FALSE;
+        depth_stencil_state.minDepthBounds = 0.0f; // Optional
+        depth_stencil_state.maxDepthBounds = 1.0f; // Optional
+        depth_stencil_state.stencilTestEnable = VK_FALSE;
+        depth_stencil_state.front = {}; // Optional
+        depth_stencil_state.back = {}; // Optional
+
         // color blending
         VkPipelineColorBlendAttachmentState color_blend_attachment_state{};
         color_blend_attachment_state.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
@@ -166,7 +182,7 @@ namespace ToolEngine
         pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
-        m_render_pass = std::make_unique<RenderPass>(m_device, m_swap_chain.getFormat());
+        m_render_pass = std::make_unique<RenderPass>(m_device, m_physical_device, m_swap_chain.getFormat());
 
         m_state = std::make_unique<PipelineState>();
         m_state->setVertexShaderStage(vert_shader_stage_info);
@@ -178,6 +194,7 @@ namespace ToolEngine
         m_state->setViewportState(viewport_state);
         m_state->setRasterizationState(rasterization_state);
         m_state->setMultisampleState(multi_sample_state);
+        m_state->setDepthStencilState(depth_stencil_state);
         m_state->setColorBlendState(colorBlending);
         m_state->setDynamicState(dynamicState);
         m_state->setSubpassIndex(0);

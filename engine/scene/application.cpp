@@ -26,7 +26,7 @@ namespace ToolEngine
 		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (auto& image_view : m_swap_chain_image_views)
 		{
-			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, app_extent.width, app_extent.height));
+			m_frame_buffers.emplace_back(std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *image_view, m_depth_resources->getImageView(), app_extent.width, app_extent.height));
 		}
 		
 		m_command_buffers = std::make_unique<CommandBuffer>(*m_device, MAX_FRAMES_IN_FLIGHT);
@@ -157,16 +157,17 @@ namespace ToolEngine
 		{
 			m_swap_chain_image_views[i] = nullptr;
 		}
-		
-		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, VkExtent2D{ app_extent.width, app_extent.height });
+		VkExtent2D extent = { app_extent.width, app_extent.height };
+		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, extent);
 		for (int i = 0; i < m_swap_chain_image_views.size(); ++i)
 		{
 			m_swap_chain_image_views[i] = std::make_unique<ImageView>(*m_device, m_swap_chain->getImages()[i], m_swap_chain->getFormat(), VK_IMAGE_ASPECT_COLOR_BIT);
 		}
+		m_depth_resources = std::make_unique<DepthResources>(*m_device, *m_physical_device, extent);
 		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (int i = 0; i < m_frame_buffers.size(); ++i)
 		{
-			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], app_extent.width, app_extent.height);
+			m_frame_buffers[i] = std::make_unique<FrameBuffer>(*m_device, m_blit_pipeline->getRenderPass().getHandle(), *m_swap_chain_image_views[i], m_depth_resources->getImageView(), app_extent.width, app_extent.height);
 		}
 		
 	}
