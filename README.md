@@ -1,5 +1,15 @@
 # Tool Engine
 
+## 拉取
+
+本项目使用 Submodule 和 Git LFS，拉取项目后还需
+
+```
+git submodule init
+git submodule update
+git lfs pull
+```
+
 ## 构建 运行
 
 - 需要 Vulkan、cmake
