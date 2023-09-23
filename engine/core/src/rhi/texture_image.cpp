@@ -26,7 +26,9 @@ namespace ToolEngine
 		// stb unload image
 		stbi_image_free(pixels);
 		// create image
-		createImage(texture_width, texture_height, m_format, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+		VkExtent2D extent { texture_width, texture_height };
+		m_texture_image = std::make_unique<Image>(m_device, m_physical_device, extent, VK_FORMAT_R8G8B8A8_SRGB,
+			VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 		// copy buffer to image
 		transitionImageLayout(VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 		createImageFormBuffer(staging_buffer, static_cast<uint32_t>(texture_width), static_cast<uint32_t>(texture_height));
@@ -38,43 +40,7 @@ namespace ToolEngine
 	TextureImage::~TextureImage()
 	{
 	}
-	void TextureImage::createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties)
-	{
-		VkImageCreateInfo image_create_info{};
-		image_create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-		image_create_info.imageType = VK_IMAGE_TYPE_2D;
-		image_create_info.extent.width = width;
-		image_create_info.extent.height = height;
-		image_create_info.extent.depth = 1;
-		image_create_info.mipLevels = 1;
-		image_create_info.arrayLayers = 1;
-		image_create_info.format = format;
-		image_create_info.tiling = tiling;
-		image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-		image_create_info.usage = usage;
-		image_create_info.samples = VK_SAMPLE_COUNT_1_BIT;
-		image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-		if (vkCreateImage(m_device.getHandle(), &image_create_info, nullptr, &m_texture_image) != VK_SUCCESS) 
-		{
-			throw std::runtime_error("failed to create image!");
-		}
-
-		VkMemoryRequirements mem_requirements;
-		vkGetImageMemoryRequirements(m_device.getHandle(), m_texture_image, &mem_requirements);
-
-		VkMemoryAllocateInfo alloc_info{};
-		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-		alloc_info.allocationSize = mem_requirements.size;
-		alloc_info.memoryTypeIndex = findMemoryType(mem_requirements.memoryTypeBits, properties);
-
-		if (vkAllocateMemory(m_device.getHandle(), &alloc_info, nullptr, &m_texture_image_memory) != VK_SUCCESS) 
-		{
-			throw std::runtime_error("failed to allocate image memory!");
-		}
-
-		vkBindImageMemory(m_device.getHandle(), m_texture_image, m_texture_image_memory, 0);
-	}
+	
 	void TextureImage::transitionImageLayout(VkImageLayout old_layout, VkImageLayout new_layout)
 	{
 		std::unique_ptr<SingleTimeCommandBuffer> command_buffer = std::make_unique<SingleTimeCommandBuffer>(m_device);
@@ -85,7 +51,7 @@ namespace ToolEngine
 		barrier.newLayout = new_layout;
 		barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-		barrier.image = m_texture_image;
+		barrier.image = m_texture_image->getHandle();
 		barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
 		barrier.subresourceRange.baseMipLevel = 0;
 		barrier.subresourceRange.levelCount = 1;
@@ -138,6 +104,6 @@ namespace ToolEngine
 		region.imageSubresource.layerCount = 1;
 		region.imageOffset = { 0, 0, 0 };
 		region.imageExtent = { width, height, 1 };
-		vkCmdCopyBufferToImage(command_buffer->getHandle(), buffer, m_texture_image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+		vkCmdCopyBufferToImage(command_buffer->getHandle(), buffer, m_texture_image->getHandle(), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 	}
 }

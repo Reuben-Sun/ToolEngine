@@ -13,6 +13,7 @@ namespace ToolEngine
 		~Image();
 
 		VkImage getHandle() const { return m_image; }
+		VkFormat getFormat() const { return m_format; }
 	private:
 		VkImage m_image{ VK_NULL_HANDLE };
 		VkDeviceMemory m_image_memory{ VK_NULL_HANDLE };
