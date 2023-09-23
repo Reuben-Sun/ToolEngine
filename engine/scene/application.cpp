@@ -21,7 +21,7 @@ namespace ToolEngine
 			m_swap_chain_image_views.emplace_back(std::make_unique<ImageView>(*m_device, image, m_swap_chain->getFormat(), VK_IMAGE_ASPECT_COLOR_BIT));
 		}
 		// create depth resources
-
+		m_depth_resources = std::make_unique<DepthResources>(*m_device, *m_physical_device, app_extent);
 		// create pipeline
 		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (auto& image_view : m_swap_chain_image_views)
