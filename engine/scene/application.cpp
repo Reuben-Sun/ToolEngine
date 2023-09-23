@@ -14,11 +14,14 @@ namespace ToolEngine
 		m_physical_device = std::make_unique<PhysicalDevice>(*m_instance, m_surface);
 		m_device = std::make_unique<Device>(*m_instance, *m_physical_device, m_surface);
 		VkExtent2D app_extent = { properties.extent.width, properties.extent.height };
+		// create swap chain image resources
 		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, app_extent);
 		for (auto& image : m_swap_chain->getImages())
 		{
 			m_swap_chain_image_views.emplace_back(std::make_unique<ImageView>(*m_device, image, m_swap_chain->getFormat()));
 		}
+		// create depth resources
+		// create pipeline
 		m_blit_pipeline = std::make_unique<BlitPipeline>(*m_device, *m_physical_device, *m_swap_chain, MAX_FRAMES_IN_FLIGHT);
 		for (auto& image_view : m_swap_chain_image_views)
 		{

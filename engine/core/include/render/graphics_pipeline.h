@@ -7,6 +7,10 @@
 
 namespace ToolEngine
 {
+	/// <summary>
+	/// Pipeline don't own frame resources, but process them.
+	/// Input resources, and output rendered resources.
+	/// </summary>
 	class GraphicsPipeline: public Pipeline
 	{
 	public:
