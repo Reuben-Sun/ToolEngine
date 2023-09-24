@@ -19,9 +19,6 @@ namespace ToolEngine
 		VkImage getHandle() const { return m_texture_image->getHandle(); }
 		VkFormat getFormat() const { return m_texture_image->getFormat(); }
 
-		void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);
-		
-		
 	private:
 		std::unique_ptr<Image> m_texture_image;
 
