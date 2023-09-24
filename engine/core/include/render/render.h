@@ -9,7 +9,7 @@
 #include "include/rhi/swapchain.h"
 #include "include/rhi/image_view.h"
 #include "include/rhi/render_pass.h"
-#include "include/render/blit_pipeline.h"
+#include "include/render/pipeline/blit_pipeline.h"
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/command_buffer.h"
 #include "include/rhi/vertex_buffer.h"
@@ -18,7 +18,7 @@
 #include "include/rhi/descriptor_pool.h"
 #include "include/logic/timer.h"
 #include "include/common/depth_support_details.h"
-#include "include/rhi/depth_resources.h"
+#include "include/render/resources/depth_resources.h"
 
 namespace ToolEngine
 {
