@@ -1,8 +1,8 @@
-#include "glfw_window.h"
+#include "include/window/glfw_window.h"
 
 namespace ToolEngine
 {
-    GlfwWindow::GlfwWindow(const Properties& properties): Window(properties)
+    GlfwWindow::GlfwWindow(Properties& properties): Window(properties), m_properties(properties)
     {
         if (!glfwInit())
         {

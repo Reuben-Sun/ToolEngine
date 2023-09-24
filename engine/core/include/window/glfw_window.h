@@ -13,7 +13,7 @@ namespace ToolEngine
 	class GlfwWindow: public Window
 	{
 	public:
-		GlfwWindow(const Properties& properties);
+		GlfwWindow(Properties& properties);
 		virtual ~GlfwWindow();
 
 		VkSurfaceKHR createSurface(Instance& instance) override;
@@ -21,9 +21,11 @@ namespace ToolEngine
 		void processEvents() override;
 		std::vector<const char*> getRequiredSurfaceExtensions() const override;
 		Extent resize() override;
+		Properties getProperties() const { return m_properties; }
 
 		static void onErrorCallback(int error_code, const char* description);
 	private:
 		GLFWwindow* m_window = nullptr;
+		Properties& m_properties;
 	};
 }
