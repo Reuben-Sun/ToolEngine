@@ -10,6 +10,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${ALL_FILES})
 
 target_link_libraries(core PUBLIC OptickCore)
 target_link_libraries(core PUBLIC glm)
+target_link_libraries(core PUBLIC tinygltf)
 
 find_package(Vulkan REQUIRED)
 target_link_libraries(core PUBLIC ${Vulkan_LIBRARIES})  

@@ -111,3 +111,5 @@ platform中的draw就是render的函数，这个类似于官方样例中`vulkan_
 [Vulkan Tutorial Github](https://github.com/Overv/VulkanTutorial/blob/main/code/00_base_code.cpp)
 
 [Vulkan Sample](https://github.com/KhronosGroup/Vulkan-Samples/tree/main)
+
+[Cherno's Hazel](https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
