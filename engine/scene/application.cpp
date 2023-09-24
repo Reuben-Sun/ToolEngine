@@ -28,9 +28,7 @@ namespace ToolEngine
 		{
 			OPTICK_FRAME("MainThread");
 			Timer::Tick();
-			OPTICK_PUSH("process glfw events")
 			m_window->processEvents();
-			OPTICK_POP();
 			m_render->drawFrame();
 		}
 		return ExitCode::Failed;
