@@ -4,6 +4,7 @@
 #include <vulkan/vulkan.h>
 #include <array>
 #include "graphics_pipeline.h"
+#include "include/render/pass/forward_pass.h"
 #include "include/rhi/device.h"
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
@@ -31,7 +32,7 @@ namespace ToolEngine
 	public:
 		BlitPipeline(Device& device, PhysicalDevice& physical_device, SwapChain& swap_chain, uint32_t frames_in_flight_count);
 		~BlitPipeline();
-		RenderPass& getRenderPass() { return *m_render_pass; }
+		RenderPass& getRenderPass() { return *m_forward_pass; }
 		GraphicsPipeline& getPipeline() { return *m_pipeline; }
 		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index);
 	private:
@@ -40,7 +41,7 @@ namespace ToolEngine
 		uint32_t m_frames_in_flight_count;
 		std::unique_ptr<GraphicsPipeline> m_pipeline;
 		std::unique_ptr<PipelineState> m_state;
-		std::unique_ptr<RenderPass> m_render_pass;
+		std::unique_ptr<ForwardPass> m_forward_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
 		std::unique_ptr<DescriptorSets> m_descriptor_sets;

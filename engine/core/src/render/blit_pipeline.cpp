@@ -38,7 +38,7 @@ namespace ToolEngine
 
         VkRenderPassBeginInfo render_pass_info{};
         render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-        render_pass_info.renderPass = m_render_pass->getHandle();
+        render_pass_info.renderPass = m_forward_pass->getHandle();
         render_pass_info.framebuffer = frame_buffer.getHandle();
         render_pass_info.renderArea.offset = { 0, 0 };
         render_pass_info.renderArea.extent = m_swap_chain.getExtent();
@@ -182,13 +182,13 @@ namespace ToolEngine
         pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
-        m_render_pass = std::make_unique<RenderPass>(m_device, m_physical_device, m_swap_chain.getFormat());
+        m_forward_pass = std::make_unique<ForwardPass>(m_device, m_physical_device, m_swap_chain.getFormat());
 
         m_state = std::make_unique<PipelineState>();
         m_state->setVertexShaderStage(vert_shader_stage_info);
         m_state->setFragmentShaderStage(frag_shader_stage_info);
         m_state->setPipelineLayout(*m_pipeline_layout);
-        m_state->setRenderPass(*m_render_pass);
+        m_state->setRenderPass(*m_forward_pass);
         m_state->setVertexInputState(vertex_input_state);
         m_state->setInputAssemblyState(input_assembly_state);
         m_state->setViewportState(viewport_state);

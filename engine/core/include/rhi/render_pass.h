@@ -12,11 +12,11 @@ namespace ToolEngine
 	{
 	public:
 		RenderPass(Device& device, PhysicalDevice& physical_device, VkFormat format);
-		~RenderPass();
+		virtual ~RenderPass();
 
 		VkRenderPass getHandle() const { return m_render_pass; }
 
-	private:
+	protected:
 		VkRenderPass m_render_pass;
 		Device& m_device;
 		PhysicalDevice& m_physical_device;
