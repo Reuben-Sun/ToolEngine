@@ -1,0 +1,21 @@
+name: Build Windows
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration: [debug]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+        
+      - name: Build
+        run: ./scripts/cmake_generate_2022.bat ${{matrix.configuration}} 
