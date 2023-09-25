@@ -2,7 +2,7 @@
 
 namespace ToolEngine
 {
-	IndexBuffer::IndexBuffer(Device& device, PhysicalDevice& physical_device, std::vector<uint16_t> index_buffer): Buffer(device, physical_device)
+	IndexBuffer::IndexBuffer(Device& device, PhysicalDevice& physical_device, std::vector<Index> index_buffer): Buffer(device, physical_device)
 	{
 		VkDeviceSize buffer_size = sizeof(index_buffer[0]) * index_buffer.size();
 
