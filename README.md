@@ -12,6 +12,8 @@ git lfs pull
 
 ## 构建 运行
 
+[![Build Windows](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml/badge.svg)](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml) 
+
 - 需要 Vulkan、cmake
 - 根据 VS 版本运行 scripts 下的 `cmake_generate_20xx`
 - 用 Visual Studio 打开 ToolEngine.sln
