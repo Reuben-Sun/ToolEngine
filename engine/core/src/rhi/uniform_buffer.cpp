@@ -19,7 +19,7 @@ namespace ToolEngine
             vkFreeMemory(m_device.getHandle(), m_memory, nullptr);
         }
     }
-    void UniformBuffer::bindingBuffer(UniformBufferObject ubo)
+    void UniformBuffer::updateBuffer(UniformBufferObject ubo)
     {
         memcpy(m_uniform_buffer_mapped, &ubo, sizeof(ubo));
     }

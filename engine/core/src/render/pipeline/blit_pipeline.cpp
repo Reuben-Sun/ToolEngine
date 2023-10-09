@@ -212,6 +212,6 @@ namespace ToolEngine
         ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain.getWidthDividedByHeight(), 0.1f, 10.0f);
         ubo.projection_matrix[1][1] *= -1;
 
-        m_uniform_buffers[current_image]->bindingBuffer(ubo);
+        m_uniform_buffers[current_image]->updateBuffer(ubo);
     }
 }
