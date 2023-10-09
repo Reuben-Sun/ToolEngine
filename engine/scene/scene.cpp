@@ -16,4 +16,8 @@ namespace ToolEngine
 	{
 
 	}
+	RenderScene Scene::getRenderScene()
+	{
+		return RenderScene();
+	}
 }

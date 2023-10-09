@@ -32,7 +32,7 @@ namespace ToolEngine
     {
         
     }
-    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index)
+    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, Model model)
     {
         command_buffer.beginRecord(frame_index);
 
@@ -67,6 +67,7 @@ namespace ToolEngine
         command_buffer.setScissor(frame_index, scissor, 0, 1);
 
         // pass vertex data
+        // TODO: use model data
         VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
         VkDeviceSize offsets[] = { 0 };
         uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());

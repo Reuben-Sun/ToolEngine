@@ -10,7 +10,7 @@ namespace ToolEngine
 		properties.extent = { 1280, 720 };
 		m_window = std::make_unique<GlfwWindow>(properties);
 		m_render = std::make_unique<Render>(*m_window);
-		
+		m_scene = std::make_unique<Scene>();
 	}
 
 	Application::~Application()
@@ -29,7 +29,8 @@ namespace ToolEngine
 			OPTICK_FRAME("MainThread");
 			Timer::Tick();
 			m_window->processEvents();
-			m_render->drawFrame();
+			m_scene->tick();
+			m_render->drawFrame(m_scene->getRenderScene());
 		}
 		return ExitCode::Failed;
 	}

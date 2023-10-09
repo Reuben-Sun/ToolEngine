@@ -25,6 +25,7 @@
 #include "include/logic/timer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "include/render/model/model.h"
 
 namespace ToolEngine
 {
@@ -35,7 +36,7 @@ namespace ToolEngine
 		~BlitPipeline();
 		RenderPass& getRenderPass() { return *m_forward_pass; }
 		GraphicsPipeline& getPipeline() { return *m_pipeline; }
-		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index);
+		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, Model model);
 	private:
 		Device& m_device;
 

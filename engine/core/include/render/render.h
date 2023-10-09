@@ -19,6 +19,7 @@
 #include "include/logic/timer.h"
 #include "include/common/depth_support_details.h"
 #include "include/render/resources/depth_resources.h"
+#include "include/render/scene/render_scene.h"
 
 namespace ToolEngine
 {
@@ -28,7 +29,7 @@ namespace ToolEngine
 		Render(GlfwWindow& window);
 		~Render();
 
-		void drawFrame();
+		void drawFrame(RenderScene render_scene);
 		void resizeFrame();
 
 		const int MAX_FRAMES_IN_FLIGHT = 2;
