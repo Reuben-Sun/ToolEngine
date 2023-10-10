@@ -27,3 +27,10 @@ add_custom_command(TARGET client POST_BUILD
 	${CMAKE_SOURCE_DIR}/textures
 	$<TARGET_FILE_DIR:client>/textures
 )
+
+# Copy models
+add_custom_command(TARGET client POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory
+	${CMAKE_SOURCE_DIR}/models
+	$<TARGET_FILE_DIR:client>/models
+)

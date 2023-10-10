@@ -68,10 +68,12 @@ namespace ToolEngine
 
         // pass vertex data
         // TODO: use model data
+        m_vertex_buffer->updateBuffer(model.vertices);
+        m_index_buffer->updateBuffer(model.indices);
         VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
         VkDeviceSize offsets[] = { 0 };
-        uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
-        uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
+        uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
+        uint32_t index_count = static_cast<uint32_t>(model.indices.size());
         updateUniformBuffer(frame_index);
         OPTICK_TAG("VertexCount", vertex_count);
         command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
