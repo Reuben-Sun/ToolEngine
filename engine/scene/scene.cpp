@@ -1,10 +1,18 @@
 #include "scene.h"
+#include <tiny_gltf.h>
 
 namespace ToolEngine
 {
 	Scene::Scene()
 	{
 		// TODO: load model
+		tinygltf::Model gltf_model;
+		tinygltf::TinyGLTF gltf_loader_context;
+		std::string gltf_load_error;
+		std::string gltf_load_warning;
+		std::string model_path = FileUtils::getInstance().getModelsPath() + "SphereWithCube.gltf";
+		bool gltf_load_result = gltf_loader_context.LoadASCIIFromFile(&gltf_model, &gltf_load_error, &gltf_load_warning, model_path);
+
 	}
 
 	Scene::~Scene()

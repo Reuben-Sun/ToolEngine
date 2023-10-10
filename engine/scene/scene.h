@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "include/render/scene/render_scene.h"
+#include "include/file/file_utils.h"
 
 namespace ToolEngine
 {
