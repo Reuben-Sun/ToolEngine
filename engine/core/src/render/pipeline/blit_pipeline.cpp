@@ -68,8 +68,10 @@ namespace ToolEngine
 
         // pass vertex data
         // TODO: use model data
-        m_vertex_buffer->updateBuffer(model.vertices);
-        m_index_buffer->updateBuffer(model.indices);
+        m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
+        m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
+        // m_vertex_buffer->updateBuffer(model.vertices);
+        // m_index_buffer->updateBuffer(model.indices);
         VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
         VkDeviceSize offsets[] = { 0 };
         uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
