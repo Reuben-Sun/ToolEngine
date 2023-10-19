@@ -29,7 +29,7 @@ namespace ToolEngine
 		Render(GlfwWindow& window);
 		~Render();
 
-		void drawFrame(RenderScene render_scene);
+		void drawFrame(RenderScene& render_scene);
 		void resizeFrame();
 
 		const int MAX_FRAMES_IN_FLIGHT = 2;

@@ -13,8 +13,9 @@ namespace ToolEngine
 		~Scene();
 
 		void tick();	
-		RenderScene getRenderScene();
+		RenderScene& getRenderScene();
 	private:
+		RenderScene m_render_scene;
 		// camera
 		// std::vector<Light> 
 		// std::vector<Model> 

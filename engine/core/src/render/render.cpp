@@ -68,7 +68,7 @@ namespace ToolEngine
 			}
 		}
 	}
-	void Render::drawFrame(RenderScene render_scene)
+	void Render::drawFrame(RenderScene& render_scene)
 	{
 		OPTICK_TAG("FrameIndex", m_current_frame);
 		OPTICK_EVENT();
