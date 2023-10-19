@@ -17,3 +17,6 @@
 [submodule "engine/third_party/lua"]
 	path = engine/third_party/lua
 	url = https://github.com/lua/lua.git
+[submodule "engine/third_party/glfw"]
+	path = engine/third_party/glfw
+	url = https://github.com/Reuben-Sun/glfw.git
