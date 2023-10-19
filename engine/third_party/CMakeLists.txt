@@ -71,3 +71,15 @@ if(NOT TARGET tinygltf)
   add_subdirectory(tinygltf)
   set_property(TARGET tinygltf PROPERTY FOLDER "ThirdParty")
 endif()
+
+# lua
+if(NOT TARGET lua)
+  set(LUA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lua)
+  file(GLOB_RECURSE LUA_SOURCES ${LUA_DIR}/*.c)
+  list(FILTER LUA_SOURCES EXCLUDE REGEX "lua.c$")
+  list(FILTER LUA_SOURCES EXCLUDE REGEX "onelua.c$")
+
+  add_library(lua STATIC ${LUA_SOURCES})
+  target_include_directories(lua PUBLIC ${LUA_DIR})
+  set_property(TARGET lua PROPERTY FOLDER "ThirdParty")
+endif()
