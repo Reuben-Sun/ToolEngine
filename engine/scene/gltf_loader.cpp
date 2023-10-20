@@ -66,13 +66,13 @@ namespace ToolEngine
 							const void* index_data_ptr = &(buffer.data[index_accessor.byteOffset + index_buffer_view.byteOffset]);
 
 							// append index
-							for (size_t i = 0; i < index_accessor.count; i++)
+							/*for (size_t i = 0; i < index_accessor.count; i++)
 							{
 								Index new_index;
 								new_index.index = final_index;
 								loaded_index_buffer.push_back(new_index);
 								final_index++;
-							}
+							}*/
 
 							// append vertex
 							vertex_start += vertex_count;
@@ -84,6 +84,9 @@ namespace ToolEngine
 								//new_vertex.color = glm::vec3(bufferColorSet[i * colorByteStride], bufferColorSet[i * colorByteStride + 1], bufferColorSet[i * colorByteStride + 2]);
 								new_vertex.color = glm::vec3(1, 1, 1);
 								loaded_vertex_buffer.push_back(new_vertex);
+								Index new_index;
+								new_index.index = loaded_index_buffer.size();
+								loaded_index_buffer.push_back(new_index);
 							}
 						}
 					}

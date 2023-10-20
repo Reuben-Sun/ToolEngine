@@ -30,3 +30,5 @@ git lfs pull
 [Cherno's Hazel](https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT)
 
 [Vulakn Render Graph](https://github.com/asc-community/VulkanAbstractionLayer)
+
+[glTF Tutorials](https://github.khronos.org/glTF-Tutorials/gltfTutorial/)
