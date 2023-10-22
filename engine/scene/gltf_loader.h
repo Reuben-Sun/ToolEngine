@@ -3,6 +3,7 @@
 #include <tiny_gltf.h>
 #include <string>
 #include <vector>
+#include <iostream>
 #include "include/render/scene/render_scene.h"
 
 namespace ToolEngine

@@ -12,7 +12,6 @@ namespace ToolEngine
 		if (gltf_load_result)
 		{
 			// load mesh
-			std::vector<Index> triangle_strip_indices;
 			for (auto& mesh : m_gltf_model.meshes)
 			{
 				for (auto& primitive : mesh.primitives)
@@ -41,29 +40,48 @@ namespace ToolEngine
 						const tinygltf::BufferView& buffer_view = m_gltf_model.bufferViews[accessor.bufferView];
 						const tinygltf::Buffer& buffer = m_gltf_model.buffers[buffer_view.buffer];
 
-						const int* data_ptr = reinterpret_cast<const int*>(&buffer.data[buffer_view.byteOffset + accessor.byteOffset]);
+						const void* dataPtr = &(buffer.data[buffer_view.byteOffset + accessor.byteOffset]);
 						const int elements_count = accessor.count;
 
-						for (int i = 0; i < elements_count; i++) 
+						// MARK: the component type is very important, common is TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT
+						switch (accessor.componentType) 
 						{
-							Index local_index;
-							local_index.index = data_ptr[i];
-							triangle_strip_indices.push_back(local_index);
+						case TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT:
+							{
+							const uint32_t* buf = static_cast<const uint32_t*>(dataPtr);
+								for (int i = 0; i < elements_count; i++)
+								{
+									Index local_index;
+									local_index.index = buf[i];
+									loaded_index_buffer.push_back(local_index);
+								}
+								break;
+							}
+						case TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT: {
+							const uint16_t* buf = static_cast<const uint16_t*>(dataPtr);
+								for (int i = 0; i < elements_count; i++)
+								{
+									Index local_index;
+									local_index.index = buf[i];
+									loaded_index_buffer.push_back(local_index);
+								}
+								break;
+							}
+						case TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE: {
+							const uint8_t* buf = static_cast<const uint8_t*>(dataPtr);
+								for (int i = 0; i < elements_count; i++)
+								{
+									Index local_index;
+									local_index.index = buf[i];
+									loaded_index_buffer.push_back(local_index);
+								}
+								break;
+							}
+						default:
+							std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
+							return;
 						}
 					}
-				}
-			}
-			// convert Triangle Strip to Triangle List
-			for (int i = 2; i < triangle_strip_indices.size(); ++i) {
-				if (i % 2 == 0) {
-					loaded_index_buffer.push_back(triangle_strip_indices[i - 2]);
-					loaded_index_buffer.push_back(triangle_strip_indices[i - 1]);
-					loaded_index_buffer.push_back(triangle_strip_indices[i]);
-				}
-				else {
-					loaded_index_buffer.push_back(triangle_strip_indices[i - 1]);
-					loaded_index_buffer.push_back(triangle_strip_indices[i - 2]);
-					loaded_index_buffer.push_back(triangle_strip_indices[i]);
 				}
 			}
 			// TODO: load children

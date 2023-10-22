@@ -133,7 +133,7 @@ namespace ToolEngine
         rasterization_state.rasterizerDiscardEnable = VK_FALSE;
         rasterization_state.polygonMode = VK_POLYGON_MODE_FILL;
         rasterization_state.lineWidth = 1.0f;
-        rasterization_state.cullMode = VK_CULL_MODE_BACK_BIT;
+        rasterization_state.cullMode = VK_CULL_MODE_NONE;
         rasterization_state.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         rasterization_state.depthBiasEnable = VK_FALSE;
 
@@ -210,8 +210,8 @@ namespace ToolEngine
     void BlitPipeline::updateUniformBuffer(uint32_t current_image)
     {
         UniformBufferObject ubo{};
-        //float time = Timer::CurrentTime();
-        float time = 1;
+        float time = Timer::CurrentTime();
+        //float time = 1;
         ubo.model_matrix = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain.getWidthDividedByHeight(), 0.1f, 10.0f);
