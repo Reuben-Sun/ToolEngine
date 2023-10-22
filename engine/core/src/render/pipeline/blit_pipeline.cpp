@@ -32,7 +32,7 @@ namespace ToolEngine
     {
         
     }
-    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index)
+    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, Model model)
     {
         command_buffer.beginRecord(frame_index);
 
@@ -67,10 +67,15 @@ namespace ToolEngine
         command_buffer.setScissor(frame_index, scissor, 0, 1);
 
         // pass vertex data
+        // TODO: use model data
+        m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
+        m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
+        // m_vertex_buffer->updateBuffer(model.vertices);
+        // m_index_buffer->updateBuffer(model.indices);
         VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
         VkDeviceSize offsets[] = { 0 };
-        uint32_t vertex_count = static_cast<uint32_t>(VERTEX_BUFFER.size());
-        uint32_t index_count = static_cast<uint32_t>(INDEX_BUFFER.size());
+        uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
+        uint32_t index_count = static_cast<uint32_t>(model.indices.size());
         updateUniformBuffer(frame_index);
         OPTICK_TAG("VertexCount", vertex_count);
         command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
@@ -205,13 +210,13 @@ namespace ToolEngine
     void BlitPipeline::updateUniformBuffer(uint32_t current_image)
     {
         UniformBufferObject ubo{};
-        //float time = Timer::CurrentTime();
-        float time = 1;
+        float time = Timer::CurrentTime();
+        //float time = 1;
         ubo.model_matrix = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         ubo.projection_matrix = glm::perspective(glm::radians(45.0f), m_swap_chain.getWidthDividedByHeight(), 0.1f, 10.0f);
         ubo.projection_matrix[1][1] *= -1;
 
-        m_uniform_buffers[current_image]->bindingBuffer(ubo);
+        m_uniform_buffers[current_image]->updateBuffer(ubo);
     }
 }

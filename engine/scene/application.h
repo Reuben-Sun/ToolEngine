@@ -4,6 +4,7 @@
 #include <optick.h>
 #include "include/window/glfw_window.h"
 #include "include/render/render.h"
+#include "scene.h"
 
 namespace ToolEngine
 {
@@ -26,5 +27,6 @@ namespace ToolEngine
 	private:
 		std::unique_ptr<GlfwWindow> m_window;
 		std::unique_ptr<Render> m_render;
+		std::unique_ptr<Scene> m_scene;
 	};
 }

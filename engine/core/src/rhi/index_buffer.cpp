@@ -10,9 +10,8 @@ namespace ToolEngine
 		VkDeviceMemory staging_buffer_memory;
 
 		createBuffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, staging_buffer, staging_buffer_memory);
-		void* data;
-		vkMapMemory(device.getHandle(), staging_buffer_memory, 0, buffer_size, 0, &data);
-		memcpy(data, index_buffer.data(), (size_t)buffer_size);
+		vkMapMemory(device.getHandle(), staging_buffer_memory, 0, buffer_size, 0, &m_index_buffer_mapped);
+		memcpy(m_index_buffer_mapped, index_buffer.data(), (size_t)buffer_size);
 		vkUnmapMemory(device.getHandle(), staging_buffer_memory);
 
 		createBuffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, m_buffer, m_memory);
@@ -34,5 +33,10 @@ namespace ToolEngine
 		}
 
 
+	}
+	void IndexBuffer::updateBuffer(std::vector<Index> index_buffer)
+	{
+		VkDeviceSize buffer_size = sizeof(index_buffer[0]) * index_buffer.size();
+		memcpy(m_index_buffer_mapped, index_buffer.data(), (size_t)buffer_size);
 	}
 }

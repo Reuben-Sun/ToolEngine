@@ -1,5 +1,4 @@
 #include "include/rhi/texture_image.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include "include/file/stb_image.h"
 
 namespace ToolEngine

@@ -19,6 +19,7 @@ namespace ToolEngine
 		std::string getExeFolderPath() { return exe_path.parent_path().string(); }
 		std::string getShaderPath() { return getExeFolderPath() + "\\shaders\\"; }
 		std::string getImagePath() { return getExeFolderPath() + "\\textures\\"; }
+		std::string getModelsPath() { return getExeFolderPath() + "\\models\\"; }
 	private:
 		FileUtils() {}
 		FileUtils(FileUtils const&) = delete;

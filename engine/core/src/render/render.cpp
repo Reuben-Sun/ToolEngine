@@ -68,7 +68,7 @@ namespace ToolEngine
 			}
 		}
 	}
-	void Render::drawFrame()
+	void Render::drawFrame(RenderScene& render_scene)
 	{
 		OPTICK_TAG("FrameIndex", m_current_frame);
 		OPTICK_EVENT();
@@ -97,8 +97,8 @@ namespace ToolEngine
 
 		m_command_buffers->resetCommandBuffer(current_frame_index);
 
-		// TODO: move this record to blit pipeline's renderTick()
-		m_blit_pipeline->renderTick(*m_command_buffers, *m_frame_buffers[image_index], current_frame_index);
+		Model model = render_scene.models[0];
+		m_blit_pipeline->renderTick(*m_command_buffers, *m_frame_buffers[image_index], current_frame_index, model);
 
 		// submit
 		VkSemaphore wait_semaphores[] = { m_image_available_semaphores[current_frame_index] };

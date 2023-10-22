@@ -2,10 +2,6 @@
 	path = engine/third_party/imgui
 	url = https://github.com/Reuben-Sun/imgui.git
 	tag = v1.89.7
-[submodule "engine/third_party/glfw"]
-	path = engine/third_party/glfw
-	url = https://github.com/glfw/glfw.git
-	tag = 3.3-stable
 [submodule "engine/third_party/tbb"]
 	path = engine/third_party/tbb
 	url = https://github.com/Reuben-Sun/oneTBB.git
@@ -21,3 +17,6 @@
 [submodule "engine/third_party/lua"]
 	path = engine/third_party/lua
 	url = https://github.com/lua/lua.git
+[submodule "engine/third_party/glfw"]
+	path = engine/third_party/glfw
+	url = https://github.com/Reuben-Sun/glfw.git

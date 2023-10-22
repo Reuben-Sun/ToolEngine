@@ -10,9 +10,8 @@ namespace ToolEngine
 		VkBuffer staging_buffer;
 		VkDeviceMemory staging_buffer_memory;
 		createBuffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, staging_buffer, staging_buffer_memory);
-		void* data;
-		vkMapMemory(m_device.getHandle(), staging_buffer_memory, 0, buffer_size, 0, &data);
-		memcpy(data, vertex_buffer.data(), (size_t)buffer_size);
+		vkMapMemory(m_device.getHandle(), staging_buffer_memory, 0, buffer_size, 0, &m_vertex_buffer_mapped);
+		memcpy(m_vertex_buffer_mapped, vertex_buffer.data(), (size_t)buffer_size);
 		vkUnmapMemory(m_device.getHandle(), staging_buffer_memory);
 		// create destination buffer in device memory
 		createBuffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, m_buffer, m_memory);
@@ -33,6 +32,12 @@ namespace ToolEngine
 		{
 			vkFreeMemory(m_device.getHandle(), m_memory, nullptr);
 		}
+	}
+
+	void VertexBuffer::updateBuffer(std::vector<Vertex> vertex_buffer)
+	{
+		VkDeviceSize buffer_size = sizeof(vertex_buffer[0]) * vertex_buffer.size();
+		memcpy(m_vertex_buffer_mapped, vertex_buffer.data(), (size_t)buffer_size);
 	}
 
 	

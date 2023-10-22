@@ -7,6 +7,9 @@
 
 namespace ToolEngine
 {
+	/// <summary>
+	/// The indices are arranged in a triangle list
+	/// </summary>
 	struct Index
 	{
 		uint16_t index;
