@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <optional>
+#include <vulkan/vulkan.h>
+#include <vector>
 
 namespace ToolEngine
 {
