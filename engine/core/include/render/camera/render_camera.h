@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include "include/math/transform.h"
 
 namespace ToolEngine
 {
@@ -13,5 +14,6 @@ namespace ToolEngine
 		float fov;
 		glm::mat4x4 projection_matrix;
 		glm::mat4x4 view_matrix;
+		Transform transform;
 	};
 }
