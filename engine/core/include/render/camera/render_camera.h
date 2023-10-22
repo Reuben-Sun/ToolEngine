@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "include/math/transform.h"
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace ToolEngine
 {
@@ -15,7 +16,7 @@ namespace ToolEngine
 		float fov;
 		Transform transform;
 
-		glm::mat4x4 getProjectionMatrix();
+		glm::mat4 getProjectionMatrix();
 		glm::mat4x4 getViewMatrix();
 	};
 }

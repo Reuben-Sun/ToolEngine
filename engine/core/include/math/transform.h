@@ -12,7 +12,7 @@ namespace ToolEngine
 	struct Transform
 	{
 		glm::vec3 position;
-		glm::vec3 rotation;		// degree, X means rotate around the X-axis
+		glm::vec3 rotation;		// radian
 		glm::vec3 scale;
 
 		static const Transform Identity;
