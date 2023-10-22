@@ -53,6 +53,7 @@ if(NOT TARGET tbb)
   add_subdirectory(tbb)
   set_property(TARGET tbb PROPERTY FOLDER "ThirdParty")
   set(TBB_Headers "${CMAKE_CURRENT_SOURCE_DIR}/tbb/include" PARENT_SCOPE)
+  set(BUILD_SHARED_LIBS OFF)
 endif()
 
 # optick
