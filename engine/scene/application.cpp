@@ -4,6 +4,15 @@ namespace ToolEngine
 {
 	Application::Application()
 	{
+	}
+
+	Application::~Application()
+	{
+	}
+
+	ExitCode Application::init(int argc, char* argv[])
+	{
+		FileUtils::getInstance().setExePath(argv[0]);
 		Timer::Start();
 		Window::Properties properties;
 		properties.title = "Tool Engine";
@@ -11,15 +20,7 @@ namespace ToolEngine
 		m_window = std::make_unique<GlfwWindow>(properties);
 		m_render = std::make_unique<Render>(*m_window);
 		m_scene = std::make_unique<Scene>();
-	}
-
-	Application::~Application()
-	{
-	}
-
-	ExitCode Application::init()
-	{
-		return ExitCode();
+		return ExitCode::Success;
 	}
 
 	ExitCode Application::mainLoop()

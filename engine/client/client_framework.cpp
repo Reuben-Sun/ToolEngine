@@ -2,10 +2,10 @@
 
 namespace ToolEngine
 {
-    void ClientFramework::run()
+    void ClientFramework::run(int argc, char* argv[])
     {
         Application app;
-        app.init();
+        app.init(argc, argv);
         app.mainLoop();
         app.cleanup();
     }

@@ -20,7 +20,7 @@ namespace ToolEngine
 		Application();
 		~Application();
 
-		ExitCode init();
+		ExitCode init(int argc, char* argv[]);
 		ExitCode mainLoop();
 		ExitCode cleanup();
 

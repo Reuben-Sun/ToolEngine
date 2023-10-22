@@ -3,7 +3,6 @@
 
 int main(int argc, char* argv[])
 {
-    ToolEngine::FileUtils::getInstance().setExePath(argv[0]);
-    ToolEngine::ClientFramework::run();
+    ToolEngine::ClientFramework::run(argc, argv);
     return 0;
 }

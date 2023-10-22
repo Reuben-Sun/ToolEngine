@@ -7,6 +7,6 @@ namespace ToolEngine
     class ClientFramework
     {
     public:
-        static void run();
+        static void run(int argc, char* argv[]);
     };
 }
