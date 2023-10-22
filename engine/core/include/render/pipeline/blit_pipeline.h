@@ -26,6 +26,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "include/render/model/model.h"
+#include "include/render/scene/render_scene.h"
 
 namespace ToolEngine
 {
@@ -36,7 +37,7 @@ namespace ToolEngine
 		~BlitPipeline();
 		RenderPass& getRenderPass() { return *m_forward_pass; }
 		GraphicsPipeline& getPipeline() { return *m_pipeline; }
-		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, Model model);
+		void renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, RenderScene& render_scene);
 	private:
 		Device& m_device;
 
@@ -59,6 +60,6 @@ namespace ToolEngine
 		SwapChain& m_swap_chain;
 
 		void createPipeline();
-		void updateUniformBuffer(uint32_t current_image);
+		void updateUniformBuffer(uint32_t current_image, RenderScene& render_scene);
 	};
 }

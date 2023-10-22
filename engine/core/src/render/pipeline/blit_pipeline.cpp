@@ -32,7 +32,7 @@ namespace ToolEngine
     {
         
     }
-    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, Model model)
+    void BlitPipeline::renderTick(CommandBuffer& command_buffer, FrameBuffer& frame_buffer, uint32_t frame_index, RenderScene& render_scene)
     {
         command_buffer.beginRecord(frame_index);
 
@@ -67,7 +67,7 @@ namespace ToolEngine
         command_buffer.setScissor(frame_index, scissor, 0, 1);
 
         // pass vertex data
-        // TODO: use model data
+        Model model = render_scene.models[0];
         m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
         m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
         // m_vertex_buffer->updateBuffer(model.vertices);
@@ -76,7 +76,7 @@ namespace ToolEngine
         VkDeviceSize offsets[] = { 0 };
         uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
         uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-        updateUniformBuffer(frame_index);
+        updateUniformBuffer(frame_index, render_scene);
         OPTICK_TAG("VertexCount", vertex_count);
         command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
         command_buffer.bindIndexBuffer(frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
@@ -133,7 +133,7 @@ namespace ToolEngine
         rasterization_state.rasterizerDiscardEnable = VK_FALSE;
         rasterization_state.polygonMode = VK_POLYGON_MODE_FILL;
         rasterization_state.lineWidth = 1.0f;
-        rasterization_state.cullMode = VK_CULL_MODE_BACK_BIT;
+        rasterization_state.cullMode = VK_CULL_MODE_NONE;
         rasterization_state.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         rasterization_state.depthBiasEnable = VK_FALSE;
 
@@ -207,7 +207,7 @@ namespace ToolEngine
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, *m_state);
     }
 
-    void BlitPipeline::updateUniformBuffer(uint32_t current_image)
+    void BlitPipeline::updateUniformBuffer(uint32_t current_image, RenderScene& render_scene)
     {
         UniformBufferObject ubo{};
         float time = Timer::CurrentTime();
