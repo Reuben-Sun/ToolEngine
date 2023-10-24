@@ -73,6 +73,30 @@ namespace ToolEngine
             {
                 g_global_context.input_manager->push(InputCommand{0, "Key W"});
             }
+            else if (key == GLFW_KEY_S)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key S" });
+			}
+            else if (key == GLFW_KEY_A)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key A" });
+			}
+            else if (key == GLFW_KEY_D)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key D" });
+			}
+            else if (key == GLFW_KEY_Q)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key Q" });
+			}
+            else if (key == GLFW_KEY_E)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key E" });
+			}
+            else if (key == GLFW_KEY_ESCAPE)
+            {
+				g_global_context.input_manager->push(InputCommand{ 0, "Key ESCAPE" });
+			}
         }
     }
     void GlfwWindow::onMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
@@ -86,6 +110,17 @@ namespace ToolEngine
             else if (action == GLFW_RELEASE) 
             {
                 g_global_context.input_manager->push(InputCommand{ 1, "Left Mouse Up" });
+            }
+        }
+        else if (button == GLFW_MOUSE_BUTTON_RIGHT)
+        {
+            if (action == GLFW_PRESS)
+            {
+                g_global_context.input_manager->push(InputCommand{ 1, "Right Mouse Down" });
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                g_global_context.input_manager->push(InputCommand{ 1, "Right Mouse Up" });
             }
         }
     }
