@@ -11,6 +11,8 @@ namespace ToolEngine
         glfwSetErrorCallback(onErrorCallback);
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         m_window = glfwCreateWindow(m_properties.extent.width, m_properties.extent.height, m_properties.title.c_str(), nullptr, nullptr);
+        glfwSetKeyCallback(m_window, onKeyCallback);
+        glfwSetMouseButtonCallback(m_window, onMouseButtonCallback);
     }
 
     GlfwWindow::~GlfwWindow()
@@ -62,6 +64,30 @@ namespace ToolEngine
     void GlfwWindow::onErrorCallback(int error_code, const char* description)
     {
         std::cout << "GLFW Run Error" << std::endl;
+    }
+    void GlfwWindow::onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+    {
+        if (action == GLFW_PRESS)
+        {
+            if (key == GLFW_KEY_W)
+            {
+                g_global_context.input_manager->push(InputCommand{0, "Key W"});
+            }
+        }
+    }
+    void GlfwWindow::onMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+    {
+        if (button == GLFW_MOUSE_BUTTON_LEFT)
+        {
+            if (action == GLFW_PRESS) 
+            {
+                g_global_context.input_manager->push(InputCommand{ 1, "Left Mouse Down" });
+            }
+            else if (action == GLFW_RELEASE) 
+            {
+                g_global_context.input_manager->push(InputCommand{ 1, "Left Mouse Up" });
+            }
+        }
     }
 }
 

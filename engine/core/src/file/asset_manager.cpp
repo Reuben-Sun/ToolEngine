@@ -8,6 +8,9 @@ namespace ToolEngine
 	AssetManager::~AssetManager()
 	{
 	}
+	void AssetManager::clear()
+	{
+	}
 	std::vector<char> AssetManager::readFile(const std::string& filename)
 	{
 		std::ifstream file(filename, std::ios::ate | std::ios::binary);

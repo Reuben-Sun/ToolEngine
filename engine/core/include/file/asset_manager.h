@@ -7,11 +7,16 @@
 
 namespace ToolEngine
 {
+	/// <summary>
+	/// A utils to load files
+	/// TODO: fileID, load state, cache
+	/// </summary>
 	class AssetManager
 	{
 	public:
 		AssetManager(std::string exe_path);
 		~AssetManager();
+		void clear();
 		std::vector<char> readFile(const std::string& filename);
 		std::string getExeFolderPath() const;
 		std::string getShaderPath() const;

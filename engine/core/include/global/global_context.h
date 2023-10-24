@@ -3,6 +3,7 @@
 #include <string>
 #include "macro.h"
 #include "include/file/asset_manager.h"
+#include "include/logic/input_manager.h"
 
 namespace ToolEngine
 {
@@ -13,6 +14,7 @@ namespace ToolEngine
 		void clear();
 		
 		class AssetManager* asset_manager = nullptr;
+		class InputManager* input_manager = nullptr;
 	private:
 
 	};

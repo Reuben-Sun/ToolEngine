@@ -32,7 +32,7 @@ namespace ToolEngine
 
 	void Scene::tick() 
 	{
-
+		g_global_context.input_manager->tick();
 	}
 	RenderScene& Scene::getRenderScene()
 	{
