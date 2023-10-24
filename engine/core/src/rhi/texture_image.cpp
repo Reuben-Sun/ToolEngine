@@ -1,5 +1,5 @@
 #include "include/rhi/texture_image.h"
-#include "include/file/stb_image.h"
+#include "stb_image.h"
 
 namespace ToolEngine
 {
