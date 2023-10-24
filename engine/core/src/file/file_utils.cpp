@@ -17,7 +17,7 @@ namespace ToolEngine
         file.read(buffer.data(), file_size);
 
         file.close();
-
+        
         return buffer;
     }
 }
