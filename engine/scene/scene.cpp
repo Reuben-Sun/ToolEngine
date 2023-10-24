@@ -5,7 +5,7 @@ namespace ToolEngine
 {
 	Scene::Scene()
 	{
-		std::string model_path = FileUtils::getInstance().getModelsPath() + "Cube.gltf";
+		std::string model_path = g_global_context.asset_manager->getModelsPath() + "Cube.gltf";
 		std::unique_ptr<GltfLoader> loader = std::make_unique<GltfLoader>(model_path);
 		Model model;
 		model.indices = loader->loaded_index_buffer;

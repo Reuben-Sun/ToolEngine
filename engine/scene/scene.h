@@ -2,8 +2,8 @@
 
 #include <vector>
 #include "include/render/scene/render_scene.h"
-#include "include/file/file_utils.h"
 #include "gltf_loader.h"
+#include "include/global/global_context.h"
 
 namespace ToolEngine
 {

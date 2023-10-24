@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "include/file/asset_manager.h"
 
 namespace ToolEngine
 {
@@ -9,9 +10,8 @@ namespace ToolEngine
 	public:
 		void init(std::string exe_path);
 		void clear();
-		// class TextureManager* textureManager = nullptr; 
-		// class FileManager* fileManager = nullptr;
-		// class TimerManager* timerManager = nullptr;
+		
+		class AssetManager* asset_manager = nullptr;
 	private:
 
 	};

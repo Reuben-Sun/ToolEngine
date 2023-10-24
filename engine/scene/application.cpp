@@ -13,7 +13,6 @@ namespace ToolEngine
 	ExitCode Application::init(int argc, char* argv[])
 	{
 		g_global_context.init(argv[0]);
-		FileUtils::getInstance().setExePath(argv[0]);
 		Timer::Start();
 		Window::Properties properties;
 		properties.title = "Tool Engine";
