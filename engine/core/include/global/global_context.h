@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "macro.h"
 #include "include/file/asset_manager.h"
 
 namespace ToolEngine
