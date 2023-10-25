@@ -1,4 +1,4 @@
-#include "application.h"
+#include "include/application.h"
 
 namespace ToolEngine
 {
@@ -12,7 +12,7 @@ namespace ToolEngine
 
 	ExitCode Application::init(int argc, char* argv[])
 	{
-		FileUtils::getInstance().setExePath(argv[0]);
+		g_global_context.init(argv[0]);
 		Timer::Start();
 		Window::Properties properties;
 		properties.title = "Tool Engine";
@@ -38,6 +38,7 @@ namespace ToolEngine
 
 	ExitCode Application::cleanup()
 	{
-		return ExitCode();
+		g_global_context.clear();
+		return ExitCode::Success;
 	}
 }

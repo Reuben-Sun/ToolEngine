@@ -5,8 +5,8 @@
 #include <vulkan/vulkan.h>
 #include "instance.h"
 #include <optional>
-#include "include/common/queue_family_indices.h"
-#include "include/common/swap_chain_support_details.h"
+#include "queue_family_indices.h"
+#include "swap_chain_support_details.h"
 
 namespace ToolEngine
 {

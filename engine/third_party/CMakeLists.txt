@@ -53,6 +53,7 @@ if(NOT TARGET tbb)
   add_subdirectory(tbb)
   set_property(TARGET tbb PROPERTY FOLDER "ThirdParty")
   set(TBB_Headers "${CMAKE_CURRENT_SOURCE_DIR}/tbb/include" PARENT_SCOPE)
+  set(BUILD_SHARED_LIBS OFF)
 endif()
 
 # optick
@@ -83,4 +84,10 @@ if(NOT TARGET lua)
   add_library(lua STATIC ${LUA_SOURCES})
   target_include_directories(lua PUBLIC ${LUA_DIR})
   set_property(TARGET lua PROPERTY FOLDER "ThirdParty")
+endif()
+
+# entt
+if(NOT TARGET EnTT)
+  add_subdirectory(EnTT)
+  set_property(TARGET EnTT PROPERTY VS_FOLDER "ThirdParty")
 endif()

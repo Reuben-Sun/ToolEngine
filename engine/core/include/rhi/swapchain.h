@@ -5,7 +5,7 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
-#include "include/common/swap_chain_support_details.h"
+#include "swap_chain_support_details.h"
 
 namespace ToolEngine
 {

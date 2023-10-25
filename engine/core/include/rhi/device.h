@@ -4,7 +4,7 @@
 #include "instance.h"
 #include "physical_device.h"
 #include "queue.h"
-#include "include/common/queue_family_indices.h"
+#include "queue_family_indices.h"
 #include "include/rhi/command_pool.h"
 #include <optick.h>
 

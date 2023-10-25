@@ -4,7 +4,8 @@
 #include <optick.h>
 #include "include/window/glfw_window.h"
 #include "include/render/render.h"
-#include "scene.h"
+#include "include/scene_system/scene.h"
+#include "include/global/global_context.h"
 
 namespace ToolEngine
 {

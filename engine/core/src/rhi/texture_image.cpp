@@ -1,5 +1,5 @@
 #include "include/rhi/texture_image.h"
-#include "include/file/stb_image.h"
+#include "stb_image.h"
 
 namespace ToolEngine
 {
@@ -7,7 +7,7 @@ namespace ToolEngine
 	{
 		// stb load image
 		int texture_width, texture_height, texture_channels;
-		std::string path = FileUtils::getInstance().getImagePath() + file_path;
+		std::string path = g_global_context.asset_manager->getImagePath() + file_path;
 		stbi_uc* pixels = stbi_load(path.c_str(), &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
 		if (!pixels)
 		{

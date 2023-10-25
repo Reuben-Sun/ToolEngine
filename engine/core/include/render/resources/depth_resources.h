@@ -4,7 +4,7 @@
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
 #include "render_resources.h"
-#include "include/common/depth_support_details.h"
+#include "include/rhi/depth_support_details.h"
 
 namespace ToolEngine
 {

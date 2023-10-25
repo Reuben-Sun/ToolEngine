@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vulkan/vulkan.h>
+#include "include/global/global_context.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
@@ -24,6 +25,8 @@ namespace ToolEngine
 		Properties getProperties() const { return m_properties; }
 
 		static void onErrorCallback(int error_code, const char* description);
+		static void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void onMouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	private:
 		GLFWwindow* m_window = nullptr;
 		Properties& m_properties;
