@@ -85,3 +85,9 @@ if(NOT TARGET lua)
   target_include_directories(lua PUBLIC ${LUA_DIR})
   set_property(TARGET lua PROPERTY FOLDER "ThirdParty")
 endif()
+
+# entt
+if(NOT TARGET EnTT)
+  add_subdirectory(EnTT)
+  set_property(TARGET EnTT PROPERTY VS_FOLDER "ThirdParty")
+endif()
