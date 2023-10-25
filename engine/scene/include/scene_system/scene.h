@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "include/render/scene/render_scene.h"
-#include "gltf_loader.h"
+#include "include/asset_pipeline/gltf_loader.h"
 #include "include/global/global_context.h"
 
 namespace ToolEngine

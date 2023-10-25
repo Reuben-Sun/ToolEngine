@@ -1,4 +1,4 @@
-#include "gltf_loader.h"
+#include "include/asset_pipeline/gltf_loader.h"
 
 namespace ToolEngine
 {

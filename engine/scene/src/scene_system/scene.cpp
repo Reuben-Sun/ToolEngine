@@ -1,5 +1,4 @@
-#include "scene.h"
-#include <tiny_gltf.h>
+#include "include/scene_system/scene.h"
 
 namespace ToolEngine
 {
