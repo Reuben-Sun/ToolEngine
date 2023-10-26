@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "macro.h"
+#include "include/common/macro.h"
 #include "include/file/asset_manager.h"
 #include "include/logic/input_manager.h"
 

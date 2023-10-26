@@ -13,6 +13,7 @@ target_link_libraries(core PUBLIC glm)
 target_link_libraries(core PUBLIC tinygltf)
 target_link_libraries(core PUBLIC glfw)
 target_link_libraries(core PUBLIC lua)
+target_link_libraries(core PUBLIC spdlog)
 
 find_package(Vulkan REQUIRED)
 target_link_libraries(core PUBLIC ${Vulkan_LIBRARIES})  
