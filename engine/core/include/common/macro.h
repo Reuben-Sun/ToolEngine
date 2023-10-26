@@ -1,9 +1,9 @@
 #pragma once
 
+#include "include/common/log_manager.h"
 #include "include/global/global_context.h"
 
-namespace ToolEngine
-{
+
 #define FORCEINLINE __forceinline
 
 #define PI 3.1415926535897932384626433832795f
@@ -21,5 +21,5 @@ namespace ToolEngine
 
 #define LOG_FATAL(...) LOG_HELPER(LogManager::LogLevel::Fatal, __VA_ARGS__);
 
-}
+
 
