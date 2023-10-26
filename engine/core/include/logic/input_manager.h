@@ -21,8 +21,6 @@ namespace ToolEngine
 		InputManager();
 		~InputManager();
 
-		void clear();
-
 		void push(InputCommand input_command);
 		void tick();
 	private:

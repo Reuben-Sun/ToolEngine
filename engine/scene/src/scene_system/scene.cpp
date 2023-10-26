@@ -4,7 +4,7 @@ namespace ToolEngine
 {
 	Scene::Scene()
 	{
-		std::string model_path = g_global_context.asset_manager->getModelsPath() + "Cube.gltf";
+		std::string model_path = g_global_context.m_asset_manager->getModelsPath() + "Cube.gltf";
 		std::unique_ptr<GltfLoader> loader = std::make_unique<GltfLoader>(model_path);
 		Model model;
 		model.indices = loader->loaded_index_buffer;
@@ -31,7 +31,7 @@ namespace ToolEngine
 
 	void Scene::tick() 
 	{
-		g_global_context.input_manager->tick();
+		g_global_context.m_input_manager->tick();
 	}
 	RenderScene& Scene::getRenderScene()
 	{
