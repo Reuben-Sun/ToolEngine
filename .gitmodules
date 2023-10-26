@@ -23,3 +23,6 @@
 [submodule "engine/third_party/entt"]
 	path = engine/third_party/entt
 	url = https://github.com/Reuben-Sun/entt.git
+[submodule "engine/third_party/spdlog"]
+	path = engine/third_party/spdlog
+	url = https://github.com/Reuben-Sun/spdlog.git
