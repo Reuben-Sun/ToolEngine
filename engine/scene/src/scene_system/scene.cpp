@@ -35,6 +35,8 @@ namespace ToolEngine
 	}
 	RenderScene& Scene::getRenderScene()
 	{
+		static_assert(std::is_same_v<std::decay_t<std::remove_pointer_t<const char*>>, char>, "xxx");
+		LOG_INFO(__FUNCTION__, "xxx{}", 1);
 		return m_render_scene;
 	}
 }

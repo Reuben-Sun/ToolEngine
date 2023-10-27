@@ -23,24 +23,26 @@ namespace ToolEngine
 		~LogManager();
 
 		template<typename... Args>
-		void log(LogLevel level, Args&&... args)
+		void log(LogLevel level, const char* _module, Args&&... args)
 		{
+			char char_part = 'x';
+			const char* str = &char_part;
 			switch (level)
 			{
 			case LogLevel::Debug:
-				m_logger->debug(std::forward<Args>(args)...);
+				m_logger->debug(spdlog::fmt_runtime_string<char>{ _module }, std::forward<Args>(args)...);
 				break;
 			case LogLevel::Info:
-				m_logger->info(std::forward<Args>(args)...);
+				m_logger->info(spdlog::fmt_runtime_string<char>{ _module }, std::forward<Args>(args)...);
 				break;
 			case LogLevel::Warn:
-				m_logger->warn(std::forward<Args>(args)...);
+				m_logger->warn(spdlog::fmt_runtime_string<char>{ _module }, std::forward<Args>(args)...);
 				break;
 			case LogLevel::Error:
-				m_logger->error(std::forward<Args>(args)...);
+				m_logger->error(spdlog::fmt_runtime_string<char>{ _module }, std::forward<Args>(args)...);
 				break;
 			case LogLevel::Fatal:
-				m_logger->critical(std::forward<Args>(args)...);
+				m_logger->critical(spdlog::fmt_runtime_string<char>{ _module }, std::forward<Args>(args)...);
 				break;
 			default:
 				break;
