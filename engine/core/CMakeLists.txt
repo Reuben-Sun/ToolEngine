@@ -18,3 +18,7 @@ target_link_libraries(core PUBLIC spdlog)
 find_package(Vulkan REQUIRED)
 target_link_libraries(core PUBLIC ${Vulkan_LIBRARIES})  
 target_include_directories(core PUBLIC ${Vulkan_INCLUDE_DIR})
+
+if(MSVC)
+    target_compile_options(core PUBLIC "/Zc:preprocessor")
+endif()
