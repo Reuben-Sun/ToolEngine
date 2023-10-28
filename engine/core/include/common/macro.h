@@ -10,8 +10,6 @@
 
 #define LOG_HELPER(LOG_LEVEL, MODULE, FMT_STRING, ...) \
     g_global_context.m_log_manager->log(LOG_LEVEL, MODULE##FMT_STRING, __VA_ARGS__);
-/*#define LOG_HELPER(LOG_LEVEL, FMT_STRING, ...) \
-    LOG_HELPER2(LOG_LEVEL, FMT_STRING, __VA_ARGS__)*/
 
 #define LOG_DEBUG(...) LOG_HELPER(LogManager::LogLevel::Debug, __VA_ARGS__);
 
