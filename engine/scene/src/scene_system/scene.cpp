@@ -1,4 +1,5 @@
 #include "include/scene_system/scene.h"
+#include <format>
 
 namespace ToolEngine
 {
@@ -35,7 +36,7 @@ namespace ToolEngine
 	}
 	RenderScene& Scene::getRenderScene()
 	{
-		LOG_INFO(__FUNCTION__, "xxx{}", 1);
+		LOG_INFO("xxx{}", 1);
 		return m_render_scene;
 	}
 }

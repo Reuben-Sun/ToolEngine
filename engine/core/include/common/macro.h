@@ -8,8 +8,8 @@
 
 #define PI 3.1415926535897932384626433832795f
 
-#define LOG_HELPER(LOG_LEVEL, MODULE, FMT_STRING, ...) \
-    g_global_context.m_log_manager->log(LOG_LEVEL, MODULE##FMT_STRING, __VA_ARGS__);
+#define LOG_HELPER(LOG_LEVEL, ...) \
+    g_global_context.m_log_manager->log(LOG_LEVEL,"[" + std::string(__FUNCTION__) + "] " +std::format(__VA_ARGS__));
 
 #define LOG_DEBUG(...) LOG_HELPER(LogManager::LogLevel::Debug, __VA_ARGS__);
 
