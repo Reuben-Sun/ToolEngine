@@ -26,7 +26,7 @@ namespace ToolEngine
 
     VKAPI_ATTR VkBool32 VKAPI_CALL DebugUtils::debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT message_severity, VkDebugUtilsMessageTypeFlagsEXT message_type, const VkDebugUtilsMessengerCallbackDataEXT* callback_data, void* user_data)
     {
-        std::cerr << "validation layer: " << callback_data->pMessage << std::endl;
+        LOG_INFO("Vulkan validation layer: {}", callback_data->pMessage);
         return VK_FALSE;
     }
 }

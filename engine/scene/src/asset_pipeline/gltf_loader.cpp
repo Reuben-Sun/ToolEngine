@@ -102,7 +102,7 @@ namespace ToolEngine
 								break;
 							}
 						default:
-							std::cerr << "Index component type " << accessor.componentType << " not supported!" << std::endl;
+							LOG_ERROR("Index component type {} don't supported!", accessor.componentType);
 							return;
 						}
 					}

@@ -23,7 +23,6 @@ namespace ToolEngine
 		{
 			InputCommand current_command = m_input_command_buffer.front();
 			m_input_command_buffer.pop();
-			std::cerr << current_command.type << ": " << current_command.detail << std::endl;
 		}
 	}
 }

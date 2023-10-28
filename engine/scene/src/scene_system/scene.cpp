@@ -36,7 +36,6 @@ namespace ToolEngine
 	}
 	RenderScene& Scene::getRenderScene()
 	{
-		LOG_INFO("xxx{}", 1);
 		return m_render_scene;
 	}
 }

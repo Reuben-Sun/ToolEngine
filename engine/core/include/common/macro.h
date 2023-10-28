@@ -2,6 +2,7 @@
 
 #include "include/common/log_manager.h"
 #include "include/global/global_context.h"
+#include "include/logic/timer.h"
 
 
 #define FORCEINLINE __forceinline
