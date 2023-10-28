@@ -89,5 +89,11 @@ endif()
 # entt
 if(NOT TARGET EnTT)
   add_subdirectory(EnTT)
-  set_property(TARGET EnTT PROPERTY VS_FOLDER "ThirdParty")
+  set_property(TARGET EnTT PROPERTY FOLDER "ThirdParty")
+endif()
+
+# spdlog
+if(NOT TARGET spdlog)
+  add_subdirectory(spdlog)
+  set_property(TARGET spdlog PROPERTY FOLDER "ThirdParty")
 endif()

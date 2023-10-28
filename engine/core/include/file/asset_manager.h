@@ -16,7 +16,6 @@ namespace ToolEngine
 	public:
 		AssetManager(std::string exe_path);
 		~AssetManager();
-		void clear();
 		std::vector<char> readFile(const std::string& filename);
 		std::string getExeFolderPath() const;
 		std::string getShaderPath() const;

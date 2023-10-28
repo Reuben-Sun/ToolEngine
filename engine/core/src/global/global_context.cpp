@@ -6,15 +6,14 @@ namespace ToolEngine
 
 	void GlobalContext::init(std::string exe_path)
 	{
-		asset_manager = new AssetManager(exe_path);
-		input_manager = new InputManager();
+		m_asset_manager = std::make_shared<AssetManager>(exe_path);
+		m_input_manager = std::make_shared<InputManager>();
+		m_log_manager = std::make_shared<LogManager>();
 	}
 	void GlobalContext::clear()
 	{
-		asset_manager->clear();
-		input_manager->clear();
-
-		asset_manager = nullptr;
-		input_manager = nullptr;
+		m_asset_manager.reset();
+		m_input_manager.reset();
+		m_log_manager.reset();
 	}
 }

@@ -7,14 +7,12 @@ namespace ToolEngine
 	}
 	InputManager::~InputManager()
 	{
-	}
-	void InputManager::clear()
-	{
 		while (!m_input_command_buffer.empty())
 		{
 			m_input_command_buffer.pop();
 		}
 	}
+
 	void InputManager::push(InputCommand input_command)
 	{
 		m_input_command_buffer.push(input_command);
@@ -25,7 +23,6 @@ namespace ToolEngine
 		{
 			InputCommand current_command = m_input_command_buffer.front();
 			m_input_command_buffer.pop();
-			std::cerr << current_command.type << ": " << current_command.detail << std::endl;
 		}
 	}
 }

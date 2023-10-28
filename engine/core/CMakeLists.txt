@@ -13,7 +13,12 @@ target_link_libraries(core PUBLIC glm)
 target_link_libraries(core PUBLIC tinygltf)
 target_link_libraries(core PUBLIC glfw)
 target_link_libraries(core PUBLIC lua)
+target_link_libraries(core PUBLIC spdlog)
 
 find_package(Vulkan REQUIRED)
 target_link_libraries(core PUBLIC ${Vulkan_LIBRARIES})  
 target_include_directories(core PUBLIC ${Vulkan_INCLUDE_DIR})
+
+if(MSVC)
+    target_compile_options(core PUBLIC "/Zc:preprocessor")
+endif()

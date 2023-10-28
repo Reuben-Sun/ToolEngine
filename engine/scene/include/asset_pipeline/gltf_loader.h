@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "include/render/scene/render_scene.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
