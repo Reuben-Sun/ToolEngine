@@ -1,8 +1,9 @@
-#include "include/common/log_manager.h"
 #include <spdlog/async.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
+
+import LogManager;
 
 namespace ToolEngine
 {

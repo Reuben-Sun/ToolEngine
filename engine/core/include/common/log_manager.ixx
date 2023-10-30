@@ -1,13 +1,13 @@
-#pragma once
-
 #include <spdlog/spdlog.h>
 #include <cstdint>
 #include <stdexcept>
 #include <format>
 
+export module LogManager;
+
 namespace ToolEngine
 {
-	class LogManager final
+	export class LogManager final
 	{
 	public:
 		enum class LogLevel : uint8_t
