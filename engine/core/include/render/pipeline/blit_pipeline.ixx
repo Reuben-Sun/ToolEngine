@@ -18,7 +18,6 @@
 #include "include/rhi/sampler.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include "include/render/scene/render_scene.h"
 
 export module BlitPipeline;
 
@@ -28,6 +27,7 @@ import Index;
 import Vertex;
 import ForwardPass;
 import GraphicsPipeline;
+import RenderScene;
 
 namespace ToolEngine
 {

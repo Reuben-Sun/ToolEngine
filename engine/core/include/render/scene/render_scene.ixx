@@ -1,14 +1,12 @@
-#pragma once
-
-#include <vector>
+export module RenderScene;
+import <vector>;
 
 import Model;
-
 import RenderCamera;
 
 namespace ToolEngine
 {
-	struct RenderScene
+	export struct RenderScene
 	{
 		std::vector<Model> models;
 		RenderCamera render_camera;
