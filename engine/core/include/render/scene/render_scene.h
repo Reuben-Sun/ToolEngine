@@ -2,7 +2,8 @@
 
 #include <vector>
 #include "include/render/model/model.h"
-#include "include/render/camera/render_camera.h"
+
+import RenderCamera;
 
 namespace ToolEngine
 {

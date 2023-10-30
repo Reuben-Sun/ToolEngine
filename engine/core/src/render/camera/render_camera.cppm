@@ -1,4 +1,7 @@
-#include "include/render/camera/render_camera.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+import RenderCamera;
 
 namespace ToolEngine
 {

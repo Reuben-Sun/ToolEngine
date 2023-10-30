@@ -1,13 +1,13 @@
-#pragma once
-
 #include <glm/glm.hpp>
-#include "glm/gtc/matrix_transform.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+
+export module RenderCamera;
 
 import Transform;
 
 namespace ToolEngine
 {
-	struct RenderCamera
+	export struct RenderCamera
 	{
 		bool left_handed;
 		float aspect;
