@@ -10,8 +10,8 @@ namespace ToolEngine
         m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, m_frames_in_flight_count);
         createPipeline();
         // resource init
-        m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, VERTEX_BUFFER);
-        m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, INDEX_BUFFER);
+        //m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, VERTEX_BUFFER);
+        //m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, INDEX_BUFFER);
         m_uniform_buffers.resize(m_frames_in_flight_count);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {

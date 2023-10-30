@@ -9,8 +9,6 @@
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
-#include "include/rhi/vertex.h"
-#include "include/rhi/index.h"
 #include "include/rhi/descriptor_set_layout.h"
 #include "include/rhi/descriptor_pool.h"
 #include "include/rhi/descriptor_sets.h"
@@ -28,6 +26,8 @@
 
 import Timer;
 import Model;
+import Index;
+import Vertex;
 
 namespace ToolEngine
 {

@@ -1,7 +1,5 @@
-#include <vulkan/vulkan.h>
-#include <glm/glm.hpp>
-#include <include/rhi/vertex.h>
-#include <include/rhi/index.h>
+import Index;
+import Vertex;
 
 export module Model;
 

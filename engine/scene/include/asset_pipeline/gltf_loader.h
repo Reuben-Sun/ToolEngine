@@ -6,6 +6,11 @@
 #include <iostream>
 #include "include/render/scene/render_scene.h"
 #include "include/common/macro.h"
+#include <glm/vec3.hpp>
+
+import Model;
+import Index;
+import Vertex;
 
 namespace ToolEngine
 {

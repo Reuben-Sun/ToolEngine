@@ -3,7 +3,8 @@
 #include <vector>
 #include <vulkan/vulkan.h>
 #include "buffer.h"
-#include "index.h"
+
+import Index;
 
 namespace ToolEngine
 {
