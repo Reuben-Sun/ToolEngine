@@ -1,9 +1,6 @@
-#pragma once
-
 #include <memory>
 #include <vulkan/vulkan.h>
 #include <array>
-#include "graphics_pipeline.h"
 #include "include/rhi/device.h"
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
@@ -23,15 +20,18 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "include/render/scene/render_scene.h"
 
+export module BlitPipeline;
+
 import Timer;
 import Model;
 import Index;
 import Vertex;
 import ForwardPass;
+import GraphicsPipeline;
 
 namespace ToolEngine
 {
-	class BlitPipeline
+	export class BlitPipeline
 	{
 	public:
 		BlitPipeline(Device& device, PhysicalDevice& physical_device, SwapChain& swap_chain, uint32_t frames_in_flight_count);

@@ -1,4 +1,6 @@
-#include "include/render/pipeline/graphics_pipeline.h"
+#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
+import GraphicsPipeline;
 
 namespace ToolEngine
 {
@@ -25,7 +27,7 @@ namespace ToolEngine
 
         if (vkCreateGraphicsPipelines(m_device.getHandle(), VK_NULL_HANDLE, 1, &pipeline_info, nullptr, &m_pipeline) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create graphics pipeline!");
+            LOG_ERROR("failed to create graphics pipeline!");
         }
 	}
 }

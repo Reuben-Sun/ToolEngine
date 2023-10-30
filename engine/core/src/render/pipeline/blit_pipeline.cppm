@@ -1,4 +1,12 @@
-#include "include/render/pipeline/blit_pipeline.h"
+#include "include/rhi/texture_image.h"
+#include "include/rhi/image_view.h"
+#include "include/rhi/sampler.h"
+#include "include/render/scene/render_scene.h"
+#include "include/rhi/shader_module.h"
+import BlitPipeline;
+import <glm/glm.hpp>;
+import <glm/gtc/matrix_transform.hpp>;
+import <array>;
 
 namespace ToolEngine
 {
