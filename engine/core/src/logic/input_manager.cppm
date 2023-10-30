@@ -1,4 +1,4 @@
-#include "include/logic/input_manager.h"
+import InputManager;
 
 namespace ToolEngine
 {

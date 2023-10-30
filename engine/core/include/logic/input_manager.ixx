@@ -1,12 +1,11 @@
-#pragma once
-
-#include <queue>
-#include <string>
-#include <iostream>
+export module InputManager;
+import <queue>;
+import <string>;
+import <iostream>;
 
 namespace ToolEngine
 {
-	struct InputCommand
+	export struct InputCommand
 	{
 		int type;
 		std::string detail;
@@ -15,7 +14,7 @@ namespace ToolEngine
 	/// There is a buffer to store input command.
 	/// TODO: thread safe
 	/// </summary>
-	class InputManager
+	export class InputManager
 	{
 	public:
 		InputManager();

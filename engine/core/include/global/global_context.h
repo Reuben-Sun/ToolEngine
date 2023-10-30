@@ -2,10 +2,10 @@
 
 #include <string>
 #include "include/common/macro.h"
-#include "include/logic/input_manager.h"
 #include "include/common/log_manager.h"
 
 import AssetManager;
+import InputManager;
 
 namespace ToolEngine
 {
