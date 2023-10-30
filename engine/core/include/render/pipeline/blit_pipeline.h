@@ -4,7 +4,6 @@
 #include <vulkan/vulkan.h>
 #include <array>
 #include "graphics_pipeline.h"
-#include "include/render/pass/forward_pass.h"
 #include "include/rhi/device.h"
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
@@ -28,6 +27,7 @@ import Timer;
 import Model;
 import Index;
 import Vertex;
+import ForwardPass;
 
 namespace ToolEngine
 {

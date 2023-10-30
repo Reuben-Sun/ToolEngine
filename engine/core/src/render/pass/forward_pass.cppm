@@ -1,4 +1,8 @@
-#include "include/render/pass/forward_pass.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+#include "include/rhi/render_pass.h"
+import ForwardPass;
 
 namespace ToolEngine
 {
