@@ -3,7 +3,8 @@
 #include <string>
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "include/global/global_context.h"
+
+import Global_Context;
 
 namespace ToolEngine
 {

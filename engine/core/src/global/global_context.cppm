@@ -1,4 +1,10 @@
-#include "include/global/global_context.h"
+import Global_Context;
+
+import LogManager;
+import AssetManager;
+import InputManager;
+import <memory>;
+import <string>;
 
 namespace ToolEngine
 {

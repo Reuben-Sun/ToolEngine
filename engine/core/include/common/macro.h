@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/global/global_context.h"
+import Global_Context;
 import LogManager;
 
 #define FORCEINLINE __forceinline

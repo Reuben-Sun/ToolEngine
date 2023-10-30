@@ -1,5 +1,4 @@
 #include <vulkan/vulkan.h>
-#include "include/global/global_context.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
@@ -7,6 +6,7 @@
 export module GLFW_Window;
 
 import Window;
+import Global_Context;
 import <iostream>;
 import <string>;
 

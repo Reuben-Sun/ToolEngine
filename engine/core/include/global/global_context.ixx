@@ -1,16 +1,14 @@
-#pragma once
-
-#include <string>
-#include "include/common/macro.h"
+export module Global_Context;
 
 import LogManager;
 import AssetManager;
 import InputManager;
 import <memory>;
+import <string>;
 
 namespace ToolEngine
 {
-	class GlobalContext
+	export class GlobalContext
 	{
 	public:
 		void init(std::string exe_path);
@@ -23,5 +21,5 @@ namespace ToolEngine
 
 	};
 
-	extern GlobalContext g_global_context;
+	export extern GlobalContext g_global_context;
 }

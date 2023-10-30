@@ -4,11 +4,11 @@
 #include <optick.h>
 #include "include/render/render.h"
 #include "include/scene_system/scene.h"
-#include "include/global/global_context.h"
 #include "include/common/macro.h"
 
 import Timer;
 import GLFW_Window;
+import Global_Context;
 
 namespace ToolEngine
 {

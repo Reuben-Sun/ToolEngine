@@ -7,7 +7,8 @@
 #include "physical_device.h"
 #include "image.h"
 #include "include/rhi/single_time_command_buffer.h"
-#include "include/global/global_context.h"
+
+import Global_Context;
 
 namespace ToolEngine
 {
