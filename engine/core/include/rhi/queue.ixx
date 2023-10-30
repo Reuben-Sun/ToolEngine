@@ -1,11 +1,10 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include "device.h"
+
+export module Queue;
 
 namespace ToolEngine
 {
-	class Queue
+	export class Queue
 	{
 	public:
 		Queue(VkDevice& device, uint32_t family_index, VkBool32 can_present, uint32_t index);

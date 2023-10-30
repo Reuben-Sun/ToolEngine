@@ -1,4 +1,5 @@
-#include "include/rhi/queue.h"
+#include <vulkan/vulkan.h>
+import Queue;
 
 namespace ToolEngine
 {
