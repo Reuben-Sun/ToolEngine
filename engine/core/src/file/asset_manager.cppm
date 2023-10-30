@@ -1,4 +1,9 @@
-#include "include/file/asset_manager.h"
+import <string>;
+import <vector>;
+import <fstream>;
+import <filesystem>;
+
+import AssetManager;
 
 namespace ToolEngine
 {

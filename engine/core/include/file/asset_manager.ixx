@@ -1,9 +1,8 @@
-#pragma once
+export module AssetManager;
 
-#include <string>
-#include <vector>
-#include <fstream>
-#include <filesystem>
+import <string>;
+import <vector>;
+import <filesystem>;
 
 namespace ToolEngine
 {
@@ -11,7 +10,7 @@ namespace ToolEngine
 	/// A utils to load files
 	/// TODO: fileID, load state, cache
 	/// </summary>
-	class AssetManager
+	export class AssetManager
 	{
 	public:
 		AssetManager(std::string exe_path);
