@@ -1,15 +1,15 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
 #include "single_time_command_buffer.h"
 
+export module Buffer;
+
 import Vertex;
 
 namespace ToolEngine
 {
-	class Buffer
+	export class Buffer
 	{
 	public:
 		Buffer(Device& device, PhysicalDevice& physical_device);

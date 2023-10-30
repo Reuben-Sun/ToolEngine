@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <vulkan/vulkan.h>
-#include "buffer.h"
 
+import Buffer;
 import Index;
 
 namespace ToolEngine

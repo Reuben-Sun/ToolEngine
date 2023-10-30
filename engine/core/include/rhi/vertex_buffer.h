@@ -2,9 +2,11 @@
 
 #include <vulkan/vulkan.h>
 #include <vector>
-#include "buffer.h"
 #include "device.h"
 #include "physical_device.h"
+
+import Buffer;
+import Vertex;
 
 namespace ToolEngine
 {

@@ -4,7 +4,8 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
-#include "buffer.h"
+
+import Buffer;
 
 namespace ToolEngine
 {
