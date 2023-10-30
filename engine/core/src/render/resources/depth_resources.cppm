@@ -1,4 +1,8 @@
-#include "include/render/resources/depth_resources.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+#include "include/rhi/depth_support_details.h"
+import DepthResources;
 
 namespace ToolEngine
 {

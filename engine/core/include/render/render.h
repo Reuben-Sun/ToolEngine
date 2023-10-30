@@ -15,12 +15,12 @@
 #include "include/rhi/uniform_buffer.h"
 #include "include/rhi/descriptor_pool.h"
 #include "include/rhi/depth_support_details.h"
-#include "include/render/resources/depth_resources.h"
 #include "include/render/scene/render_scene.h"
 
 import Timer;
 import GLFW_Window;
 import BlitPipeline;
+import DepthResources;
 
 namespace ToolEngine
 {
