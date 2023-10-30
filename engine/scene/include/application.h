@@ -8,6 +8,8 @@
 #include "include/global/global_context.h"
 #include "include/common/macro.h"
 
+import Timer;
+
 namespace ToolEngine
 {
 	enum class ExitCode

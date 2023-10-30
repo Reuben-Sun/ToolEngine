@@ -22,11 +22,12 @@
 #include "include/rhi/texture_image.h"
 #include "include/rhi/image_view.h"
 #include "include/rhi/sampler.h"
-#include "include/logic/timer.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "include/render/model/model.h"
 #include "include/render/scene/render_scene.h"
+
+import Timer;
 
 namespace ToolEngine
 {
