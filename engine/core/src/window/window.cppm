@@ -1,4 +1,4 @@
-#include "include/window/window.h"
+import Window;
 
 namespace ToolEngine
 {

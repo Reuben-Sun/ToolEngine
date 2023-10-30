@@ -1,12 +1,14 @@
-#pragma once
-
-#include <string>
 #include <vulkan/vulkan.h>
 #include "include/rhi/instance.h"
 
+export module Window;
+
+import <string>;
+
+
 namespace ToolEngine
 {
-	class Window
+	export class Window
 	{
 	public:
 		struct Extent 
