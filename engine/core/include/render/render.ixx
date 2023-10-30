@@ -1,6 +1,3 @@
-#pragma once
-
-#include <memory>
 #include <optick.h>
 #include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"
@@ -16,15 +13,18 @@
 #include "include/rhi/descriptor_pool.h"
 #include "include/rhi/depth_support_details.h"
 
+export module Render;
+
 import Timer;
 import GLFW_Window;
 import BlitPipeline;
 import DepthResources;
 import RenderScene;
+import <memory>;
 
 namespace ToolEngine
 {
-	class Render
+	export class Render
 	{
 	public:
 		Render(GlfwWindow& window);

@@ -2,13 +2,13 @@
 
 #include <memory>
 #include <optick.h>
-#include "include/render/render.h"
 #include "include/scene_system/scene.h"
 #include "include/common/macro.h"
 
 import Timer;
 import GLFW_Window;
 import Global_Context;
+import Render;
 
 namespace ToolEngine
 {
