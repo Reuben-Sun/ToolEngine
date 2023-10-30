@@ -1,8 +1,8 @@
 file(GLOB_RECURSE HEADERS "include/*/*.h" "include/*/*.ixx")
-file(GLOB_RECURSE SOURCES "*src/*/*.cpp" "include/*/*.cppm")
+file(GLOB_RECURSE SOURCES "*src/*/*.cpp" "src/*/*.cppm")
 set(ALL_FILES ${HEADERS} ${SOURCES})
 
-add_library(core MODULE ${ALL_FILES})
+add_library(core STATIC ${ALL_FILES})
 
 target_include_directories(core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
