@@ -1,18 +1,18 @@
-#pragma once
-
-#include <iostream>
-#include <string>
 #include <vulkan/vulkan.h>
 #include "include/global/global_context.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
 
+export module GLFW_Window;
+
 import Window;
+import <iostream>;
+import <string>;
 
 namespace ToolEngine
 {
-	class GlfwWindow: public Window
+	export class GlfwWindow: public Window
 	{
 	public:
 		GlfwWindow(Properties& properties);

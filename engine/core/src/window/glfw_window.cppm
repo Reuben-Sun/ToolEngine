@@ -1,4 +1,12 @@
-#include "include/window/glfw_window.h"
+#include <vulkan/vulkan.h>
+#include "include/global/global_context.h"
+#include "GLFW/glfw3.h"
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include "GLFW/glfw3native.h"
+import <iostream>;
+import <string>;
+
+import GLFW_Window;
 
 namespace ToolEngine
 {

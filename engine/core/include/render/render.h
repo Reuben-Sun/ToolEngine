@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <optick.h>
-#include "include/window/glfw_window.h"
 #include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
@@ -21,6 +20,7 @@
 #include "include/render/scene/render_scene.h"
 
 import Timer;
+import GLFW_Window;
 
 namespace ToolEngine
 {
