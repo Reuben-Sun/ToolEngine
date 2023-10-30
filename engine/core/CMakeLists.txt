@@ -1,8 +1,8 @@
-file(GLOB_RECURSE HEADERS "include/*/*.h")
-file(GLOB_RECURSE SOURCES "*src/*/*.cpp")
+file(GLOB_RECURSE HEADERS "include/*/*.h" "include/*/*.ixx")
+file(GLOB_RECURSE SOURCES "*src/*/*.cpp" "include/*/*.cppm")
 set(ALL_FILES ${HEADERS} ${SOURCES})
 
-add_library(core STATIC ${ALL_FILES})
+add_library(core MODULE ${ALL_FILES})
 
 target_include_directories(core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -21,4 +21,6 @@ target_include_directories(core PUBLIC ${Vulkan_INCLUDE_DIR})
 
 if(MSVC)
     target_compile_options(core PUBLIC "/Zc:preprocessor")
+    target_compile_options(core PUBLIC "/std:c++latest")
+    target_compile_options(core PUBLIC "/experimental:module")
 endif()
