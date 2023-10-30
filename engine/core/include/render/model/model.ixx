@@ -1,14 +1,15 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include <glm/glm.hpp>
-#include <vector>
 #include <include/rhi/vertex.h>
 #include <include/rhi/index.h>
 
+export module Model;
+
+import <vector>;
+
 namespace ToolEngine
 {
-	struct Model
+	export struct Model
 	{
 		std::vector<Vertex> vertices;
 		std::vector<Index> indices;

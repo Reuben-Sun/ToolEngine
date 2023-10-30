@@ -1,7 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "include/render/model/model.h"
+
+import Model;
 
 import RenderCamera;
 
