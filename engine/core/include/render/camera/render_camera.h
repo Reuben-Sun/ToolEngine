@@ -1,8 +1,9 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "include/math/transform.h"
 #include "glm/gtc/matrix_transform.hpp"
+
+import Transform;
 
 namespace ToolEngine
 {

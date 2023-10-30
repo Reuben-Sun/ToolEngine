@@ -1,6 +1,6 @@
-#pragma once
-
 #include <glm/glm.hpp>
+
+export module Transform;
 
 namespace ToolEngine
 {
@@ -9,7 +9,7 @@ namespace ToolEngine
 	/// Calculate rotation matrix by order: Y -> X -> Z.
 	/// Calculate position translate in order of: scale -> rotation -> position.
 	/// </summary>
-	struct Transform
+	export struct Transform
 	{
 		glm::vec3 position;
 		glm::vec3 rotation;		// radian
