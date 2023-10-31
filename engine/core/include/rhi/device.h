@@ -4,10 +4,12 @@
 #include "instance.h"
 #include "physical_device.h"
 #include "queue_family_indices.h"
-#include "include/rhi/command_pool.h"
 #include <optick.h>
+#include "include/rhi/device.h"
 
 import Queue;
+import CommandPool;
+import <memory>;
 
 namespace ToolEngine
 {

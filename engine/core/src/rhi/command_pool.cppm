@@ -1,4 +1,7 @@
-#include "include/rhi/command_pool.h"
+#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
+#include "include/rhi/device.h"
+import CommandPool;
 
 
 namespace ToolEngine
@@ -13,7 +16,7 @@ namespace ToolEngine
 
 		if (vkCreateCommandPool(m_device, &pool_info, nullptr, &m_command_pool) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create command pool!");
+			LOG_ERROR("failed to create command pool!");
 		}
 	}
 	CommandPool::~CommandPool()

@@ -1,11 +1,9 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <stdexcept>
+export module CommandPool;
 
 namespace ToolEngine
 {
-	class CommandPool
+	export class CommandPool
 	{
 	public:
 		CommandPool(VkDevice& device, uint32_t queue_family_index);
