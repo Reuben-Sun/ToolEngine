@@ -1,15 +1,15 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <array>
 #include "device.h"
 #include "physical_device.h"
 
+export module RenderPass;
+
 import DepthSupportDetails;
+import <array>;
 
 namespace ToolEngine
 {
-	class RenderPass 
+	export class RenderPass 
 	{
 	public:
 		RenderPass(Device& device, PhysicalDevice& physical_device, VkFormat format);

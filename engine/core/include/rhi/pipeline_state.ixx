@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
-#include "render_pass.h"
 
 export module PipelineState;
 
 import PipelineLayout;
+import RenderPass;
 
 namespace ToolEngine
 {

@@ -1,7 +1,6 @@
 #include <optick.h>
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
-#include "include/rhi/render_pass.h"
 
 export module Render;
 
@@ -20,6 +19,7 @@ import FrameBuffer;
 import ImageView;
 import Instance;
 import SwapChain;
+import RenderPass;
 import <memory>;
 
 namespace ToolEngine

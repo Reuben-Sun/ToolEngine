@@ -1,4 +1,11 @@
-#include "include/rhi/render_pass.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+
+import RenderPass;
+
+import DepthSupportDetails;
+import <array>;
 
 namespace ToolEngine
 {
