@@ -5,7 +5,6 @@
 #include "include/rhi/swapchain.h"
 #include "include/rhi/image_view.h"
 #include "include/rhi/render_pass.h"
-#include "include/rhi/frame_buffer.h"
 
 export module Render;
 
@@ -20,6 +19,7 @@ import UniformBuffer;
 import CommandBuffer;
 import DepthSupportDetails;
 import DescriptorPool;
+import FrameBuffer;
 import <memory>;
 
 namespace ToolEngine

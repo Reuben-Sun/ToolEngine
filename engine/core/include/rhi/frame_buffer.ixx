@@ -1,13 +1,12 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <array>
 #include "device.h"
 #include "image_view.h"
 
+export module FrameBuffer;
+
 namespace ToolEngine
 {
-	class FrameBuffer
+	export class FrameBuffer
 	{
 	public:
 		FrameBuffer(Device& device, VkRenderPass render_pass, ImageView& swap_chain_image_view, ImageView& depth_image_view, uint32_t width, uint32_t height);
