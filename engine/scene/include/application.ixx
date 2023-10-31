@@ -1,24 +1,22 @@
-#pragma once
-
-#include <memory>
-#include <optick.h>
 #include "include/common/macro.h"
 
+export module Application;
 import Timer;
 import GLFW_Window;
 import Global_Context;
 import Render;
 import Scene;
+import <memory>;
 
 namespace ToolEngine
 {
-	enum class ExitCode
+	export enum class ExitCode
 	{
 		Success = 0,
 		Failed = 1
 	};
 
-	class Application
+	export class Application
 	{
 	public:
 		Application();

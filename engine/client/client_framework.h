@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/application.h"
+import Application;
 
 namespace ToolEngine
 {

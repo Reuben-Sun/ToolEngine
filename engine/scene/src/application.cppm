@@ -1,4 +1,13 @@
-#include "include/application.h"
+#include "include/common/macro.h"
+
+import Application;
+import Timer;
+import GLFW_Window;
+import Global_Context;
+import Render;
+import Scene;
+import <optick.h>;
+import <memory>;
 
 namespace ToolEngine
 {
