@@ -4,6 +4,7 @@
 #include "include/rhi/shader_module.h"
 import BlitPipeline;
 import RenderScene;
+import Model;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;

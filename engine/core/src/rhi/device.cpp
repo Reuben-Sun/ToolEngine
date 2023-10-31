@@ -80,4 +80,6 @@ namespace ToolEngine
 
         vkQueuePresentKHR(m_present_queue->getHandle(), &presentInfo);
     }
+    Queue& Device::getGraphicsQueue() const { return *m_graphics_queue; }
+    Queue& Device::getPresentQueue() const { return *m_present_queue; }
 }
