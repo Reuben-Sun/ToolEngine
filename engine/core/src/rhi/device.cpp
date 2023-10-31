@@ -1,4 +1,5 @@
 #include "include/rhi/device.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -46,7 +47,7 @@ namespace ToolEngine
 
         if (vkCreateDevice(physical_device.getHandle(), &create_info, nullptr, &m_device) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create logical device!");
+            LOG_ERROR("failed to create logical device!");
         }
 
         VkBool32 present_supported = physical_device.checkPresentSupported(surface, indices.graphics_family.value());

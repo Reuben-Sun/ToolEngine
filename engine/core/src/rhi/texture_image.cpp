@@ -1,4 +1,5 @@
 #include "include/rhi/texture_image.h"
+#include "include/common/macro.h"
 #include "stb_image.h"
 
 namespace ToolEngine
@@ -11,7 +12,7 @@ namespace ToolEngine
 		stbi_uc* pixels = stbi_load(path.c_str(), &texture_width, &texture_height, &texture_channels, STBI_rgb_alpha);
 		if (!pixels)
 		{
-			throw std::runtime_error("failed to load texture image!");
+			LOG_ERROR("failed to load texture image!");
 		}
 		// create stage buffer
 		VkDeviceSize image_buffer_size = texture_width * texture_height * 4;

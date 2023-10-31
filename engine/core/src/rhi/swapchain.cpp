@@ -1,4 +1,5 @@
 #include "include/rhi/swapchain.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -46,7 +47,7 @@ namespace ToolEngine
 
         if (vkCreateSwapchainKHR(device.getHandle(), &createInfo, nullptr, &m_swap_chain) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create swap chain!");
+            LOG_ERROR("failed to create swap chain!");
         }
 
         vkGetSwapchainImagesKHR(device.getHandle(), m_swap_chain, &imageCount, nullptr);

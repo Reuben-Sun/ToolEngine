@@ -1,4 +1,5 @@
 #include "include/rhi/pipeline_layout.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -6,7 +7,7 @@ namespace ToolEngine
 	{
 		if (vkCreatePipelineLayout(m_deivce.getHandle(), &create_info, nullptr, &m_pipeline_layout) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create pipeline layout!");
+			LOG_ERROR("failed to create pipeline layout!");
 		}
 	}
 	

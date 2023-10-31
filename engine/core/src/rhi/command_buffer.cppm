@@ -47,7 +47,7 @@ namespace ToolEngine
 
 		if (vkQueueSubmit(m_device.getGraphicsQueue().getHandle(), 1, &submitInfo, in_flight_fence) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to submit draw command buffer!");
+			LOG_ERROR("failed to submit draw command buffer!");
 		}
 	}
 	void CommandBuffer::beginRecord(uint32_t current_frame)
@@ -58,7 +58,7 @@ namespace ToolEngine
 
 		if (vkBeginCommandBuffer(m_command_buffers[current_frame], &begin_info) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to begin recording command buffer!");
+			LOG_ERROR("failed to begin recording command buffer!");
 		}
 	}
 	void CommandBuffer::endRecord(uint32_t current_frame)
@@ -66,7 +66,7 @@ namespace ToolEngine
 		OPTICK_EVENT();
 		if (vkEndCommandBuffer(m_command_buffers[current_frame]) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to record command buffer!");
+			LOG_ERROR("failed to record command buffer!");
 		}
 	}
 	void CommandBuffer::beginRenderPass(uint32_t current_frame, VkRenderPassBeginInfo render_pass_info)

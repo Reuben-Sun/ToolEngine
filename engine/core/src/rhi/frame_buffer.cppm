@@ -1,5 +1,6 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
+#include "include/common/macro.h"
 import FrameBuffer;
 import ImageView;
 import <array>;
@@ -22,7 +23,7 @@ namespace ToolEngine
 
         if (vkCreateFramebuffer(m_device.getHandle(), &framebufferInfo, nullptr, &m_frame_buffer) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create framebuffer!");
+            LOG_ERROR("failed to create framebuffer!");
         }
 	}
 	FrameBuffer::~FrameBuffer()

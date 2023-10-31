@@ -1,4 +1,5 @@
 #include "include/rhi/instance.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -7,7 +8,7 @@ namespace ToolEngine
 	{
         if (m_enable_validation_layers && !checkValidationLayerSupport())
         {
-            throw std::runtime_error("validation layers requested, but not available!");
+            LOG_ERROR("validation layers requested, but not available!");
         }
         if (m_enable_validation_layers)
         {
@@ -50,7 +51,7 @@ namespace ToolEngine
 
         if (vkCreateInstance(&create_info, nullptr, &m_instance) != VK_SUCCESS) 
         {
-            throw std::runtime_error("failed to create instance!");
+            LOG_ERROR("failed to create instance!");
         }
 
         if (m_enable_validation_layers)
@@ -64,7 +65,7 @@ namespace ToolEngine
 
             if (DebugUtils::createDebugUtilsMessengerEXT(m_instance, &debug_create_info, nullptr, &debug_utils_messenger) != VK_SUCCESS)
             {
-				throw std::runtime_error("failed to set up debug messenger!");
+                LOG_ERROR("failed to set up debug messenger!");
 			}
 		}
 	}

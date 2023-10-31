@@ -1,4 +1,5 @@
 #include "include/rhi/shader_module.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -14,7 +15,7 @@ namespace ToolEngine
 
 		if (vkCreateShaderModule(m_device.getHandle(), &create_info, nullptr, &m_shader_module) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create shader module!");
+			LOG_ERROR("failed to create shader module!");
 		}
 	}
 

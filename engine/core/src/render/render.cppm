@@ -4,6 +4,7 @@
 #include "include/rhi/device.h"
 #include "include/rhi/swapchain.h"
 #include "include/rhi/render_pass.h"
+#include "include/common/macro.h"
 
 import Render;
 import IndexBuffer;
@@ -57,7 +58,7 @@ namespace ToolEngine
 				vkCreateSemaphore(m_device->getHandle(), &semaphore_info, nullptr, &m_render_finished_semaphores[i]) != VK_SUCCESS ||
 				vkCreateFence(m_device->getHandle(), &fence_info, nullptr, &m_in_flight_fences[i]) != VK_SUCCESS)
 			{
-				throw std::runtime_error("failed to create synchronization objects for a frame!");
+				LOG_ERROR("failed to create synchronization objects for a frame!");
 			}
 		}
 	}
@@ -103,7 +104,7 @@ namespace ToolEngine
 		}
 		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
 		{
-			throw std::runtime_error("failed to acquire swap chain image!");
+			LOG_ERROR("failed to acquire swap chain image!");
 		}
 		OPTICK_POP();
 

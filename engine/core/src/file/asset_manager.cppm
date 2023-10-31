@@ -1,3 +1,4 @@
+#include "include/common/macro.h"
 import <string>;
 import <vector>;
 import <fstream>;
@@ -18,7 +19,7 @@ namespace ToolEngine
 		std::ifstream file(filename, std::ios::ate | std::ios::binary);
 		if (!file.is_open())
 		{
-			throw std::runtime_error("failed to open file!");
+			LOG_ERROR("failed to open file!");
 		}
 
 		size_t file_size = (size_t)file.tellg();

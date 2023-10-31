@@ -1,4 +1,5 @@
 #include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
@@ -14,7 +15,7 @@ namespace ToolEngine
     {
         if (!glfwInit())
         {
-            throw std::runtime_error("GLFW couldn't be initialized.");
+            LOG_ERROR("GLFW couldn't be initialized.");
         }
         glfwSetErrorCallback(onErrorCallback);
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -33,7 +34,7 @@ namespace ToolEngine
         VkSurfaceKHR surface;
         if (glfwCreateWindowSurface(instance.getHandle(), m_window, nullptr, &surface) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to set up debug messenger!");
+            LOG_ERROR("failed to create window surface!");
         }
         return surface;
     }
@@ -71,7 +72,7 @@ namespace ToolEngine
 
     void GlfwWindow::onErrorCallback(int error_code, const char* description)
     {
-        std::cout << "GLFW Run Error" << std::endl;
+        LOG_ERROR("GLFW Run Error");
     }
     void GlfwWindow::onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {

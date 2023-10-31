@@ -125,8 +125,7 @@ namespace ToolEngine
 				return i;
 			}
 		}
-
-		throw std::runtime_error("failed to find suitable memory type!");
+		LOG_ERROR("failed to find suitable memory type!");
 	}
 
 }

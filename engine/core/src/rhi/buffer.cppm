@@ -2,6 +2,7 @@
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
 #include "include/rhi/single_time_command_buffer.h"
+#include "include/common/macro.h"
 import Buffer;
 
 namespace ToolEngine
@@ -22,8 +23,7 @@ namespace ToolEngine
 				return i;
 			}
 		}
-
-		throw std::runtime_error("failed to find suitable memory type!");
+		LOG_ERROR("failed to find suitable memory type!");
 	}
 	void Buffer::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& buffer_memory)
 	{
@@ -35,7 +35,7 @@ namespace ToolEngine
 
 		if (vkCreateBuffer(m_device.getHandle(), &buffer_info, nullptr, &buffer) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create vertex buffer!");
+			LOG_ERROR("failed to create vertex buffer!");
 		}
 
 		VkMemoryRequirements mem_requirements;
@@ -48,7 +48,7 @@ namespace ToolEngine
 
 		if (vkAllocateMemory(m_device.getHandle(), &alloc_info, nullptr, &buffer_memory) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to allocate vertex buffer memory!");
+			LOG_ERROR("failed to allocate vertex buffer memory!");
 		}
 
 		vkBindBufferMemory(m_device.getHandle(), buffer, buffer_memory, 0);

@@ -2,6 +2,7 @@
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
 #include "include/rhi/render_pass.h"
+#include "include/common/macro.h"
 import ForwardPass;
 import DepthSupportDetails;
 
@@ -66,7 +67,7 @@ namespace ToolEngine
 
         if (vkCreateRenderPass(m_device.getHandle(), &render_pass_info, nullptr, &m_render_pass) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create render pass!");
+            LOG_ERROR("failed to create render pass!");
         }
 	}
 	ForwardPass::~ForwardPass()

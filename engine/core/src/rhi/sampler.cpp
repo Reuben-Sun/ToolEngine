@@ -1,4 +1,5 @@
 #include "include/rhi/sampler.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -27,7 +28,7 @@ namespace ToolEngine
 
 		if (vkCreateSampler(m_device.getHandle(), &sampler_info, nullptr, &m_sampler) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create texture sampler!");
+			LOG_ERROR("failed to create texture sampler!");
 		}
 	}
 	Sampler::~Sampler()

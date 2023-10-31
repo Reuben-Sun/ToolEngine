@@ -1,4 +1,5 @@
 #include "include/rhi/physical_device.h"
+#include "include/common/macro.h"
 
 namespace ToolEngine
 {
@@ -8,7 +9,7 @@ namespace ToolEngine
         vkEnumeratePhysicalDevices(instance.getHandle(), &device_count, nullptr);
         if (device_count == 0) 
         {
-            throw std::runtime_error("failed to find GPUs with Vulkan support!");
+            LOG_ERROR("failed to find GPUs with Vulkan support!");
         }
         std::vector<VkPhysicalDevice> devices(device_count);
         vkEnumeratePhysicalDevices(instance.getHandle(), &device_count, devices.data());
@@ -24,7 +25,7 @@ namespace ToolEngine
 
         if (m_physical_device == VK_NULL_HANDLE)
         {
-            throw std::runtime_error("failed to find a suitable GPU!");
+            LOG_ERROR("failed to find a suitable GPU!");
         }
 	}
 

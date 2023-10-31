@@ -2,6 +2,7 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
 #include "include/rhi/pipeline_layout.h"
+#include "include/common/macro.h"
 import DescriptorSetLayout;
 
 namespace ToolEngine
@@ -31,7 +32,7 @@ namespace ToolEngine
 
 		if (vkCreateDescriptorSetLayout(m_device.getHandle(), &layout_info, nullptr, &m_descriptor_set_layout) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create descriptor set layout!");
+			LOG_ERROR("failed to create descriptor set layout!");
 		}
 	}
 	DescriptorSetLayout::~DescriptorSetLayout()
