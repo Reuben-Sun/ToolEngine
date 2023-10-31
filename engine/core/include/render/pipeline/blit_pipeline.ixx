@@ -46,7 +46,7 @@ namespace ToolEngine
 
 		uint32_t m_frames_in_flight_count;
 		std::unique_ptr<GraphicsPipeline> m_pipeline;
-		std::unique_ptr<PipelineState> m_state;
+		PipelineState m_state;
 		std::unique_ptr<ForwardPass> m_forward_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;

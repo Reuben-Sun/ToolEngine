@@ -14,7 +14,7 @@ namespace ToolEngine
 	export class GraphicsPipeline: public Pipeline
 	{
 	public:
-		GraphicsPipeline(Device& device, PipelineState& pipeline_state);
+		GraphicsPipeline(Device& device, PipelineState pipeline_state);
 		virtual ~GraphicsPipeline() = default;
 	};
 }

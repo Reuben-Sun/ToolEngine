@@ -206,22 +206,21 @@ namespace ToolEngine
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
         m_forward_pass = std::make_unique<ForwardPass>(m_device, m_physical_device, m_swap_chain.getFormat());
 
-        m_state = std::make_unique<PipelineState>();
-        m_state->setVertexShaderStage(vert_shader_stage_info);
-        m_state->setFragmentShaderStage(frag_shader_stage_info);
-        m_state->setPipelineLayout(*m_pipeline_layout);
-        m_state->setRenderPass(*m_forward_pass);
-        m_state->setVertexInputState(vertex_input_state);
-        m_state->setInputAssemblyState(input_assembly_state);
-        m_state->setViewportState(viewport_state);
-        m_state->setRasterizationState(rasterization_state);
-        m_state->setMultisampleState(multi_sample_state);
-        m_state->setDepthStencilState(depth_stencil_state);
-        m_state->setColorBlendState(colorBlending);
-        m_state->setDynamicState(dynamicState);
-        m_state->setSubpassIndex(0);
+        m_state.m_vertex_shader_stage = vert_shader_stage_info;
+        m_state.m_fragment_shader_stage = frag_shader_stage_info;
+        m_state.m_pipeline_layout = m_pipeline_layout->getHandle();
+        m_state.m_render_pass = m_forward_pass->getHandle();
+		m_state.m_vertex_input_state = vertex_input_state;
+        m_state.m_input_assembly_state = input_assembly_state;
+        m_state.m_viewport_state = viewport_state;
+        m_state.m_rasterization_state = rasterization_state;
+        m_state.m_multisample_state = multi_sample_state;
+        m_state.m_depth_stencil_state = depth_stencil_state;
+        m_state.m_color_blend_state = colorBlending;
+        m_state.m_dynamic_state = dynamicState;
+        m_state.m_subpass_index = 0;
 
-        m_pipeline = std::make_unique<GraphicsPipeline>(m_device, *m_state);
+        m_pipeline = std::make_unique<GraphicsPipeline>(m_device, m_state);
     }
 
     void BlitPipeline::updateUniformBuffer(uint32_t current_image, RenderScene& render_scene)
