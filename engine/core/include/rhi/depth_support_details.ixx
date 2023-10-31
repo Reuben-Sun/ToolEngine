@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
-#include "physical_device.h"
 
 export module DepthSupportDetails;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

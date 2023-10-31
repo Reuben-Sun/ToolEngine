@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
-#include "include/rhi/physical_device.h"
 
 export module ForwardPass;
 import RenderPass;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

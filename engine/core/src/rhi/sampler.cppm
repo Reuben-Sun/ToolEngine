@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
-#include "include/rhi/physical_device.h"
 #include "include/common/macro.h"
 
 import Sampler;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

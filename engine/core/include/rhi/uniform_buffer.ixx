@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "physical_device.h"
 
 export module UniformBuffer;
 
 import Buffer;
+import PhysicalDevice;
 import <glm/glm.hpp>;
 
 namespace ToolEngine

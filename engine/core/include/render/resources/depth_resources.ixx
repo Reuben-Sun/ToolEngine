@@ -2,11 +2,11 @@
 
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
-#include "include/rhi/physical_device.h"
 
 export module DepthResources;
 import RenderResources;
 import DepthSupportDetails;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

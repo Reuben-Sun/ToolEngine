@@ -2,7 +2,6 @@
 #include <vulkan/vulkan.h>
 #include <array>
 #include "include/rhi/device.h"
-#include "include/rhi/physical_device.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -30,6 +29,7 @@ import PipelineLayout;
 import PipelineState;
 import RenderPass;
 import Sampler;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

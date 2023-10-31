@@ -1,5 +1,13 @@
-#include "include/rhi/physical_device.h"
+#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
+
+import PhysicalDevice;
+import QueueFamilyIndices;
+import SwapChainSupportDetails;
+import <vector>;
+import <set>;
+import <string>;
+import <optional>;
 
 namespace ToolEngine
 {

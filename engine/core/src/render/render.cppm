@@ -1,5 +1,4 @@
 #include <optick.h>
-#include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
 #include "include/common/macro.h"
 
@@ -15,6 +14,7 @@ import ImageView;
 import Instance;
 import SwapChain;
 import RenderPass;
+import PhysicalDevice;
 import <memory>;
 
 namespace ToolEngine

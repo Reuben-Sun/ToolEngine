@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "physical_device.h"
 
 export module Image;
 import SingleTimeCommandBuffer;
+import PhysicalDevice;
 
 namespace ToolEngine
 {

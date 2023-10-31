@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "physical_device.h"
 
 export module RenderPass;
 
 import DepthSupportDetails;
+import PhysicalDevice;
 import <array>;
 
 namespace ToolEngine

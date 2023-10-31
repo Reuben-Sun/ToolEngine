@@ -1,6 +1,5 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "physical_device.h"
 
 export module TextureImage;
 
@@ -8,6 +7,7 @@ import Global_Context;
 import Buffer;
 import Image;
 import SingleTimeCommandBuffer;
+import PhysicalDevice;
 import <string>;
 import <memory>;
 

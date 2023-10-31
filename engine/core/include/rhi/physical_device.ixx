@@ -1,17 +1,15 @@
-#pragma once
-
-#include <set>
-#include <string>
 #include <vulkan/vulkan.h>
-#include <optional>
+
+export module PhysicalDevice;
 
 import Instance;
 import QueueFamilyIndices;
 import SwapChainSupportDetails;
+import <vector>;
 
 namespace ToolEngine
 {
-	class PhysicalDevice
+	export class PhysicalDevice
 	{
 	public:
 		PhysicalDevice(Instance& instance, VkSurfaceKHR& surface);
