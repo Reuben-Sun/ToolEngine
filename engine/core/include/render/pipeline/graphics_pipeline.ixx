@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
-#include "include/rhi/shader_module.h"
 
 export module GraphicsPipeline;
 import Pipeline;
+import ShaderModule;
 
 namespace ToolEngine
 {

@@ -1,14 +1,14 @@
-#pragma once
-
-#include <string>
 #include <vulkan/vulkan.h>
 #include "device.h"
 
+export module ShaderModule;
+
 import Global_Context;
+import <string>;
 
 namespace ToolEngine
 {
-	class ShaderModule
+	export class ShaderModule
 	{
 	public:
 		ShaderModule(Device& device, std::string shader_path);

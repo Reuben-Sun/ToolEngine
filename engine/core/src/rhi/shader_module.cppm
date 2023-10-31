@@ -1,5 +1,10 @@
-#include "include/rhi/shader_module.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
 #include "include/common/macro.h"
+
+import ShaderModule;
+import Global_Context;
+import <string>;
 
 namespace ToolEngine
 {

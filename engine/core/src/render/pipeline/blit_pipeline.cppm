@@ -1,4 +1,3 @@
-#include "include/rhi/shader_module.h"
 #include "include/rhi/device.h"
 
 import BlitPipeline;
@@ -11,6 +10,7 @@ import ImageView;
 import TextureImage;
 import SwapChain;
 import Sampler;
+import ShaderModule;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
