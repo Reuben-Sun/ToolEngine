@@ -1,4 +1,8 @@
-#include "include/rhi/descriptor_set_layout.h"
+#include <array>
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/pipeline_layout.h"
+import DescriptorSetLayout;
 
 namespace ToolEngine
 {

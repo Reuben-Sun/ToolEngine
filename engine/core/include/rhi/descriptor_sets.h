@@ -2,10 +2,10 @@
 
 #include <vector>
 #include <vulkan/vulkan.h>
-#include "descriptor_set_layout.h"
 #include "device.h"
 
 import DescriptorPool;
+import DescriptorSetLayout;
 
 namespace ToolEngine
 {

@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "descriptor_set_layout.h"
 
 export module DescriptorPool;
 
 import UniformBuffer;
+import DescriptorSetLayout;
 
 namespace ToolEngine
 {

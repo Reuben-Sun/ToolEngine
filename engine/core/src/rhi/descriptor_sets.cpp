@@ -1,6 +1,8 @@
 #include "include/rhi/descriptor_sets.h"
 
 import UniformBuffer;
+import DescriptorSetLayout;
+import <array>;
 
 namespace ToolEngine
 {

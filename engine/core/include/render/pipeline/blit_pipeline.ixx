@@ -6,7 +6,6 @@
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
-#include "include/rhi/descriptor_set_layout.h"
 #include "include/rhi/descriptor_sets.h"
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/swapchain.h"
@@ -30,6 +29,7 @@ import VertexBuffer;
 import CommandBuffer;
 import UniformBuffer;
 import DescriptorPool;
+import DescriptorSetLayout;
 
 namespace ToolEngine
 {
