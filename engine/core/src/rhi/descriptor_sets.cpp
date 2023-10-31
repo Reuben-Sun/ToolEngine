@@ -1,5 +1,7 @@
 #include "include/rhi/descriptor_sets.h"
 
+import UniformBuffer;
+
 namespace ToolEngine
 {
     DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, uint32_t frames_in_flight_count)

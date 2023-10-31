@@ -2,12 +2,18 @@
 #include "include/rhi/image_view.h"
 #include "include/rhi/sampler.h"
 #include "include/rhi/shader_module.h"
+#include "include/rhi/device.h"
+#include "include/rhi/swapchain.h"
+#include "include/rhi/descriptor_set_layout.h"
 import BlitPipeline;
 import RenderScene;
 import Model;
+import DescriptorPool;
+import UniformBuffer;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
+import <memory>;
 
 namespace ToolEngine
 {

@@ -1,4 +1,10 @@
-#include "include/rhi/descriptor_pool.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/descriptor_set_layout.h"
+#include "include/common/macro.h"
+import DescriptorPool;
+import <array>;
+import <vector>;
 
 namespace ToolEngine
 {
@@ -21,7 +27,7 @@ namespace ToolEngine
 
 		if (vkCreateDescriptorPool(m_device.getHandle(), &pool_info, nullptr, &m_descriptor_pool) != VK_SUCCESS) 
 		{
-			throw std::runtime_error("failed to create descriptor pool!");
+			LOG_ERROR("failed to create descriptor pool!");
 		}
 	}
 

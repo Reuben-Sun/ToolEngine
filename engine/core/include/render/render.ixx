@@ -6,7 +6,6 @@
 #include "include/rhi/image_view.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/frame_buffer.h"
-#include "include/rhi/descriptor_pool.h"
 
 export module Render;
 
@@ -20,6 +19,7 @@ import VertexBuffer;
 import UniformBuffer;
 import CommandBuffer;
 import DepthSupportDetails;
+import DescriptorPool;
 import <memory>;
 
 namespace ToolEngine

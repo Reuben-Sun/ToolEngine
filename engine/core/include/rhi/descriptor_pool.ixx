@@ -1,16 +1,14 @@
-#pragma once
-
-#include <array>
-#include <vector>
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "descriptor_set_layout.h"
+
+export module DescriptorPool;
 
 import UniformBuffer;
 
 namespace ToolEngine
 {
-	class DescriptorPool
+	export class DescriptorPool
 	{
 	public:
 		DescriptorPool(Device& device, uint32_t max_frames_in_flight_count);

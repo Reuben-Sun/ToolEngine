@@ -2,11 +2,11 @@
 #include <vulkan/vulkan.h>
 #include <array>
 #include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
 #include "include/rhi/descriptor_set_layout.h"
-#include "include/rhi/descriptor_pool.h"
 #include "include/rhi/descriptor_sets.h"
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/swapchain.h"
@@ -28,6 +28,8 @@ import RenderScene;
 import IndexBuffer;
 import VertexBuffer;
 import CommandBuffer;
+import UniformBuffer;
+import DescriptorPool;
 
 namespace ToolEngine
 {

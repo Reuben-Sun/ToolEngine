@@ -4,7 +4,8 @@
 #include <vulkan/vulkan.h>
 #include "descriptor_set_layout.h"
 #include "device.h"
-#include "descriptor_pool.h"
+
+import DescriptorPool;
 
 namespace ToolEngine
 {
