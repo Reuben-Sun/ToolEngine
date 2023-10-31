@@ -1,5 +1,4 @@
 #include "include/rhi/texture_image.h"
-#include "include/rhi/image_view.h"
 #include "include/rhi/sampler.h"
 #include "include/rhi/shader_module.h"
 #include "include/rhi/device.h"
@@ -11,6 +10,7 @@ import Model;
 import DescriptorPool;
 import DescriptorSetLayout;
 import UniformBuffer;
+import ImageView;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;

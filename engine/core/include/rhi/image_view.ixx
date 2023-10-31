@@ -1,11 +1,11 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "device.h"
 
+export module ImageView;
+
 namespace ToolEngine
 {
-	class ImageView
+	export class ImageView
 	{
 	public:
 		ImageView(Device& device, VkImage image, VkFormat format, VkImageAspectFlags aspect_flags);

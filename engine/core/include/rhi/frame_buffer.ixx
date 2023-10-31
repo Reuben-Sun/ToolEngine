@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "image_view.h"
 
 export module FrameBuffer;
+import ImageView;
 
 namespace ToolEngine
 {

@@ -1,4 +1,7 @@
-#include "include/rhi/image_view.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/common/macro.h"
+import ImageView;
 
 namespace ToolEngine
 {
@@ -21,7 +24,7 @@ namespace ToolEngine
         create_info.subresourceRange.layerCount = 1;
         if (vkCreateImageView(m_device.getHandle(), &create_info, nullptr, &m_image_view) != VK_SUCCESS)
         {
-            throw std::runtime_error("failed to create image views!");
+            LOG_ERROR("failed to create image views!");
         }
 	}
 	ImageView::~ImageView()

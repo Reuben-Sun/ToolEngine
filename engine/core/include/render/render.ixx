@@ -3,7 +3,6 @@
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
 #include "include/rhi/swapchain.h"
-#include "include/rhi/image_view.h"
 #include "include/rhi/render_pass.h"
 
 export module Render;
@@ -20,6 +19,7 @@ import CommandBuffer;
 import DepthSupportDetails;
 import DescriptorPool;
 import FrameBuffer;
+import ImageView;
 import <memory>;
 
 namespace ToolEngine

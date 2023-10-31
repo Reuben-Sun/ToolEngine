@@ -8,7 +8,6 @@
 #include "include/rhi/pipeline_layout.h"
 #include "include/rhi/swapchain.h"
 #include "include/rhi/texture_image.h"
-#include "include/rhi/image_view.h"
 #include "include/rhi/sampler.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -30,6 +29,7 @@ import DescriptorPool;
 import DescriptorSetLayout;
 import DescriptorSets;
 import FrameBuffer;
+import ImageView;
 
 namespace ToolEngine
 {
