@@ -2,13 +2,13 @@
 
 #include <vulkan/vulkan.h>
 #include "physical_device.h"
-#include "queue_family_indices.h"
 #include <optick.h>
 #include "include/rhi/device.h"
 
 import Queue;
 import CommandPool;
 import Instance;
+import QueueFamilyIndices;
 import <memory>;
 
 namespace ToolEngine
