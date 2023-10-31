@@ -1,13 +1,12 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "device.h"
 
+export module Pipeline;
 import PipelineState;
 
 namespace ToolEngine
 {
-	class Pipeline
+	export class Pipeline
 	{
 	public:
 		Pipeline(Device& device);
