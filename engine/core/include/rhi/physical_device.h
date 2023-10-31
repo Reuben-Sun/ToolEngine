@@ -4,10 +4,10 @@
 #include <string>
 #include <vulkan/vulkan.h>
 #include <optional>
-#include "swap_chain_support_details.h"
 
 import Instance;
 import QueueFamilyIndices;
+import SwapChainSupportDetails;
 
 namespace ToolEngine
 {
