@@ -1,8 +1,12 @@
-#include "include/rhi/descriptor_sets.h"
+#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
+#include "include/rhi/device.h"
 
+import DescriptorSets;
 import UniformBuffer;
 import DescriptorSetLayout;
 import <array>;
+import <vector>;
 
 namespace ToolEngine
 {
@@ -19,7 +23,7 @@ namespace ToolEngine
         m_descriptor_sets.resize(m_frames_in_flight_count);
         if (vkAllocateDescriptorSets(m_device.getHandle(), &alloc_info, m_descriptor_sets.data()) != VK_SUCCESS) 
         {
-            throw std::runtime_error("failed to allocate descriptor sets!");
+            LOG_ERROR("failed to allocate descriptor sets!");
         }
     }
     DescriptorSets::~DescriptorSets()

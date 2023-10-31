@@ -1,15 +1,15 @@
-#pragma once
-
-#include <vector>
 #include <vulkan/vulkan.h>
 #include "device.h"
 
+export module DescriptorSets;
+
 import DescriptorPool;
 import DescriptorSetLayout;
+import <vector>;
 
 namespace ToolEngine
 {
-	class DescriptorSets
+	export class DescriptorSets
 	{
 	public:
 		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, uint32_t frames_in_flight_count);
