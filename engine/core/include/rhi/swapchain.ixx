@@ -1,15 +1,16 @@
-#pragma once
-
-#include <vector>
-#include <algorithm>
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
 #include "swap_chain_support_details.h"
 
+export module SwapChain;
+
+import <vector>;
+import <algorithm>;
+
 namespace ToolEngine
 {
-	class SwapChain
+	export class SwapChain
 	{
 	public:
 		SwapChain(Device& device, PhysicalDevice& physical_device, VkSurfaceKHR& surface, VkExtent2D extent);

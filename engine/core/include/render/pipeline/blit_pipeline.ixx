@@ -6,7 +6,6 @@
 #include "include/rhi/pipeline_state.h"
 #include "include/rhi/render_pass.h"
 #include "include/rhi/pipeline_layout.h"
-#include "include/rhi/swapchain.h"
 #include "include/rhi/sampler.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -30,6 +29,7 @@ import DescriptorSets;
 import FrameBuffer;
 import ImageView;
 import TextureImage;
+import SwapChain;
 
 namespace ToolEngine
 {

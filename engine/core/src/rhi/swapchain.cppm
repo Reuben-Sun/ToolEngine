@@ -1,5 +1,12 @@
-#include "include/rhi/swapchain.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+#include "include/rhi/swap_chain_support_details.h"
 #include "include/common/macro.h"
+
+import SwapChain;
+import <vector>;
+import <algorithm>;
 
 namespace ToolEngine
 {

@@ -2,7 +2,6 @@
 #include "include/rhi/sampler.h"
 #include "include/rhi/shader_module.h"
 #include "include/rhi/device.h"
-#include "include/rhi/swapchain.h"
 
 import BlitPipeline;
 import RenderScene;
@@ -12,6 +11,7 @@ import DescriptorSetLayout;
 import UniformBuffer;
 import ImageView;
 import TextureImage;
+import SwapChain;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
