@@ -1,8 +1,9 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 #include <optick.h>
 
 export module CommandBuffer;
+import Device;
+import <vector>;
 
 namespace ToolEngine
 {

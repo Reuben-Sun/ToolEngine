@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 import ForwardPass;
 import DepthSupportDetails;
 import RenderPass;
 import PhysicalDevice;
+import Device;
 import <array>;
 
 namespace ToolEngine

@@ -1,8 +1,7 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include <optick.h>
-#include "include/rhi/device.h"
+
+export module Device;
 
 import Queue;
 import CommandPool;
@@ -13,7 +12,7 @@ import <memory>;
 
 namespace ToolEngine
 {
-	class Device
+	export class Device
 	{
 	public:
 		Device(Instance& instance, PhysicalDevice& physical_device, VkSurfaceKHR& surface);

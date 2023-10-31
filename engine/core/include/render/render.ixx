@@ -1,6 +1,5 @@
 #include <optick.h>
-#include "include/rhi/device.h"
-
+#include <vulkan/vulkan.h>
 export module Render;
 
 import Timer;
@@ -20,7 +19,9 @@ import Instance;
 import SwapChain;
 import RenderPass;
 import PhysicalDevice;
+import Device;
 import <memory>;
+import <vector>;
 
 namespace ToolEngine
 {

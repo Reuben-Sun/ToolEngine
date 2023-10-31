@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 import Buffer;
 import SingleTimeCommandBuffer;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {

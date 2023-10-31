@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 import DescriptorPool;
 import DescriptorSetLayout;
+import Device;
 import <array>;
 import <vector>;
 

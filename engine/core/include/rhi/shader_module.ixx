@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 
 export module ShaderModule;
 
 import Global_Context;
+import Device;
 import <string>;
 
 namespace ToolEngine

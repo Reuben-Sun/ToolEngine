@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 import FrameBuffer;
 import ImageView;
+import Device;
 import <array>;
 
 namespace ToolEngine

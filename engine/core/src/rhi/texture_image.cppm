@@ -1,11 +1,11 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 #include "stb_image.h"
 
 import TextureImage;
 import SingleTimeCommandBuffer;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {

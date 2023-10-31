@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 
 export module SwapChain;
 
 import SwapChainSupportDetails;
 import PhysicalDevice;
+import Device;
 import <vector>;
 import <algorithm>;
 

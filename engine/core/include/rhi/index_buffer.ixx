@@ -1,11 +1,11 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 
 export module IndexBuffer;
 
 import Buffer;
 import Index;
 import PhysicalDevice;
+import Device;
 import <vector>;
 
 namespace ToolEngine

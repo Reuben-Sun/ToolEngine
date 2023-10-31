@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include "include/common/macro.h"
-#include "include/rhi/device.h"
 import CommandPool;
+import Device;
 
 
 namespace ToolEngine

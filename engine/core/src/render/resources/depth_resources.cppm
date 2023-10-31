@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 
 import DepthResources;
 import DepthSupportDetails;
 import Image;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {

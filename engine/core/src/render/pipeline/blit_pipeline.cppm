@@ -1,5 +1,4 @@
-#include "include/rhi/device.h"
-
+#include <vulkan/vulkan.h>
 import BlitPipeline;
 import RenderScene;
 import Model;
@@ -11,10 +10,12 @@ import TextureImage;
 import SwapChain;
 import Sampler;
 import ShaderModule;
+import Device;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
 import <memory>;
+import <optick.h>;
 
 namespace ToolEngine
 {

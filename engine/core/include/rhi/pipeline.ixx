@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 
 export module Pipeline;
 import PipelineState;
+import Device;
 
 namespace ToolEngine
 {

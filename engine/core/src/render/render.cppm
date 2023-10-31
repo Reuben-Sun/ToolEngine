@@ -1,5 +1,5 @@
 #include <optick.h>
-#include "include/rhi/device.h"
+#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 
 import Render;
@@ -15,6 +15,7 @@ import Instance;
 import SwapChain;
 import RenderPass;
 import PhysicalDevice;
+import Device;
 import <memory>;
 
 namespace ToolEngine

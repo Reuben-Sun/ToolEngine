@@ -1,8 +1,7 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 
 import RenderPass;
-
+import Device;
 import DepthSupportDetails;
 import PhysicalDevice;
 import <array>;

@@ -1,10 +1,10 @@
 #include <array>
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 
 import DescriptorSetLayout;
 import PipelineLayout;
+import Device;
 
 namespace ToolEngine
 {

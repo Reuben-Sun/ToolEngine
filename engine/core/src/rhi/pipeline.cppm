@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 
 import Pipeline;
 import PipelineState;
+import Device;
 
 namespace ToolEngine
 {

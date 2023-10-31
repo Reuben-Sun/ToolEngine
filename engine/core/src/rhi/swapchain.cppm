@@ -1,10 +1,11 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 
 import SwapChain;
 import SwapChainSupportDetails;
 import PhysicalDevice;
+import Device;
+import QueueFamilyIndices;
 import <vector>;
 import <algorithm>;
 

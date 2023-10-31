@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 
 export module ImageView;
+import Device;
 
 namespace ToolEngine
 {

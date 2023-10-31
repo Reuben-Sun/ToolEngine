@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "include/common/macro.h"
-#include "include/rhi/device.h"
 
 import DescriptorSets;
 import UniformBuffer;
 import DescriptorSetLayout;
+import Device;
 import <array>;
 import <vector>;
 

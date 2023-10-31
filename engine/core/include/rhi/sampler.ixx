@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
-#include "device.h"
 
 export module Sampler;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {

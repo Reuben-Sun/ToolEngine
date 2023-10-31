@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 
 export module DepthResources;
 import RenderResources;
 import DepthSupportDetails;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {

@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/device.h"
 #include "include/common/macro.h"
 import Image;
 import SingleTimeCommandBuffer;
 import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {
@@ -126,6 +126,7 @@ namespace ToolEngine
 			}
 		}
 		LOG_ERROR("failed to find suitable memory type!");
+		return 0;
 	}
 
 }
