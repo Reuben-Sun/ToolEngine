@@ -3,6 +3,7 @@
 #include "include/rhi/physical_device.h"
 #include "include/rhi/render_pass.h"
 import ForwardPass;
+import DepthSupportDetails;
 
 namespace ToolEngine
 {

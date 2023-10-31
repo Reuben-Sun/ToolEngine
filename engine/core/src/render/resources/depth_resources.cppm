@@ -1,8 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
-#include "include/rhi/depth_support_details.h"
+#include "include/rhi/image.h"
+
 import DepthResources;
+import DepthSupportDetails;
 
 namespace ToolEngine
 {

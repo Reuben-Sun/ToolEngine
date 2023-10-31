@@ -4,7 +4,8 @@
 #include <array>
 #include "device.h"
 #include "physical_device.h"
-#include "depth_support_details.h"
+
+import DepthSupportDetails;
 
 namespace ToolEngine
 {
