@@ -3,7 +3,6 @@
 #include <array>
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
-#include "include/rhi/sampler.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -30,6 +29,7 @@ import SwapChain;
 import PipelineLayout;
 import PipelineState;
 import RenderPass;
+import Sampler;
 
 namespace ToolEngine
 {

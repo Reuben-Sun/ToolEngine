@@ -1,5 +1,3 @@
-
-#include "include/rhi/sampler.h"
 #include "include/rhi/shader_module.h"
 #include "include/rhi/device.h"
 
@@ -12,6 +10,7 @@ import UniformBuffer;
 import ImageView;
 import TextureImage;
 import SwapChain;
+import Sampler;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
