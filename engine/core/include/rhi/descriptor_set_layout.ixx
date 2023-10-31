@@ -1,8 +1,8 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "pipeline_layout.h"
 
 export module DescriptorSetLayout;
+import PipelineLayout;
 
 namespace ToolEngine
 {

@@ -1,8 +1,9 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
-#include "pipeline_layout.h"
 #include "render_pass.h"
+
+import PipelineLayout;
 
 namespace ToolEngine
 {

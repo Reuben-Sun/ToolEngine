@@ -1,11 +1,11 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "device.h"
 
+export module PipelineLayout;
+
 namespace ToolEngine
 {
-	class PipelineLayout
+	export class PipelineLayout
 	{
 	public:
 		PipelineLayout(Device& device, const VkPipelineLayoutCreateInfo& create_info);
