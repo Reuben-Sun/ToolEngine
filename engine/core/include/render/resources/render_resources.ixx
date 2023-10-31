@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
-#include "include/rhi/image.h"
 
 export module RenderResources;
 import ImageView;
+import Image;
 
 namespace ToolEngine
 {

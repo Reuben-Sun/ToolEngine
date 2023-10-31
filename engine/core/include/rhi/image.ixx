@@ -1,13 +1,13 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
 #include "single_time_command_buffer.h"
 
+export module Image;
+
 namespace ToolEngine
 {
-	class Image
+	export class Image
 	{
 	public:
 		Image(Device& device, PhysicalDevice& physical_device, VkExtent2D extent, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);

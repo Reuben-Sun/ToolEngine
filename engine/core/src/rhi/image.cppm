@@ -1,4 +1,9 @@
-#include "include/rhi/image.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+#include "include/rhi/single_time_command_buffer.h"
+#include "include/common/macro.h"
+import Image;
 
 namespace ToolEngine
 {
@@ -22,7 +27,7 @@ namespace ToolEngine
 
 		if (vkCreateImage(m_device.getHandle(), &image_create_info, nullptr, &m_image) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create image!");
+			LOG_ERROR("failed to create image!");
 		}
 
 		VkMemoryRequirements mem_requirements;
@@ -35,7 +40,7 @@ namespace ToolEngine
 
 		if (vkAllocateMemory(m_device.getHandle(), &alloc_info, nullptr, &m_image_memory) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to allocate image memory!");
+			LOG_ERROR("failed to allocate image memory!");
 		}
 
 		vkBindImageMemory(m_device.getHandle(), m_image, m_image_memory, 0);
@@ -96,7 +101,7 @@ namespace ToolEngine
 		}
 		else
 		{
-			throw std::invalid_argument("unsupported layout transition!");
+			LOG_ERROR("unsupported layout transition!");
 		}
 
 		vkCmdPipelineBarrier(command_buffer->getHandle(),
