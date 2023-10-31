@@ -1,14 +1,16 @@
-#pragma once
-
-#include <vector>
 #include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+
+export module IndexBuffer;
 
 import Buffer;
+import <vector>;
 import Index;
 
 namespace ToolEngine
 {
-	class IndexBuffer : public Buffer
+	export class IndexBuffer : public Buffer
 	{
 	public:
 		IndexBuffer(Device& device, PhysicalDevice& physical_device, std::vector<Index> index_buffer);

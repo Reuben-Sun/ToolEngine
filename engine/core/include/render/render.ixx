@@ -8,7 +8,6 @@
 #include "include/rhi/frame_buffer.h"
 #include "include/rhi/command_buffer.h"
 #include "include/rhi/vertex_buffer.h"
-#include "include/rhi/index_buffer.h"
 #include "include/rhi/uniform_buffer.h"
 #include "include/rhi/descriptor_pool.h"
 #include "include/rhi/depth_support_details.h"
@@ -20,6 +19,7 @@ import GLFW_Window;
 import BlitPipeline;
 import DepthResources;
 import RenderScene;
+import IndexBuffer;
 import <memory>;
 
 namespace ToolEngine
