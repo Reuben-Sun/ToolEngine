@@ -4,8 +4,9 @@
 #include <vector>
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "uniform_buffer.h"
 #include "descriptor_set_layout.h"
+
+import UniformBuffer;
 
 namespace ToolEngine
 {
