@@ -1,10 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "include/asset_pipeline/gltf_loader.h"
 
 import Global_Context;
 import RenderScene;
+import GltfLoader;
 
 namespace ToolEngine
 {

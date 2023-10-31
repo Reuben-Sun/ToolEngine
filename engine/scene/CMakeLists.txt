@@ -1,5 +1,5 @@
-file(GLOB_RECURSE HEADERS "*.h")
-file(GLOB_RECURSE SOURCES "*.cpp")
+file(GLOB_RECURSE HEADERS "*.h" "include/*/*.ixx")
+file(GLOB_RECURSE SOURCES "*.cpp" "src/*/*.cppm")
 set(ALL_FILES ${HEADERS} ${SOURCES})
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${ALL_FILES})

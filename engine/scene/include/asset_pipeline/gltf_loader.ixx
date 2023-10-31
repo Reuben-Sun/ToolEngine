@@ -1,20 +1,17 @@
-#pragma once
-
 #include <tiny_gltf.h>
-#include <string>
-#include <vector>
-#include <iostream>
-#include "include/common/macro.h"
 #include <glm/vec3.hpp>
+
+export module GltfLoader;
 
 import Model;
 import Index;
 import Vertex;
 import RenderScene;
+import <vector>;
 
 namespace ToolEngine
 {
-	class GltfLoader
+	export class GltfLoader
 	{
 	public:
 		GltfLoader(std::string model_path);

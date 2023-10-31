@@ -1,4 +1,11 @@
-#include "include/asset_pipeline/gltf_loader.h"
+#include <tiny_gltf.h>
+#include "include/common/macro.h"
+import GltfLoader;
+import Model;
+import Index;
+import Vertex;
+import RenderScene;
+import <vector>;
 
 namespace ToolEngine
 {
