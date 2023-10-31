@@ -1,4 +1,8 @@
-#include "include/rhi/command_buffer.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/common/macro.h"
+#include <optick.h>
+import CommandBuffer;
 
 namespace ToolEngine
 {
@@ -13,7 +17,7 @@ namespace ToolEngine
 		m_command_buffers.resize(m_buffer_count);
 		if (vkAllocateCommandBuffers(m_device.getHandle(), &alloc_info, m_command_buffers.data()) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to allocate command buffers!");
+			LOG_ERROR("failed to allocate command buffers!");
 		}
 	}
 	CommandBuffer::~CommandBuffer()

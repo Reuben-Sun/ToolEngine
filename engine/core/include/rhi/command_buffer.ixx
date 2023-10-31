@@ -1,13 +1,12 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <stdexcept>
 #include "device.h"
 #include <optick.h>
 
+export module CommandBuffer;
+
 namespace ToolEngine
 {
-	class CommandBuffer
+	export class CommandBuffer
 	{
 	public:
 		CommandBuffer(Device& device, uint32_t buffer_count);
