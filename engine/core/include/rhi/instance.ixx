@@ -1,17 +1,15 @@
-#pragma once
-
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include <unordered_map>
 #include <vulkan/vulkan.h>
-#include <iostream>
+
+export module Instance;
 
 import DebugUtils;
+import <vector>;
+import <string>;
+import <unordered_map>;
 
 namespace ToolEngine
 {
-	class Instance
+	export class Instance
 	{
 	public:
 		Instance(const std::string& app_name, std::vector<const char*> required_extensions, bool enable_validation_layers = true);

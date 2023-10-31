@@ -1,5 +1,4 @@
 #include <optick.h>
-#include "include/rhi/instance.h"
 #include "include/rhi/physical_device.h"
 #include "include/rhi/device.h"
 #include "include/rhi/swapchain.h"
@@ -20,6 +19,7 @@ import DepthSupportDetails;
 import DescriptorPool;
 import FrameBuffer;
 import ImageView;
+import Instance;
 import <memory>;
 
 namespace ToolEngine

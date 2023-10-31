@@ -3,10 +3,11 @@
 #include <set>
 #include <string>
 #include <vulkan/vulkan.h>
-#include "instance.h"
 #include <optional>
 #include "queue_family_indices.h"
 #include "swap_chain_support_details.h"
+
+import Instance;
 
 namespace ToolEngine
 {

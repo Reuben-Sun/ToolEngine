@@ -1,10 +1,10 @@
 #include <vulkan/vulkan.h>
-#include "include/rhi/instance.h"
 
 export module Window;
 
 import <string>;
-
+import Instance;
+import <vector>;
 
 namespace ToolEngine
 {

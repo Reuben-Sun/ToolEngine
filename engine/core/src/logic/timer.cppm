@@ -14,7 +14,7 @@ namespace ToolEngine
     void Timer::Tick()
     {
         auto current_time = std::chrono::high_resolution_clock::now();
-        delta_time = std::chrono::duration<float>(current_time - last_time).count();
+        delta_time = std::chrono::duration<float, std::ratio<1, 1>>(current_time - last_time).count();
         last_time = current_time;
     }
 
@@ -25,6 +25,6 @@ namespace ToolEngine
 
     float Timer::CurrentTime()
     {
-        return std::chrono::duration<float>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+        return std::chrono::duration<float, std::ratio<1, 1>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
     }
 }

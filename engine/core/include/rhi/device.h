@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
-#include "instance.h"
 #include "physical_device.h"
 #include "queue_family_indices.h"
 #include <optick.h>
@@ -9,6 +8,7 @@
 
 import Queue;
 import CommandPool;
+import Instance;
 import <memory>;
 
 namespace ToolEngine
