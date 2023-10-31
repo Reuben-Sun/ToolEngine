@@ -1,16 +1,16 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <vector>
 #include "device.h"
 #include "physical_device.h"
 
+export module VertexBuffer;
+
 import Buffer;
 import Vertex;
+import <vector>;
 
 namespace ToolEngine
 {
-	class VertexBuffer: public Buffer
+	export class VertexBuffer: public Buffer
 	{
 	public:
 		VertexBuffer(Device& device, PhysicalDevice& physical_device, std::vector<Vertex> vertex_buffer);
