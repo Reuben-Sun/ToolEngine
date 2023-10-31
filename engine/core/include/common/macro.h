@@ -1,9 +1,8 @@
 #pragma once
 
-#include "include/common/log_manager.h"
-#include "include/global/global_context.h"
-#include "include/logic/timer.h"
-
+import Global_Context;
+import LogManager;
+import <format>;
 
 #define FORCEINLINE __forceinline
 

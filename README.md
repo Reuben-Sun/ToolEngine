@@ -1,5 +1,7 @@
 # Tool Engine
 
+一个基于C++20 Modules的简易Vulkan渲染器
+
 ## 拉取
 
 本项目使用 Submodule 和 Git LFS，拉取项目后还需
@@ -10,13 +12,19 @@ git submodule update
 git lfs pull
 ```
 
-## 构建 运行
+## 构建
 
 [![Build Windows](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml/badge.svg)](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml) 
 
-- 需要 Vulkan、cmake
-- 根据 VS 版本运行 scripts 下的 `cmake_generate_20xx`
-- 用 Visual Studio 打开 ToolEngine.sln
+- 需要 Vulkan
+- 需要cmake 3.21以上的版本（`.ixx`和`.cppm`支持）
+- 仅支持MSVC（使用了C++20 Modules）
+- 需要Visual Studio 2022 17.5即以上版本，且安装**适用于v143生成工具的C++模块（x64/x86 - 实验性）**
+
+## 运行
+
+- 运行 scripts 下的 `cmake_generate_2022`生成项目
+- 用 Visual Studio 22打开 ToolEngine.sln
 - 设 client 为启动项目，运行
 
 ## 宏伟蓝图
