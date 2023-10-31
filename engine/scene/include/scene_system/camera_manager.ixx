@@ -1,4 +1,4 @@
-#pragma once
+export module CameraManager;
 
 namespace ToolEngine
 {

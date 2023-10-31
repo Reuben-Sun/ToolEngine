@@ -1,4 +1,4 @@
-#include "include/scene_system/level_manager.h"
+import LevelManager;
 
 namespace ToolEngine
 {

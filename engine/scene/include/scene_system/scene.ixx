@@ -1,6 +1,4 @@
-#pragma once
-
-#include <vector>
+export module Scene;
 
 import Global_Context;
 import RenderScene;
@@ -8,7 +6,7 @@ import GltfLoader;
 
 namespace ToolEngine
 {
-	class Scene
+	export class Scene
 	{
 	public:
 		Scene();

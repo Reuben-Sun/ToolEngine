@@ -1,5 +1,4 @@
-#pragma once
-
+export module LevelManager;
 namespace ToolEngine
 {
 

@@ -1,6 +1,9 @@
-#include "include/scene_system/scene.h"
-#include <format>
+import Scene;
+import Global_Context;
+import RenderScene;
+import GltfLoader;
 import <glm/glm.hpp>;
+import <string>;
 
 namespace ToolEngine
 {

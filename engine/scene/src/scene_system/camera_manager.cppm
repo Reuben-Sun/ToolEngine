@@ -1,4 +1,4 @@
-#include "include/scene_system/camera_manager.h"
+import CameraManager;
 
 namespace ToolEngine
 {
