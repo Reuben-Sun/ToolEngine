@@ -6,7 +6,8 @@
 #include <unordered_map>
 #include <vulkan/vulkan.h>
 #include <iostream>
-#include "debug_utils.h"
+
+import DebugUtils;
 
 namespace ToolEngine
 {

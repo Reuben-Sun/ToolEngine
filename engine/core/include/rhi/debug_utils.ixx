@@ -1,12 +1,10 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <iostream>
-#include "include/common/macro.h"
+
+export module DebugUtils;
 
 namespace ToolEngine
 {
-	class DebugUtils
+	export class DebugUtils
 	{
 	public:
 		static VkResult createDebugUtilsMessengerEXT(VkInstance instance, const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, const VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pDebugMessenger);
