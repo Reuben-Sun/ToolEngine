@@ -2,7 +2,8 @@
 
 #include <vulkan/vulkan.h>
 #include "device.h"
-#include "include/rhi/pipeline_state.h"
+
+import PipelineState;
 
 namespace ToolEngine
 {

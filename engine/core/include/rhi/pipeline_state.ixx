@@ -1,13 +1,13 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
 #include "render_pass.h"
+
+export module PipelineState;
 
 import PipelineLayout;
 
 namespace ToolEngine
 {
-	class PipelineState
+	export class PipelineState
 	{
 	public:
 		void reset();

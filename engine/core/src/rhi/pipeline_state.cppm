@@ -1,4 +1,8 @@
-#include "include/rhi/pipeline_state.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/render_pass.h"
+
+import PipelineState;
+import PipelineLayout;
 
 namespace ToolEngine
 {
