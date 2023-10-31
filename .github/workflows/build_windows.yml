@@ -18,4 +18,6 @@ jobs:
           submodules: 'true'
         
       - name: Build
-        run: ./scripts/cmake_build_2022.bat ${{matrix.configuration}} 
+        run: |
+          mkdir -p build
+          ./scripts/cmake_build_2022.bat ${{matrix.configuration}} 
