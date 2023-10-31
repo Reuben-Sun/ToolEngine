@@ -1,11 +1,11 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
-#include "single_time_command_buffer.h"
 
 export module Buffer;
 
 import Vertex;
+import SingleTimeCommandBuffer;
 
 namespace ToolEngine
 {

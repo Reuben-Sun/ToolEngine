@@ -1,9 +1,9 @@
 #include <vulkan/vulkan.h>
 #include "include/rhi/device.h"
 #include "include/rhi/physical_device.h"
-#include "include/rhi/single_time_command_buffer.h"
 #include "include/common/macro.h"
 import Buffer;
+import SingleTimeCommandBuffer;
 
 namespace ToolEngine
 {
@@ -24,6 +24,7 @@ namespace ToolEngine
 			}
 		}
 		LOG_ERROR("failed to find suitable memory type!");
+		return 0;
 	}
 	void Buffer::createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& buffer_memory)
 	{

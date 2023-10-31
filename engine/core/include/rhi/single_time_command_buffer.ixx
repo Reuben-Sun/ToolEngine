@@ -1,7 +1,7 @@
-#pragma once 
-
 #include <vulkan/vulkan.h>
 #include "device.h"
+
+export module SingleTimeCommandBuffer;
 
 namespace ToolEngine
 {
@@ -9,7 +9,7 @@ namespace ToolEngine
 	/// A buffer to execute a one-time command, such as submit texture.
 	/// This buffer is design for std::unique_ptr, needn't free or submit
 	/// </summary>
-	class SingleTimeCommandBuffer
+	export class SingleTimeCommandBuffer
 	{
 	public:
 		SingleTimeCommandBuffer(Device& device);

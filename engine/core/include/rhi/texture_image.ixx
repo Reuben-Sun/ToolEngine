@@ -1,13 +1,13 @@
 #include <vulkan/vulkan.h>
 #include "device.h"
 #include "physical_device.h"
-#include "include/rhi/single_time_command_buffer.h"
 
 export module TextureImage;
 
 import Global_Context;
 import Buffer;
 import Image;
+import SingleTimeCommandBuffer;
 import <string>;
 import <memory>;
 

@@ -1,4 +1,7 @@
-#include "include/rhi/single_time_command_buffer.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+
+import SingleTimeCommandBuffer;
 
 namespace ToolEngine
 {
