@@ -1,18 +1,19 @@
-#pragma once
-
 #include <vulkan/vulkan.h>
-#include <string>
 #include "device.h"
 #include "physical_device.h"
 #include "include/rhi/single_time_command_buffer.h"
 
+export module TextureImage;
+
 import Global_Context;
 import Buffer;
 import Image;
+import <string>;
+import <memory>;
 
 namespace ToolEngine
 {
-	class TextureImage : Buffer
+	export class TextureImage : Buffer
 	{
 	public:
 		TextureImage(Device& device, PhysicalDevice& physical_device, std::string file_path);

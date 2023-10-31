@@ -1,6 +1,11 @@
-#include "include/rhi/texture_image.h"
+#include <vulkan/vulkan.h>
+#include "include/rhi/device.h"
+#include "include/rhi/physical_device.h"
+#include "include/rhi/single_time_command_buffer.h"
 #include "include/common/macro.h"
 #include "stb_image.h"
+
+import TextureImage;
 
 namespace ToolEngine
 {

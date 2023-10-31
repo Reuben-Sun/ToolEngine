@@ -1,4 +1,4 @@
-#include "include/rhi/texture_image.h"
+
 #include "include/rhi/sampler.h"
 #include "include/rhi/shader_module.h"
 #include "include/rhi/device.h"
@@ -11,6 +11,7 @@ import DescriptorPool;
 import DescriptorSetLayout;
 import UniformBuffer;
 import ImageView;
+import TextureImage;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
