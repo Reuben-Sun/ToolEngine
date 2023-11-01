@@ -4,6 +4,7 @@ import RenderScene;
 import GltfLoader;
 import <glm/glm.hpp>;
 import <string>;
+import <memory>;
 
 namespace ToolEngine
 {

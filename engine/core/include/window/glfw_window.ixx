@@ -7,6 +7,7 @@ export module GLFW_Window;
 
 import Window;
 import Global_Context;
+import Instance;
 import <iostream>;
 import <string>;
 

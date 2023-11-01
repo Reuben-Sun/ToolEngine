@@ -1,5 +1,7 @@
+//module;
 #include <vulkan/vulkan.h>
 #include "include/common/macro.h"
+
 import CommandPool;
 import Device;
 

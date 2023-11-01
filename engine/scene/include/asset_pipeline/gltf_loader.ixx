@@ -1,5 +1,4 @@
 #include <tiny_gltf.h>
-#include <glm/vec3.hpp>
 
 export module GltfLoader;
 
@@ -8,6 +7,7 @@ import Index;
 import Vertex;
 import RenderScene;
 import <vector>;
+import <string>;
 
 namespace ToolEngine
 {

@@ -5,6 +5,7 @@ import ImageView;
 import Image;
 import PhysicalDevice;
 import Device;
+import <memory>;
 
 namespace ToolEngine
 {

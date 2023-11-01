@@ -30,6 +30,8 @@ import RenderPass;
 import Sampler;
 import PhysicalDevice;
 import Device;
+import <memory>;
+import <vector>;
 
 namespace ToolEngine
 {
