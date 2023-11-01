@@ -2,3 +2,5 @@
 build/
 
 .vscode/
+
+engine/cmake-build-debug-visual-studio/
