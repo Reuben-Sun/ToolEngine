@@ -12,7 +12,9 @@ git submodule update
 git lfs pull
 ```
 
-## 构建
+## Visual Studio 2022
+
+### 构建
 
 [![Build Windows](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml/badge.svg)](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml) 
 
@@ -21,11 +23,18 @@ git lfs pull
 - 仅支持MSVC（使用了C++20 Modules）
 - 需要Visual Studio 2022 17.5即以上版本，且安装**适用于v143生成工具的C++模块（x64/x86 - 实验性）**
 
-## 运行
+### 运行
 
-- 运行 scripts 下的 `cmake_generate_2022`生成项目
-- 用 Visual Studio 22打开 ToolEngine.sln
-- 设 client 为启动项目，运行
+1. 运行 scripts 下的 `cmake_generate_2022`生成项目
+
+2. 用 Visual Studio 22打开 ToolEngine.sln
+
+3. 设 client 为启动项目，运行
+
+## Clion
+
+1. Clion打开engine文件夹
+2. ToolChains使用Visual Studio 22
 
 ## 宏伟蓝图
 
