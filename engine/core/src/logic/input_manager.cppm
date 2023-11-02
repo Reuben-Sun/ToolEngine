@@ -17,12 +17,18 @@ namespace ToolEngine
 	{
 		m_input_command_buffer.push(input_command);
 	}
-	void InputManager::tick()
-	{
-		if (!m_input_command_buffer.empty())
-		{
-			InputCommand current_command = m_input_command_buffer.front();
-			m_input_command_buffer.pop();
-		}
-	}
+
+    InputCommand InputManager::pop()
+    {
+        InputCommand current_command {
+            CommandType::NONE,
+            ""
+        };
+        if(!m_input_command_buffer.empty())
+        {
+            current_command = m_input_command_buffer.front();
+            m_input_command_buffer.pop();
+        }
+        return current_command;
+    }
 }

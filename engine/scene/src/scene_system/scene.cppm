@@ -1,3 +1,4 @@
+#include "include/common/macro.h"
 #include <glm/glm.hpp>
 import Scene;
 import Global_Context;
@@ -44,7 +45,11 @@ namespace ToolEngine
 
 	void Scene::tick() 
 	{
-		g_global_context.m_input_manager->tick();
+		auto command = g_global_context.m_input_manager->pop();
+        if(command.type != CommandType::NONE)
+        {
+            LOG_INFO("command: {}", command.detail);
+        }
 	}
 	RenderScene& Scene::getRenderScene()
 	{

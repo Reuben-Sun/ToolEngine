@@ -83,31 +83,31 @@ namespace ToolEngine
         {
             if (key == GLFW_KEY_W)
             {
-                g_global_context.m_input_manager->push(InputCommand{0, "Key W"});
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key W"});
             }
             else if (key == GLFW_KEY_S)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key S" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key S" });
 			}
             else if (key == GLFW_KEY_A)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key A" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key A" });
 			}
             else if (key == GLFW_KEY_D)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key D" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key D" });
 			}
             else if (key == GLFW_KEY_Q)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key Q" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key Q" });
 			}
             else if (key == GLFW_KEY_E)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key E" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key E" });
 			}
             else if (key == GLFW_KEY_ESCAPE)
             {
-				g_global_context.m_input_manager->push(InputCommand{ 0, "Key ESCAPE" });
+				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key ESCAPE" });
 			}
         }
     }
@@ -117,22 +117,22 @@ namespace ToolEngine
         {
             if (action == GLFW_PRESS) 
             {
-                g_global_context.m_input_manager->push(InputCommand{ 1, "Left Mouse Down" });
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Left Mouse Down" });
             }
             else if (action == GLFW_RELEASE) 
             {
-                g_global_context.m_input_manager->push(InputCommand{ 1, "Left Mouse Up" });
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Left Mouse Up" });
             }
         }
         else if (button == GLFW_MOUSE_BUTTON_RIGHT)
         {
             if (action == GLFW_PRESS)
             {
-                g_global_context.m_input_manager->push(InputCommand{ 1, "Right Mouse Down" });
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Right Mouse Down" });
             }
             else if (action == GLFW_RELEASE)
             {
-                g_global_context.m_input_manager->push(InputCommand{ 1, "Right Mouse Up" });
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Right Mouse Up" });
             }
         }
     }

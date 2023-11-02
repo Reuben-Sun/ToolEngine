@@ -5,9 +5,15 @@ import <iostream>;
 
 namespace ToolEngine
 {
+    export enum class CommandType
+    {
+        NONE = 0,
+        MOVE = 1,
+        CLICK = 2
+    };
 	export struct InputCommand
 	{
-		int type;
+        CommandType type;
 		std::string detail;
 	};
 	/// <summary>
@@ -21,7 +27,7 @@ namespace ToolEngine
 		~InputManager();
 
 		void push(InputCommand input_command);
-		void tick();
+		InputCommand pop();
 	private:
 		std::queue<InputCommand> m_input_command_buffer;
 	};
