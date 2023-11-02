@@ -23,6 +23,7 @@ namespace ToolEngine
 		CommandPool& getCommandPool() const { return *m_command_pool; }
 		Queue& getGraphicsQueue() const;
 		Queue& getPresentQueue() const;
+		QueueFamilyIndices getQueueFamilyIndices() const { return m_queue_family_indices; }
 
 		void present(VkSemaphore* wait_semaphores, uint32_t image_index, VkSwapchainKHR* swap_chains);
 		// request fence from fence pool
@@ -33,6 +34,7 @@ namespace ToolEngine
 		std::unique_ptr<Queue> m_graphics_queue;
 		std::unique_ptr<Queue> m_present_queue;
 		std::unique_ptr<CommandPool> m_command_pool;
+		QueueFamilyIndices m_queue_family_indices;
 		// fence pool
 	};
 }

@@ -16,6 +16,9 @@ import SwapChain;
 import RenderPass;
 import PhysicalDevice;
 import Device;
+import RenderScene;
+import GLFW_Window;
+import DepthResources;
 import <memory>;
 
 namespace ToolEngine

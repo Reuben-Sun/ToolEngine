@@ -15,13 +15,13 @@ namespace ToolEngine
 {
     Device::Device(Instance& instance, PhysicalDevice& physical_device, VkSurfaceKHR& surface)
     {
-        QueueFamilyIndices indices = QueueFamilyIndices::getQueueFamilyIndices(physical_device.getHandle(), surface);
+        m_queue_family_indices = QueueFamilyIndices::getQueueFamilyIndices(physical_device.getHandle(), surface);
 
         std::vector<VkDeviceQueueCreateInfo> queue_create_infos;
         std::set<uint32_t> unique_queue_families =
         {
-            indices.graphics_family.value(),
-            indices.present_family.value()
+            m_queue_family_indices.graphics_family.value(),
+            m_queue_family_indices.present_family.value()
         };
         float queuePriority = 1.0f;
         for (uint32_t queue_family_index : unique_queue_families)
@@ -60,12 +60,12 @@ namespace ToolEngine
             LOG_ERROR("failed to create logical device!");
         }
 
-        VkBool32 present_supported = physical_device.checkPresentSupported(surface, indices.graphics_family.value());
-        m_graphics_queue = std::make_unique<Queue>(m_device, indices.graphics_family.value(), present_supported, 0);
-        present_supported = physical_device.checkPresentSupported(surface, indices.present_family.value());
-        m_present_queue = std::make_unique<Queue>(m_device, indices.present_family.value(), present_supported, 0);
+        VkBool32 present_supported = physical_device.checkPresentSupported(surface, m_queue_family_indices.graphics_family.value());
+        m_graphics_queue = std::make_unique<Queue>(m_device, m_queue_family_indices.graphics_family.value(), present_supported, 0);
+        present_supported = physical_device.checkPresentSupported(surface, m_queue_family_indices.present_family.value());
+        m_present_queue = std::make_unique<Queue>(m_device, m_queue_family_indices.present_family.value(), present_supported, 0);
 
-        m_command_pool = std::make_unique<CommandPool>(m_device, indices.graphics_family.value());
+        m_command_pool = std::make_unique<CommandPool>(m_device, m_queue_family_indices.graphics_family.value());
     }
 
     Device::~Device()
