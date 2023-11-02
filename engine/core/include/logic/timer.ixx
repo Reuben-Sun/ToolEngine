@@ -1,6 +1,5 @@
+#include <chrono>
 export module Timer;
-
-import <chrono>;
 
 namespace ToolEngine
 {
@@ -14,8 +13,9 @@ namespace ToolEngine
 		static float DeltaTime();
 
 		static float CurrentTime();
-	private:
+
 		static std::chrono::time_point<std::chrono::high_resolution_clock> last_time;
 		static float delta_time;
 	};
+    float Timer::delta_time = 0.0f;
 }

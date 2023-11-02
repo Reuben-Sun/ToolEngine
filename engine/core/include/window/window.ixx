@@ -23,7 +23,7 @@ namespace ToolEngine
 			Extent extent = { 1280, 720 };
 		};
 
-		Window(const Properties &properties);
+		Window(const Window::Properties &properties);
 		virtual ~Window() = default;
 		virtual VkSurfaceKHR createSurface(Instance &instance) = 0;
 		virtual bool shouldClose() = 0;
@@ -33,7 +33,7 @@ namespace ToolEngine
 		const Extent& getExtent() const { return m_properties.extent; }
 		virtual Extent resize() = 0;
 	protected:
-		Properties m_properties;
+        Window::Properties m_properties;
 	};
 
 }

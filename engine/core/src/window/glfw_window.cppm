@@ -9,10 +9,12 @@ import <vector>;
 
 import GLFW_Window;
 import Global_Context;
+import Instance;
+import InputManager;
 
 namespace ToolEngine
 {
-    GlfwWindow::GlfwWindow(Properties& properties): Window(properties), m_properties(properties)
+    GlfwWindow::GlfwWindow(Window::Properties& properties): Window(properties), m_properties(properties)
     {
         if (!glfwInit())
         {

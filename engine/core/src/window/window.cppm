@@ -2,7 +2,7 @@ import Window;
 
 namespace ToolEngine
 {
-	Window::Window(const Properties& properties): m_properties(properties)
+	Window::Window(const Window::Properties& properties): m_properties(properties)
 	{
 
 	}

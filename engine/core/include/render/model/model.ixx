@@ -1,8 +1,6 @@
+export module Model;
 import Index;
 import Vertex;
-
-export module Model;
-
 import <vector>;
 
 namespace ToolEngine
