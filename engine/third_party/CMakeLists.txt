@@ -19,30 +19,26 @@ if (NOT TARGET glfw)
 endif()
 
 # imgui
-set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui" )
-set(IMGUI_FILES
-    "${IMGUI_DIR}/imgui.cpp"
-    "${IMGUI_DIR}/imgui_demo.cpp"
-    "${IMGUI_DIR}/imgui_draw.cpp"
-    "${IMGUI_DIR}/imgui_tables.cpp"
-    "${IMGUI_DIR}/imgui_widgets.cpp"
-    "${IMGUI_DIR}/imconfig.h"
-    "${IMGUI_DIR}/imgui.h"
-    "${IMGUI_DIR}/imgui_internal.h"
-    "${IMGUI_DIR}/imstb_rectpack.h"
-    "${IMGUI_DIR}/imstb_textedit.h"
-    "${IMGUI_DIR}/imstb_truetype.h"
-    "${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp")
-
 if (NOT TARGET imgui)
-  add_library(imgui STATIC ${IMGUI_FILES})
+  set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui")
+  set(IMGUI_SOURCES
+          "${IMGUI_DIR}/imgui.cpp"
+          "${IMGUI_DIR}/imgui_demo.cpp"
+          "${IMGUI_DIR}/imgui_draw.cpp"
+          "${IMGUI_DIR}/imgui_tables.cpp"
+          "${IMGUI_DIR}/imgui_widgets.cpp")
+  set(IMGUI_IMPL
+          "${IMGUI_DIR}/backends/imgui_impl_vulkan.h"
+          "${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp"
+          "${IMGUI_DIR}/backends/imgui_impl_glfw.h"
+          "${IMGUI_DIR}/backends/imgui_impl_glfw.cpp")
+  add_library(imgui STATIC ${IMGUI_SOURCES} ${IMGUI_IMPL})
   target_include_directories(imgui PUBLIC ${IMGUI_DIR})
-  target_link_libraries(imgui PUBLIC ${Vulkan_LIBRARIES})
   target_include_directories(imgui PUBLIC ${Vulkan_INCLUDE_DIRS})
+  target_link_libraries(imgui PUBLIC glfw ${Vulkan_LIBRARIES})
   set_property(TARGET imgui PROPERTY FOLDER "ThirdParty")
 endif()
 
-set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui" PARENT_SCOPE)
 
 # tbb
 if(NOT TARGET tbb)
