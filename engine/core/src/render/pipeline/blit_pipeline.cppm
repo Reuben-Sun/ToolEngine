@@ -11,11 +11,14 @@ import SwapChain;
 import Sampler;
 import ShaderModule;
 import Device;
+import PhysicalDevice;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
 import <memory>;
 import <optick.h>;
+import DescriptorSets;
+import RenderResources;
 
 namespace ToolEngine
 {

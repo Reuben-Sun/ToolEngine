@@ -8,6 +8,8 @@ import Instance;
 import PhysicalDevice;
 import SwapChain;
 import RenderPass;
+import ImguiPass;
+import <memory>;
 
 namespace ToolEngine
 {
@@ -26,5 +28,6 @@ namespace ToolEngine
         SwapChain& m_swap_chain;
         RenderPass& m_render_pass;
         VkDescriptorPool m_imgui_desc_pool;
+        std::unique_ptr<ImguiPass> m_imgui_pass;
     };
 }

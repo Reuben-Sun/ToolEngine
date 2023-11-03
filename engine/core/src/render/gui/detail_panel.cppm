@@ -9,12 +9,14 @@ import Instance;
 import PhysicalDevice;
 import RenderPass;
 import <vector>;
+import <memory>;
 
 namespace ToolEngine
 {
     DetailPanel::DetailPanel(Device& device, Instance& instance, PhysicalDevice& physical_device, SwapChain& swap_chain, RenderPass& render_pass)
         : m_device(device), m_instance(instance), m_physical_device(physical_device), m_swap_chain(swap_chain), m_render_pass(render_pass)
     {
+        //m_imgui_pass = std::make_unique<ImguiPass>(m_device, m_physical_device);
     }
 
     DetailPanel::~DetailPanel()

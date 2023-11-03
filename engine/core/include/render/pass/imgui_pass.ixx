@@ -1,6 +1,14 @@
 export module ImguiPass;
+import RenderPass;
+import PhysicalDevice;
+import Device;
 
 namespace ToolEngine
 {
-	// use this pass to render imgui
+	export class ImguiPass : RenderPass
+	{
+	public:
+		ImguiPass(Device& device, PhysicalDevice& physical_device, VkFormat format);
+		~ImguiPass();
+	};
 }
