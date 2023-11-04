@@ -9,7 +9,9 @@ namespace ToolEngine
     {
         NONE = 0,
         MOVE = 1,
-        CLICK = 2
+		END_MOVE = 2,
+        CLICK = 3,
+		DRAG = 4
     };
 	export struct InputCommand
 	{

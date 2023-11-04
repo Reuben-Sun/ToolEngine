@@ -78,12 +78,13 @@ namespace ToolEngine
 		glm::vec3 forward = 
 		{
 			sin(rotation.y),
-			sin(rotation.x) * cos(rotation.z),
+			-sin(rotation.x) * cos(rotation.z),
 			cos(rotation.y)
 		};
 		return forward;
 	}
 
+	// MARK: right maybe error
 	glm::vec3 Transform::getRight()
 	{
 		glm::vec3 forward = getForward();

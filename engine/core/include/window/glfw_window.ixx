@@ -30,6 +30,11 @@ namespace ToolEngine
 		static void onErrorCallback(int error_code, const char* description);
 		static void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 		static void onMouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+		static void onCursorPosCallback(GLFWwindow* window, double xpos, double ypos);
+		static bool m_dragging;
+		static double m_last_x;
+		static double m_last_y;
+		static double m_drag_threshold;
 	private:
 		GLFWwindow* m_window = nullptr;
         Window::Properties& m_properties;

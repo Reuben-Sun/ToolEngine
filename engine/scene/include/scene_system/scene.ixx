@@ -3,6 +3,8 @@ export module Scene;
 import Global_Context;
 import RenderScene;
 import GltfLoader;
+import CameraManager;
+import <memory>;
 
 namespace ToolEngine
 {
@@ -16,8 +18,6 @@ namespace ToolEngine
 		RenderScene& getRenderScene();
 	private:
 		RenderScene m_render_scene;
-		// camera
-		// std::vector<Light> 
-		// std::vector<Model> 
+		std::unique_ptr<CameraManager> m_camera_manager;
 	};
 }
