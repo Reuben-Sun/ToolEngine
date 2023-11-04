@@ -79,7 +79,7 @@ namespace ToolEngine
     }
     void GlfwWindow::onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
-        if (action == GLFW_PRESS || action == GLFW_REPEAT)
+        if (action == GLFW_PRESS)
         {
             if (key == GLFW_KEY_W)
             {
@@ -109,6 +109,37 @@ namespace ToolEngine
             {
 				g_global_context.m_input_manager->push(InputCommand{ CommandType::MOVE, "Key ESCAPE" });
 			}
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            if (key == GLFW_KEY_W)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key W" });
+            }
+            else if (key == GLFW_KEY_S)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key S" });
+            }
+            else if (key == GLFW_KEY_A)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key A" });
+            }
+            else if (key == GLFW_KEY_D)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key D" });
+            }
+            else if (key == GLFW_KEY_Q)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key Q" });
+            }
+            else if (key == GLFW_KEY_E)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key E" });
+            }
+            else if (key == GLFW_KEY_ESCAPE)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::END_MOVE, "Key ESCAPE" });
+            }
         }
     }
     void GlfwWindow::onMouseButtonCallback(GLFWwindow* window, int button, int action, int mods)

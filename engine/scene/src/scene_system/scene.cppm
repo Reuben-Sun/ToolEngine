@@ -51,14 +51,49 @@ namespace ToolEngine
 		float delta_time = Timer::DeltaTime();
 		
 		auto command = g_global_context.m_input_manager->pop();
-        if(command.type != CommandType::NONE)
-        {
-            LOG_INFO("command: {}", command.detail);
+		if (command.type != CommandType::NONE)
+		{
+			LOG_INFO("command: {}", command.detail);
 			if (command.type == CommandType::MOVE)
 			{
-				m_camera_manager->tick(delta_time, command);
+				if (command.detail == "Key W")
+				{
+					m_camera_manager->m_move_state.forward_count++;
+				}
+				else if (command.detail == "Key S")
+				{
+					m_camera_manager->m_move_state.forward_count--;
+				}
+				else if (command.detail == "Key A")
+				{
+					m_camera_manager->m_move_state.right_count--;
+				}
+				else if (command.detail == "Key D")
+				{
+					m_camera_manager->m_move_state.right_count++;
+				}
 			}
-        }
+			else if (command.type == CommandType::END_MOVE)
+			{
+				if (command.detail == "Key W")
+				{
+					m_camera_manager->m_move_state.forward_count--;
+				}
+				else if (command.detail == "Key S")
+				{
+					m_camera_manager->m_move_state.forward_count++;
+				}
+				else if (command.detail == "Key A")
+				{
+					m_camera_manager->m_move_state.right_count++;
+				}
+				else if (command.detail == "Key D")
+				{
+					m_camera_manager->m_move_state.right_count--;
+				}
+			}
+		}
+		m_camera_manager->tick(delta_time);
 	}
 	RenderScene& Scene::getRenderScene()
 	{

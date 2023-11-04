@@ -1,12 +1,12 @@
 #include <glm/glm.hpp>
 import CameraManager;
-import InputManager;
 import <string>;
 
 namespace ToolEngine
 {
 	CameraManager::CameraManager()
 	{
+		m_move_state = { .forward_count = 0, .right_count = 0 };
 		m_camera.transform.position = glm::vec3(0.0f, 0.0f, 5.0f);
 		m_camera.transform.rotation = glm::vec3(glm::radians(0.0f), glm::radians(0.0f), 0.0f);
 		m_camera.transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -21,15 +21,15 @@ namespace ToolEngine
 	CameraManager::~CameraManager()
 	{
 	}
-	void CameraManager::tick(float delta_time, InputCommand command)
+	void CameraManager::tick(float delta_time)
 	{
-		if (command.detail == "Key W")
+		if(m_move_state.forward_count != 0)
 		{
-			m_camera.transform.position.z -= m_camera_speed * delta_time;
+			m_camera.transform.position.z -= m_camera_speed * delta_time * m_move_state.forward_count;
 		}
-		else if (command.detail == "Key S")
+		if(m_move_state.right_count != 0)
 		{
-			m_camera.transform.position.z += m_camera_speed * delta_time;
+			m_camera.transform.position.x += m_camera_speed * delta_time * m_move_state.right_count;
 		}
 	}
 	RenderCamera& CameraManager::getRenderCamera()
