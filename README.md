@@ -21,7 +21,9 @@ git lfs pull
 - 需要 Vulkan
 - 需要cmake 3.21以上的版本（`.ixx`和`.cppm`支持）
 - 仅支持MSVC（使用了C++20 Modules）
-- 需要Visual Studio 2022 17.5即以上版本，且安装**适用于v143生成工具的C++模块（x64/x86 - 实验性）**
+- 需要Visual Studio 2022 17.7.5及以上版本，且安装**适用于v143生成工具的C++模块（x64/x86 - 实验性）**
+
+> Visual Studio 2022 17.7.5修复了大量modules相关bug
 
 ### 运行
 
