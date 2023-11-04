@@ -6,8 +6,11 @@ namespace ToolEngine
 	// TODO: make a behaviour tree
 	export struct CameraMoveState
 	{
-		int forward_count;
-		int right_count;
+		int forward_count = 0;
+		int right_count = 0;
+		bool dragging = false;
+		double delta_x = 0.0;
+		double delta_y = 0.0;
 	};
 
 	export class CameraManager

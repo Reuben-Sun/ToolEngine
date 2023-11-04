@@ -15,6 +15,7 @@ import Timer;
 import <string>;
 import <memory>;
 import <vector>;
+import <regex>;
 
 namespace ToolEngine
 {
@@ -53,7 +54,6 @@ namespace ToolEngine
 		auto command = g_global_context.m_input_manager->pop();
 		if (command.type != CommandType::NONE)
 		{
-			LOG_INFO("command: {}", command.detail);
 			if (command.type == CommandType::MOVE)
 			{
 				if (command.detail == "Key W")
@@ -72,6 +72,7 @@ namespace ToolEngine
 				{
 					m_camera_manager->m_move_state.right_count++;
 				}
+				LOG_INFO("command: {}", command.detail);
 			}
 			else if (command.type == CommandType::END_MOVE)
 			{
@@ -91,6 +92,38 @@ namespace ToolEngine
 				{
 					m_camera_manager->m_move_state.right_count--;
 				}
+			}
+			if (command.type == CommandType::CLICK)
+			{
+				LOG_INFO("command: {}", command.detail);
+				if(command.detail == "Left Mouse Down")
+				{
+					m_camera_manager->m_move_state.dragging = true;
+				}
+				else if (command.detail == "Left Mouse Up")
+				{
+					m_camera_manager->m_move_state.dragging = false;
+				}
+			}
+			if (m_camera_manager->m_move_state.dragging)
+			{
+				if (command.type == CommandType::DRAG)
+				{
+					std::regex pattern("x:([-]?\\d+) y:([-]?\\d+)");
+					std::smatch match;
+					if (std::regex_search(command.detail, match, pattern))
+					{
+						double x = std::stof(match[1].str());
+						double y = std::stof(match[2].str());
+						m_camera_manager->m_move_state.delta_x = x;
+						m_camera_manager->m_move_state.delta_y = y;
+					}
+				}
+			}
+			else 
+			{
+				m_camera_manager->m_move_state.delta_x = 0;
+				m_camera_manager->m_move_state.delta_y = 0;
 			}
 		}
 		m_camera_manager->tick(delta_time);

@@ -6,6 +6,8 @@
 import <iostream>;
 import <string>;
 import <vector>;
+import <format>;
+import <math.h>;
 
 import GLFW_Window;
 import Global_Context;
@@ -14,6 +16,11 @@ import InputManager;
 
 namespace ToolEngine
 {
+    bool GlfwWindow::m_dragging = false;
+    double GlfwWindow::m_last_x = 0.0;
+    double GlfwWindow::m_last_y = 0.0;
+    double GlfwWindow::m_drag_threshold = 0.00001;
+
     GlfwWindow::GlfwWindow(Window::Properties& properties): Window(properties), m_properties(properties)
     {
         if (!glfwInit())
@@ -25,6 +32,7 @@ namespace ToolEngine
         m_window = glfwCreateWindow(m_properties.extent.width, m_properties.extent.height, m_properties.title.c_str(), nullptr, nullptr);
         glfwSetKeyCallback(m_window, onKeyCallback);
         glfwSetMouseButtonCallback(m_window, onMouseButtonCallback);
+        glfwSetCursorPosCallback(m_window, onCursorPosCallback);
     }
 
     GlfwWindow::~GlfwWindow()
@@ -149,10 +157,13 @@ namespace ToolEngine
             if (action == GLFW_PRESS) 
             {
                 g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Left Mouse Down" });
+                m_dragging = true;
+                glfwGetCursorPos(window, &m_last_x, &m_last_y);
             }
             else if (action == GLFW_RELEASE) 
             {
                 g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Left Mouse Up" });
+                m_dragging = false;
             }
         }
         else if (button == GLFW_MOUSE_BUTTON_RIGHT)
@@ -165,6 +176,21 @@ namespace ToolEngine
             {
                 g_global_context.m_input_manager->push(InputCommand{ CommandType::CLICK, "Right Mouse Up" });
             }
+        }
+    }
+    void GlfwWindow::onCursorPosCallback(GLFWwindow* window, double x_pos, double y_pos)
+    {
+        if (m_dragging)
+        {
+            double x_offset = x_pos - m_last_x;
+            double y_offset = y_pos - m_last_y;
+            m_last_x = x_pos;
+            m_last_y = y_pos;
+            if (abs(x_offset) > m_drag_threshold || abs(y_offset) > m_drag_threshold)
+            {
+                g_global_context.m_input_manager->push(InputCommand{ CommandType::DRAG, std::format("Drag x:{} y:{}", x_offset, y_offset) });
+            }
+            
         }
     }
 }
