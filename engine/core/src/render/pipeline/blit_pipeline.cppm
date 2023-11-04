@@ -230,7 +230,7 @@ namespace ToolEngine
         float time = 1;
         ubo.model_matrix = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         //ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        render_scene.render_camera.transform.rotation.z += 0.001f;
+        //render_scene.render_camera.transform.rotation.z += 0.001f;
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
         m_uniform_buffers[current_image]->updateBuffer(ubo);
