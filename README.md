@@ -19,24 +19,28 @@ git lfs pull
 [![Build Windows](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml/badge.svg)](https://github.com/Reuben-Sun/ToolEngine/actions/workflows/build_windows.yml) 
 
 - 需要 Vulkan
-- 需要cmake 3.21以上的版本（`.ixx`和`.cppm`支持）
-- 仅支持MSVC（使用了C++20 Modules）
+- 需要 cmake 3.21以上的版本
+- 仅支持 MSVC
 - 需要Visual Studio 2022 17.7.5及以上版本，且安装**适用于v143生成工具的C++模块（x64/x86 - 实验性）**
 
-> Visual Studio 2022 17.7.5修复了大量modules相关bug
+> cmake 3.21 支持了`.ixx`和`.cppm`文件，部分编译器无法将 `.cpp`识别为 modules
+>
+> 截止2023年11月，MSVC对 C++20 Modules 支持最好
+>
+> Visual Studio 2022 17.7.5 修复了大量modules相关bug，不然几乎无法正常开发
 
 ### 运行
 
-1. 运行 scripts 下的 `cmake_generate_2022`生成项目
+1. 运行 `cmake_generate_2022.bat` 生成项目
 
-2. 用 Visual Studio 22打开 ToolEngine.sln
+2. 用 Visual Studio 22 打开 build 目录下的 ToolEngine.sln
 
 3. 设 client 为启动项目，运行
 
 ## Clion
 
-1. Clion打开engine文件夹
-2. ToolChains使用Visual Studio 22
+1. Clion打开 engine 文件夹
+2. ToolChains 使用 Visual Studio 22，编译器选用 MSVC
 
 ## 宏伟蓝图
 
