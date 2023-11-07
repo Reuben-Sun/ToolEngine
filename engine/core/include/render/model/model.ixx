@@ -9,5 +9,9 @@ namespace ToolEngine
 	{
 		std::vector<Vertex> vertices;
 		std::vector<Index> indices;
+
+		// material
+		// aabb
+		// transform
 	};
 }

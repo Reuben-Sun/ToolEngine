@@ -72,7 +72,6 @@ namespace ToolEngine
             m_index_buffers[i] = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
             VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
             VkDeviceSize offsets[] = { 0 };
-            //uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
             updateUniformBuffer(frame_index, render_scene);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);

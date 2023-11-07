@@ -19,5 +19,7 @@ namespace ToolEngine
 
 		glm::mat4 getProjectionMatrix();
 		glm::mat4x4 getViewMatrix();
+
+		// frustum
 	};
 }
