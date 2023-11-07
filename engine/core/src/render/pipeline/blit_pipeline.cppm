@@ -26,9 +26,10 @@ namespace ToolEngine
         m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         m_descriptor_pool = std::make_unique<DescriptorPool>(m_device, m_frames_in_flight_count);
         createPipeline();
-        // resource init
-        //m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, VERTEX_BUFFER);
-        //m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, INDEX_BUFFER);
+        
+        m_vertex_buffers = std::vector<std::unique_ptr<VertexBuffer>>{};
+        m_index_buffers = std::vector<std::unique_ptr<IndexBuffer>>{};
+
         m_uniform_buffers.resize(m_frames_in_flight_count);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
@@ -37,7 +38,7 @@ namespace ToolEngine
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat(), VK_IMAGE_ASPECT_COLOR_BIT);
         m_texture_sampler = std::make_unique<Sampler>(m_device, m_physical_device);
-        // resource descriptor
+        
         m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
@@ -83,22 +84,24 @@ namespace ToolEngine
         scissor.extent = m_swap_chain.getExtent();
         command_buffer.setScissor(frame_index, scissor, 0, 1);
 
-        // pass vertex data
-        Model model = render_scene.models[0];
-        m_vertex_buffer = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
-        m_index_buffer = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
-        // m_vertex_buffer->updateBuffer(model.vertices);
-        // m_index_buffer->updateBuffer(model.indices);
-        VkBuffer vertex_buffers[] = { m_vertex_buffer->getHandle() };
-        VkDeviceSize offsets[] = { 0 };
-        uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
-        uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-        updateUniformBuffer(frame_index, render_scene);
-        OPTICK_TAG("VertexCount", vertex_count);
-        command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
-        command_buffer.bindIndexBuffer(frame_index, m_index_buffer->getHandle(), 0, VK_INDEX_TYPE_UINT16);
-        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
-        command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
+        uint32_t vertex_buffer_count = render_scene.models.size();
+        m_vertex_buffers.resize(vertex_buffer_count);
+        m_index_buffers.resize(vertex_buffer_count);
+        for(int i = 0; i < vertex_buffer_count; i++)
+        {
+            Model& model = render_scene.models[i];
+            m_vertex_buffers[i] = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
+            m_index_buffers[i] = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
+            VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
+            VkDeviceSize offsets[] = { 0 };
+            uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
+            uint32_t index_count = static_cast<uint32_t>(model.indices.size());
+            updateUniformBuffer(frame_index, render_scene);
+            command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
+            command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
+            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
+            command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
+        }
 
         command_buffer.endRenderPass(frame_index);
 

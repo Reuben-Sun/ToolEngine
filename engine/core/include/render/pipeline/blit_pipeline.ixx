@@ -54,8 +54,8 @@ namespace ToolEngine
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
 		std::unique_ptr<DescriptorSets> m_descriptor_sets;
 		std::unique_ptr<DescriptorPool> m_descriptor_pool;
-		std::unique_ptr<VertexBuffer> m_vertex_buffer;
-		std::unique_ptr<IndexBuffer> m_index_buffer;
+		std::vector<std::unique_ptr<VertexBuffer>> m_vertex_buffers;
+		std::vector<std::unique_ptr<IndexBuffer>> m_index_buffers;
 		std::vector<std::unique_ptr<UniformBuffer>> m_uniform_buffers;
 		std::unique_ptr<TextureImage> m_texture_image;
 		std::unique_ptr<ImageView> m_texture_image_view;
