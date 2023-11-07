@@ -1,6 +1,7 @@
 export module Model;
 import Index;
 import Vertex;
+import Transform;
 import <vector>;
 
 namespace ToolEngine
@@ -9,9 +10,8 @@ namespace ToolEngine
 	{
 		std::vector<Vertex> vertices;
 		std::vector<Index> indices;
-
+		Transform transform;
 		// material
 		// aabb
-		// transform
 	};
 }

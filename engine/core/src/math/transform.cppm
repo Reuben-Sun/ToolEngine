@@ -73,6 +73,12 @@ namespace ToolEngine
 		return matrix;
 	}
 
+	glm::mat4x4 Transform::getModelMatrix()
+	{
+		glm::mat4x4 matrix = getTranslationMatrix() * getRotationMatrix() * getScaleMatrix();
+		return matrix;
+	}
+
 	glm::vec3 Transform::getForward()
 	{
 		glm::vec3 forward = 

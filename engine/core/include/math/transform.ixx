@@ -24,6 +24,8 @@ namespace ToolEngine
 		glm::mat4x4 getRotationYMatrix();
 		glm::mat4x4 getRotationZMatrix();
 		glm::mat4x4 getRotationMatrix();
+		
+		glm::mat4x4 getModelMatrix();
 
 		glm::vec3 getForward();
 		glm::vec3 getRight();

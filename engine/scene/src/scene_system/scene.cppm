@@ -11,6 +11,7 @@ import RenderCamera;
 import InputManager;
 import AssetManager;
 import CameraManager;
+import Transform;
 import Timer;
 import <string>;
 import <memory>;
@@ -24,9 +25,14 @@ namespace ToolEngine
 		m_camera_manager = std::make_unique<CameraManager>();
 		std::string model_path = g_global_context.m_asset_manager->getModelsPath() + "Cube.gltf";
 		std::unique_ptr<GltfLoader> loader = std::make_unique<GltfLoader>(model_path);
+		Transform transform;
+		transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+		transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+		transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		Model model;
 		model.indices = loader->loaded_index_buffer;
 		model.vertices = loader->loaded_vertex_buffer;
+		model.transform = transform;
 		m_render_scene.models.push_back(model);
 		std::vector<Index> plane_index_buffer = { {0}, {1}, {2}, {2}, {3}, {0} };
 		const std::vector<Vertex> plane_vertex_buffer =
@@ -36,9 +42,14 @@ namespace ToolEngine
 			{{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
 			{{-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f}}
 		};
+		Transform plane_transform;
+		plane_transform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+		plane_transform.rotation = glm::vec3(90.0f, 0.0f, 0.0f);
+		plane_transform.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 		Model plane_model;
 		plane_model.indices = plane_index_buffer;
 		plane_model.vertices = plane_vertex_buffer;
+		plane_model.transform = plane_transform;
 		m_render_scene.models.push_back(plane_model);
 	}
 

@@ -73,7 +73,7 @@ namespace ToolEngine
             VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
             VkDeviceSize offsets[] = { 0 };
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-            updateUniformBuffer(frame_index, render_scene);
+            updateUniformBuffer(frame_index, render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
             command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
@@ -203,14 +203,10 @@ namespace ToolEngine
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, m_state);
     }
 
-    void BlitPipeline::updateUniformBuffer(uint32_t current_image, RenderScene& render_scene)
+    void BlitPipeline::updateUniformBuffer(uint32_t current_image, RenderScene& render_scene, uint32_t model_index)
     {
         UniformBufferObject ubo{};
-        //float time = Timer::CurrentTime();
-        float time = 1;
-        ubo.model_matrix = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        //ubo.view_matrix = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        //render_scene.render_camera.transform.rotation.z += 0.001f;
+        ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
         m_uniform_buffers[current_image]->updateBuffer(ubo);
