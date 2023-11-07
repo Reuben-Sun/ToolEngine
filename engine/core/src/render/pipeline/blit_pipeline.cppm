@@ -54,35 +54,13 @@ namespace ToolEngine
     {
         command_buffer.beginRecord(frame_index);
 
-        VkRenderPassBeginInfo render_pass_info{};
-        render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-        render_pass_info.renderPass = m_forward_pass->getHandle();
-        render_pass_info.framebuffer = frame_buffer.getHandle();
-        render_pass_info.renderArea.offset = { 0, 0 };
-        render_pass_info.renderArea.extent = m_swap_chain.getExtent();
-        std::array<VkClearValue, 2> clear_colors {};
-        clear_colors[0].color = { {0.0f, 0.0f, 0.0f, 1.0f} };
-        clear_colors[1].depthStencil = { 1.0f, 0 };
-        render_pass_info.clearValueCount = static_cast<uint32_t>(clear_colors.size());
-        render_pass_info.pClearValues = clear_colors.data();
-
-        command_buffer.beginRenderPass(frame_index, render_pass_info);
+        command_buffer.beginRenderPass(frame_index, *m_forward_pass, frame_buffer, m_swap_chain.getExtent());
 
         command_buffer.bindPipeline(frame_index, m_pipeline->getHandle());
 
-        VkViewport viewport{};
-        viewport.x = 0.0f;
-        viewport.y = 0.0f;
-        viewport.width = (float)m_swap_chain.getExtent().width;
-        viewport.height = (float)m_swap_chain.getExtent().height;
-        viewport.minDepth = 0.0f;
-        viewport.maxDepth = 1.0f;
-        command_buffer.setViewport(frame_index, viewport, 0, 1);
+        command_buffer.setViewport(frame_index, m_swap_chain.getExtent(), 0.0f, 1.0f, 0, 1);
 
-        VkRect2D scissor{};
-        scissor.offset = { 0, 0 };
-        scissor.extent = m_swap_chain.getExtent();
-        command_buffer.setScissor(frame_index, scissor, 0, 1);
+        command_buffer.setScissor(frame_index, m_swap_chain.getExtent(), 0, 1);
 
         uint32_t vertex_buffer_count = render_scene.models.size();
         m_vertex_buffers.resize(vertex_buffer_count);
@@ -94,7 +72,7 @@ namespace ToolEngine
             m_index_buffers[i] = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
             VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
             VkDeviceSize offsets[] = { 0 };
-            uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
+            //uint32_t vertex_count = static_cast<uint32_t>(model.vertices.size());
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
             updateUniformBuffer(frame_index, render_scene);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
