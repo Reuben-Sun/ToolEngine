@@ -76,6 +76,7 @@ namespace ToolEngine
             updateUniformBuffer(frame_index, render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
+            // TODO: each draw call have a descriptor sets
             command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
