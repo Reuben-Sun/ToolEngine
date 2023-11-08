@@ -4,6 +4,7 @@ import CommandBuffer;
 import Device;
 import RenderPass;
 import FrameBuffer;
+import DebugUtils;
 import <optick.h>;
 import <array>;
 
@@ -75,6 +76,7 @@ namespace ToolEngine
 	void CommandBuffer::beginRenderPass(uint32_t current_frame, RenderPass& render_pass, FrameBuffer& frame_buffer, VkExtent2D extent)
 	{
 		OPTICK_EVENT();
+		DebugUtils::beginDebugUtilsLabelEXT(m_command_buffers[current_frame], "forward");
 		VkRenderPassBeginInfo render_pass_info{};
 		render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 		render_pass_info.renderPass = render_pass.getHandle();
@@ -92,6 +94,7 @@ namespace ToolEngine
 	{
 		OPTICK_EVENT();
 		vkCmdEndRenderPass(m_command_buffers[current_frame]);
+		DebugUtils::endDebugUtilsLabelEXT(m_command_buffers[current_frame]);
 	}
 	void CommandBuffer::bindPipeline(uint32_t current_frame, VkPipeline pipeline)
 	{

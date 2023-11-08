@@ -1,6 +1,7 @@
 #include <vulkan/vulkan.h>
 
 export module DebugUtils;
+import <string>;
 
 namespace ToolEngine
 {
@@ -13,6 +14,8 @@ namespace ToolEngine
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 
-		// TODO: vkCmdBeginDebugUtilsLabelEXT and vkCmdEndDebugUtilsLabelEXT
+		static void beginDebugUtilsLabelEXT(VkCommandBuffer cmd, std::string label);
+
+		static void endDebugUtilsLabelEXT(VkCommandBuffer cmd);
 	};
 }

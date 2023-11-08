@@ -64,7 +64,9 @@ namespace ToolEngine
     {
         uint32_t glfw_extension_count { 0 };
         const char** glfw_extensions { glfwGetRequiredInstanceExtensions(&glfw_extension_count) };
-        return { glfw_extensions, glfw_extensions + glfw_extension_count };
+        std::vector<const char*> extensions(glfw_extensions, glfw_extensions + glfw_extension_count);
+        //const char* enabledExtensions[] = { VK_EXT_DEBUG_UTILS_EXTENSION_NAME };
+        return extensions;
     }
 
     GlfwWindow::Extent GlfwWindow::resize()

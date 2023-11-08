@@ -1,6 +1,7 @@
 #include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 import DebugUtils;
+import <string>;
 
 namespace ToolEngine
 {
@@ -30,5 +31,16 @@ namespace ToolEngine
     {
         LOG_INFO("Vulkan validation layer: {}", callback_data->pMessage);
         return VK_FALSE;
+    }
+    void DebugUtils::beginDebugUtilsLabelEXT(VkCommandBuffer cmd, std::string label)
+    {
+        //VkDebugUtilsLabelEXT label_info = {};
+        //label_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
+        //label_info.pLabelName = label.c_str();
+        //vkCmdBeginDebugUtilsLabelEXT(cmd, &label_info);
+    }
+    void DebugUtils::endDebugUtilsLabelEXT(VkCommandBuffer cmd)
+    {
+        //vkCmdEndDebugUtilsLabelEXT(cmd);
     }
 }
