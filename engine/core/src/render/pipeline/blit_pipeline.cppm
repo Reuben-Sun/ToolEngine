@@ -30,17 +30,12 @@ namespace ToolEngine
         
         m_vertex_buffers = std::vector<std::unique_ptr<VertexBuffer>>{};
         m_index_buffers = std::vector<std::unique_ptr<IndexBuffer>>{};
-
-        m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+        m_uniform_buffers = std::vector<std::unique_ptr<UniformBuffer>>{};
+        //m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
-        
-        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool);
-        for (int i = 0; i < m_frames_in_flight_count; ++i)
-        {
-            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image);
-        }
-        
+        m_descriptor_sets = std::vector<std::unique_ptr<DescriptorSets>>{};
+        //m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, *m_uniform_buffer, *m_texture_image);        
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -61,19 +56,24 @@ namespace ToolEngine
         uint32_t vertex_buffer_count = render_scene.models.size();
         m_vertex_buffers.resize(vertex_buffer_count);
         m_index_buffers.resize(vertex_buffer_count);
+        m_uniform_buffers.resize(vertex_buffer_count);
+        m_descriptor_sets.resize(vertex_buffer_count);
         for(int i = 0; i < vertex_buffer_count; i++)
         {
             Model& model = render_scene.models[i];
             m_vertex_buffers[i] = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
             m_index_buffers[i] = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
+            m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+            updateUniformBuffer(render_scene, i);
+            m_descriptor_sets[i] = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, *m_uniform_buffers[i], *m_texture_image);
             VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
             VkDeviceSize offsets[] = { 0 };
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-            updateUniformBuffer(render_scene, i);
+            
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
             // TODO: each draw call have a descriptor sets
-            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
+            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets[i]->getHandlePtr(), 0, 1);
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
 
@@ -206,6 +206,6 @@ namespace ToolEngine
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
-        m_uniform_buffer->updateBuffer(ubo);
+        m_uniform_buffers[model_index]->updateBuffer(ubo);
     }
 }

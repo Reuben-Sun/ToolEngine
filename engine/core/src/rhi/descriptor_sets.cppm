@@ -11,7 +11,7 @@ import <vector>;
 
 namespace ToolEngine
 {
-    DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool)
+    DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, UniformBuffer& ubo_buffer, TextureImage& texture_image)
         : m_device(device), m_descriptor_set_layout(descriptor_set_layout), m_descriptor_pool(descriptor_pool)
     {
         VkDescriptorSetAllocateInfo alloc_info{};
@@ -24,14 +24,9 @@ namespace ToolEngine
         {
             LOG_ERROR("failed to allocate descriptor sets!");
         }
-    }
-    DescriptorSets::~DescriptorSets()
-    {
-    }
-    void DescriptorSets::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image)
-    {
+
         std::array<VkWriteDescriptorSet, 2> descriptor_writes{};
-        
+
         descriptor_writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
         descriptor_writes[0].dstSet = m_descriptor_set;
         descriptor_writes[0].dstBinding = 0;
@@ -50,5 +45,8 @@ namespace ToolEngine
 
         uint32_t descriptor_write_count = static_cast<uint32_t>(descriptor_writes.size());
         vkUpdateDescriptorSets(m_device.getHandle(), descriptor_write_count, descriptor_writes.data(), 0, nullptr);
+    }
+    DescriptorSets::~DescriptorSets()
+    {
     }
 }
