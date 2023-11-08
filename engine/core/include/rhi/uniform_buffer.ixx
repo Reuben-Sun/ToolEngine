@@ -23,9 +23,14 @@ namespace ToolEngine
 		virtual ~UniformBuffer();
 		void updateBuffer(UniformBufferObject ubo);
 		VkBuffer getHandle() const { return m_buffer; }
+		VkDescriptorBufferInfo getDescriptor() const
+		{
+			return m_descriptor;
+		};
 	private:
 		VkBuffer m_buffer;
 		VkDeviceMemory m_memory;
 		void* m_uniform_buffer_mapped;
+		VkDescriptorBufferInfo m_descriptor;
 	};
 }

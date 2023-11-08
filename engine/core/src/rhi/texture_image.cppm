@@ -7,6 +7,8 @@ import SingleTimeCommandBuffer;
 import PhysicalDevice;
 import BufferUtils;
 import Device;
+import ImageView;
+import Sampler;
 
 namespace ToolEngine
 {
@@ -42,6 +44,9 @@ namespace ToolEngine
 		// destroy stage buffer
 		vkDestroyBuffer(m_device.getHandle(), staging_buffer, nullptr);
 		vkFreeMemory(m_device.getHandle(), staging_buffer_memory, nullptr);
+
+		m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat(), VK_IMAGE_ASPECT_COLOR_BIT);
+		m_texture_sampler = std::make_unique<Sampler>(m_device, m_physical_device);
 	}
 	TextureImage::~TextureImage()
 	{
