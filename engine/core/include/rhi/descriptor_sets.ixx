@@ -14,15 +14,14 @@ namespace ToolEngine
 	export class DescriptorSets
 	{
 	public:
-		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, uint32_t frames_in_flight_count);
+		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool);
 		~DescriptorSets();
-		void updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image, uint32_t frames_in_flight_index);
-		VkDescriptorSet* getHandlePtr(uint32_t frames_index) { return &m_descriptor_sets[frames_index]; }
+		void updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image);
+		VkDescriptorSet* getHandlePtr(uint32_t frames_index) { return &m_descriptor_set; }
 	private:
-		std::vector<VkDescriptorSet> m_descriptor_sets;
+		VkDescriptorSet m_descriptor_set;
 		Device& m_device;
 		DescriptorSetLayout& m_descriptor_set_layout;
 		DescriptorPool& m_descriptor_pool;
-		uint32_t m_frames_in_flight_count;
 	};
 }

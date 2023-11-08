@@ -11,6 +11,7 @@ import SwapChain;
 import Sampler;
 import ShaderModule;
 import Device;
+import Vertex;
 import <glm/glm.hpp>;
 import <glm/gtc/matrix_transform.hpp>;
 import <array>;
@@ -34,10 +35,10 @@ namespace ToolEngine
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
+        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
-            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image, i);
+            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image);
         }
         
 	}

@@ -11,18 +11,16 @@ import <vector>;
 
 namespace ToolEngine
 {
-    DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool, uint32_t frames_in_flight_count)
-        : m_device(device), m_descriptor_set_layout(descriptor_set_layout), m_descriptor_pool(descriptor_pool), m_frames_in_flight_count(frames_in_flight_count)
+    DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool)
+        : m_device(device), m_descriptor_set_layout(descriptor_set_layout), m_descriptor_pool(descriptor_pool)
     {
-        std::vector<VkDescriptorSetLayout> layouts(m_frames_in_flight_count, m_descriptor_set_layout.getHandle());
         VkDescriptorSetAllocateInfo alloc_info{};
         alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
         alloc_info.descriptorPool = m_descriptor_pool.getHandle();
-        alloc_info.descriptorSetCount = static_cast<uint32_t>(m_frames_in_flight_count);
-        alloc_info.pSetLayouts = layouts.data();
+        alloc_info.descriptorSetCount = 1;
+        alloc_info.pSetLayouts = m_descriptor_set_layout.getHandlePtr();
 
-        m_descriptor_sets.resize(m_frames_in_flight_count);
-        if (vkAllocateDescriptorSets(m_device.getHandle(), &alloc_info, m_descriptor_sets.data()) != VK_SUCCESS) 
+        if (vkAllocateDescriptorSets(m_device.getHandle(), &alloc_info, &m_descriptor_set) != VK_SUCCESS) 
         {
             LOG_ERROR("failed to allocate descriptor sets!");
         }
@@ -30,12 +28,12 @@ namespace ToolEngine
     DescriptorSets::~DescriptorSets()
     {
     }
-    void DescriptorSets::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image, uint32_t frames_in_flight_index)
+    void DescriptorSets::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image)
     {
         std::array<VkWriteDescriptorSet, 2> descriptor_writes{};
         
         descriptor_writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-        descriptor_writes[0].dstSet = m_descriptor_sets[frames_in_flight_index];
+        descriptor_writes[0].dstSet = m_descriptor_set;
         descriptor_writes[0].dstBinding = 0;
         descriptor_writes[0].dstArrayElement = 0;
         descriptor_writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -43,7 +41,7 @@ namespace ToolEngine
         descriptor_writes[0].pBufferInfo = ubo_buffer.getDescriptor();
 
         descriptor_writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-        descriptor_writes[1].dstSet = m_descriptor_sets[frames_in_flight_index];
+        descriptor_writes[1].dstSet = m_descriptor_set;
         descriptor_writes[1].dstBinding = 1;
         descriptor_writes[1].dstArrayElement = 0;
         descriptor_writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
