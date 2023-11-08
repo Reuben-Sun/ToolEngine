@@ -30,17 +30,14 @@ namespace ToolEngine
         m_vertex_buffers = std::vector<std::unique_ptr<VertexBuffer>>{};
         m_index_buffers = std::vector<std::unique_ptr<IndexBuffer>>{};
 
-        m_uniform_buffers.resize(m_frames_in_flight_count);
-        for (int i = 0; i < m_frames_in_flight_count; ++i)
-        {
-            m_uniform_buffers[i] = std::make_unique<UniformBuffer>(m_device, m_physical_device);
-        }
+        m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
         m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
-            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffers[i], *m_texture_image, i);
+            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image, i);
         }
         
 	}
@@ -208,6 +205,6 @@ namespace ToolEngine
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
-        m_uniform_buffers[current_image]->updateBuffer(ubo);
+        m_uniform_buffer->updateBuffer(ubo);
     }
 }
