@@ -68,7 +68,7 @@ namespace ToolEngine
             VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
             VkDeviceSize offsets[] = { 0 };
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-            updateUniformBuffer(frame_index, render_scene, i);
+            updateUniformBuffer(render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
             // TODO: each draw call have a descriptor sets
@@ -199,7 +199,7 @@ namespace ToolEngine
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, m_state);
     }
 
-    void BlitPipeline::updateUniformBuffer(uint32_t current_image, RenderScene& render_scene, uint32_t model_index)
+    void BlitPipeline::updateUniformBuffer(RenderScene& render_scene, uint32_t model_index)
     {
         UniformBufferObject ubo{};
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();

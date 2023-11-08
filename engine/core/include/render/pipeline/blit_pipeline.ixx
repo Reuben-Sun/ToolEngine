@@ -63,6 +63,6 @@ namespace ToolEngine
 		SwapChain& m_swap_chain;
 
 		void createPipeline();
-		void updateUniformBuffer(uint32_t current_image, RenderScene& render_scene, uint32_t model_index);
+		void updateUniformBuffer(RenderScene& render_scene, uint32_t model_index);
 	};
 }
