@@ -5,11 +5,12 @@
 import TextureImage;
 import SingleTimeCommandBuffer;
 import PhysicalDevice;
+import BufferUtils;
 import Device;
 
 namespace ToolEngine
 {
-	TextureImage::TextureImage(Device& device, PhysicalDevice& physical_device, std::string file_path): Buffer(device, physical_device)
+	TextureImage::TextureImage(Device& device, PhysicalDevice& physical_device, std::string file_path): m_device(device), m_physical_device(physical_device)
 	{
 		// stb load image
 		int texture_width, texture_height, texture_channels;
@@ -23,7 +24,7 @@ namespace ToolEngine
 		VkDeviceSize image_buffer_size = texture_width * texture_height * 4;
 		VkBuffer staging_buffer;
 		VkDeviceMemory staging_buffer_memory;
-		createBuffer(image_buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, staging_buffer, staging_buffer_memory);
+		BufferUtils::createBuffer(device, physical_device, image_buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, staging_buffer, staging_buffer_memory);
 		void* data;
 		vkMapMemory(m_device.getHandle(), staging_buffer_memory, 0, image_buffer_size, 0, &data);
 		memcpy(data, pixels, static_cast<size_t>(image_buffer_size));

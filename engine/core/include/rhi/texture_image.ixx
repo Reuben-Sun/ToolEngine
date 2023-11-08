@@ -13,7 +13,7 @@ import <memory>;
 
 namespace ToolEngine
 {
-	export class TextureImage : Buffer
+	export class TextureImage
 	{
 	public:
 		TextureImage(Device& device, PhysicalDevice& physical_device, std::string file_path);
@@ -23,7 +23,8 @@ namespace ToolEngine
 
 	private:
 		std::unique_ptr<Image> m_texture_image;
-
+		Device& m_device;
+		PhysicalDevice& m_physical_device;
 		void createImageFormBuffer(VkBuffer buffer, uint32_t width, uint32_t height);
 	};
 }
