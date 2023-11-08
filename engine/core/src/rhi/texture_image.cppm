@@ -9,6 +9,8 @@ import BufferUtils;
 import Device;
 import ImageView;
 import Sampler;
+import <string>;
+import <memory>;
 
 namespace ToolEngine
 {
@@ -47,6 +49,10 @@ namespace ToolEngine
 
 		m_texture_image_view = std::make_unique<ImageView>(m_device, m_texture_image->getHandle(), m_texture_image->getFormat(), VK_IMAGE_ASPECT_COLOR_BIT);
 		m_texture_sampler = std::make_unique<Sampler>(m_device, m_physical_device);
+
+		m_descriptor.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		m_descriptor.imageView = m_texture_image_view->getHandle();
+		m_descriptor.sampler = m_texture_sampler->getHandle();
 	}
 	TextureImage::~TextureImage()
 	{

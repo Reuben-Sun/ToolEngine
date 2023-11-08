@@ -40,7 +40,7 @@ namespace ToolEngine
         m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, *m_descriptor_pool, m_frames_in_flight_count);
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
-            m_descriptor_sets->updateDescriptorSets(m_uniform_buffers[i]->getHandle(), m_texture_image->getImageView(), m_texture_image->getSampler(), i);
+            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffers[i], *m_texture_image, i);
         }
         
 	}

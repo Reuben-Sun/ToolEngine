@@ -24,9 +24,9 @@ namespace ToolEngine
 		VkFormat getFormat() const { return m_texture_image->getFormat(); }
 		VkImageView getImageView() const { return m_texture_image_view->getHandle(); }
 		VkSampler getSampler() const { return m_texture_sampler->getHandle(); }
-		VkDescriptorImageInfo getDescriptor() const
+		VkDescriptorImageInfo* getDescriptor()
 		{
-			return m_descriptor;
+			return &m_descriptor;
 		}
 	private:
 		std::unique_ptr<Image> m_texture_image;

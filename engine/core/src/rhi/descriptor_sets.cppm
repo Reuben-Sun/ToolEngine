@@ -5,6 +5,7 @@ import DescriptorSets;
 import UniformBuffer;
 import DescriptorSetLayout;
 import Device;
+import TextureImage;
 import <array>;
 import <vector>;
 
@@ -29,18 +30,8 @@ namespace ToolEngine
     DescriptorSets::~DescriptorSets()
     {
     }
-    void DescriptorSets::updateDescriptorSets(VkBuffer ubo_buffer, VkImageView texture_image_view, VkSampler texture_sampler, uint32_t frames_in_flight_index)
+    void DescriptorSets::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image, uint32_t frames_in_flight_index)
     {
-        VkDescriptorBufferInfo buffer_info{};
-        buffer_info.buffer = ubo_buffer;
-        buffer_info.offset = 0;
-        buffer_info.range = sizeof(UniformBufferObject);
-
-        VkDescriptorImageInfo image_info{};
-        image_info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-        image_info.imageView = texture_image_view;
-        image_info.sampler = texture_sampler;
-
         std::array<VkWriteDescriptorSet, 2> descriptor_writes{};
         
         descriptor_writes[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
@@ -49,7 +40,7 @@ namespace ToolEngine
         descriptor_writes[0].dstArrayElement = 0;
         descriptor_writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         descriptor_writes[0].descriptorCount = 1;
-        descriptor_writes[0].pBufferInfo = &buffer_info;
+        descriptor_writes[0].pBufferInfo = ubo_buffer.getDescriptor();
 
         descriptor_writes[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
         descriptor_writes[1].dstSet = m_descriptor_sets[frames_in_flight_index];
@@ -57,7 +48,7 @@ namespace ToolEngine
         descriptor_writes[1].dstArrayElement = 0;
         descriptor_writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         descriptor_writes[1].descriptorCount = 1;
-        descriptor_writes[1].pImageInfo = &image_info;
+        descriptor_writes[1].pImageInfo = texture_image.getDescriptor();
 
         uint32_t descriptor_write_count = static_cast<uint32_t>(descriptor_writes.size());
         vkUpdateDescriptorSets(m_device.getHandle(), descriptor_write_count, descriptor_writes.data(), 0, nullptr);
