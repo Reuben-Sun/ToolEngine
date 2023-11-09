@@ -8,6 +8,8 @@ import Device;
 
 namespace ToolEngine
 {
+	// TODO: convert a array, store binding info
+	// binding info contain two prop, bind index and type(image or buffer)
 	DescriptorSetLayout::DescriptorSetLayout(Device& device): m_device(device)
 	{
 		// ubo
