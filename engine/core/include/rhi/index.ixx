@@ -1,11 +1,6 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module Index;
-
-import <vector>;
-import <array>;
-import <glm/vec3.hpp>;
-import <glm/mat4x4.hpp>;
 
 namespace ToolEngine
 {

@@ -1,5 +1,4 @@
 #include "include/common/macro.h"
-#include <optick.h>
 import Application;
 import Timer;
 import GLFW_Window;
@@ -8,8 +7,6 @@ import Global_Context;
 import Render;
 import Scene;
 import LogManager;
-import <memory>;
-import <string>;
 
 namespace ToolEngine
 {

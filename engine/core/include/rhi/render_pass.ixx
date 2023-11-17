@@ -1,11 +1,10 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module RenderPass;
 
 import DepthSupportDetails;
 import PhysicalDevice;
 import Device;
-import <array>;
 
 namespace ToolEngine
 {

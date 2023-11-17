@@ -1,5 +1,4 @@
-#include <vulkan/vulkan.h>
-#include <optick.h>
+#include "include/common/macro.h"
 
 export module Device;
 
@@ -8,7 +7,6 @@ import CommandPool;
 import Instance;
 import QueueFamilyIndices;
 import PhysicalDevice;
-import <memory>;
 
 namespace ToolEngine
 {

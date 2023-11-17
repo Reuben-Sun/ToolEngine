@@ -1,5 +1,5 @@
+#include "include/common/macro.h"
 export module RenderScene;
-import <vector>;
 
 import Model;
 import RenderCamera;

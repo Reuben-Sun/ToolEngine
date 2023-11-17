@@ -1,9 +1,8 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 import UniformBuffer;
 import PhysicalDevice;
 import Device;
 import BufferUtils;
-import <glm/glm.hpp>;
 
 namespace ToolEngine
 {

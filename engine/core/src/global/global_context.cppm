@@ -1,10 +1,10 @@
+#include "include/common/macro.h"
 import Global_Context;
 
 import AssetManager;
 import InputManager;
 import BindingManager;
-import <memory>;
-import <string>;
+
 
 namespace ToolEngine
 {

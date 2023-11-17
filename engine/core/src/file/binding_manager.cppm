@@ -1,7 +1,7 @@
+#include "include/common/macro.h"
 import BindingManager;
 import Device;
 import DescriptorPool;
-import <memory>;
 
 namespace ToolEngine
 {

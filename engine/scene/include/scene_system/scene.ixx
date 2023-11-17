@@ -1,10 +1,10 @@
+#include "include/common/macro.h"
 export module Scene;
 
 import Global_Context;
 import RenderScene;
 import GltfLoader;
 import CameraManager;
-import <memory>;
 
 namespace ToolEngine
 {

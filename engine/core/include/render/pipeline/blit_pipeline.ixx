@@ -1,6 +1,4 @@
-#include <memory>
-#include <vulkan/vulkan.h>
-#include <array>
+#include "include/common/macro.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -30,8 +28,6 @@ import RenderPass;
 import Sampler;
 import PhysicalDevice;
 import Device;
-import <memory>;
-import <vector>;
 
 namespace ToolEngine
 {

@@ -6,7 +6,6 @@ import GLFW_Window;
 import Global_Context;
 import Render;
 import Scene;
-import <memory>;
 
 namespace ToolEngine
 {

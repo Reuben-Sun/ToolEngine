@@ -1,11 +1,10 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module RenderResources;
 import ImageView;
 import Image;
 import PhysicalDevice;
 import Device;
-import <memory>;
 
 namespace ToolEngine
 {

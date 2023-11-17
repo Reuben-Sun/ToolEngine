@@ -1,10 +1,6 @@
-import <glm/glm.hpp>;
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module Vertex;
-
-import <vector>;
-import <array>;
 
 namespace ToolEngine
 {

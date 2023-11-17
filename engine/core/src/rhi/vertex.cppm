@@ -1,7 +1,5 @@
-#include <glm/glm.hpp>
-#include <vulkan/vulkan.h>
-import <vector>;
-import <array>;
+#include "include/common/macro.h"
+
 import Vertex;
 
 namespace ToolEngine

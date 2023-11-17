@@ -1,13 +1,10 @@
 #include <tiny_gltf.h>
 #include "include/common/macro.h"
-#include <glm/glm.hpp>
 import GltfLoader;
 import Model;
 import Index;
 import Vertex;
-import <vector>;
 import RenderScene;
-import <string>;
 
 
 namespace ToolEngine

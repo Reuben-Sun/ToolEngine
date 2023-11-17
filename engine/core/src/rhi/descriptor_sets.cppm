@@ -1,4 +1,3 @@
-#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 
 import DescriptorSets;
@@ -6,8 +5,6 @@ import UniformBuffer;
 import DescriptorSetLayout;
 import Device;
 import TextureImage;
-import <array>;
-import <vector>;
 
 namespace ToolEngine
 {

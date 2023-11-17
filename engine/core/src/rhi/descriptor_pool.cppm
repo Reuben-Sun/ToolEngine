@@ -1,10 +1,7 @@
-#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 import DescriptorPool;
 import DescriptorSetLayout;
 import Device;
-import <array>;
-import <vector>;
 
 namespace ToolEngine
 {

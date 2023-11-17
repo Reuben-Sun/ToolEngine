@@ -1,4 +1,3 @@
-#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 import PipelineLayout;
 import Device;

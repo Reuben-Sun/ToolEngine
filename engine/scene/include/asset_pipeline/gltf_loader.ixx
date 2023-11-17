@@ -1,4 +1,5 @@
 #include <tiny_gltf.h>
+#include "include/common/macro.h"
 
 export module GltfLoader;
 
@@ -6,8 +7,6 @@ import Model;
 import Index;
 import Vertex;
 import RenderScene;
-import <vector>;
-import <string>;
 
 namespace ToolEngine
 {

@@ -1,5 +1,4 @@
-#include <optick.h>
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 export module Render;
 
 import Timer;
@@ -20,8 +19,6 @@ import SwapChain;
 import RenderPass;
 import PhysicalDevice;
 import Device;
-import <memory>;
-import <vector>;
 
 namespace ToolEngine
 {

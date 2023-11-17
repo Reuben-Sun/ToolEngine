@@ -1,11 +1,10 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 import VertexBuffer;
 import Buffer;
 import Vertex;
 import PhysicalDevice;
 import Device;
 import BufferUtils;
-import <vector>;
 
 namespace ToolEngine
 {

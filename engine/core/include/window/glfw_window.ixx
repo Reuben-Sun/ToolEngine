@@ -1,4 +1,4 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
@@ -8,9 +8,6 @@ export module GLFW_Window;
 import Window;
 import Global_Context;
 import Instance;
-import <iostream>;
-import <string>;
-import <vector>;
 
 namespace ToolEngine
 {

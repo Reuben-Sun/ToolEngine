@@ -1,5 +1,4 @@
 #include "include/common/macro.h"
-#include <glm/glm.hpp>
 import Scene;
 import Global_Context;
 import RenderScene;
@@ -13,10 +12,6 @@ import AssetManager;
 import CameraManager;
 import Transform;
 import Timer;
-import <string>;
-import <memory>;
-import <vector>;
-import <regex>;
 
 namespace ToolEngine
 {

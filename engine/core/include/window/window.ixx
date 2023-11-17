@@ -1,10 +1,8 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module Window;
 
-import <string>;
 import Instance;
-import <vector>;
 
 namespace ToolEngine
 {

@@ -1,7 +1,5 @@
-#include <glm/glm.hpp>
+#include "include/common/macro.h"
 import CameraManager;
-import <string>;
-import <math.h>;
 
 namespace ToolEngine
 {

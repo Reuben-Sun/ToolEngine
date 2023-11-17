@@ -1,13 +1,7 @@
-#include <vulkan/vulkan.h>
 #include "include/common/macro.h"
 #include "GLFW/glfw3.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3native.h"
-import <iostream>;
-import <string>;
-import <vector>;
-import <format>;
-import <math.h>;
 
 import GLFW_Window;
 import Global_Context;

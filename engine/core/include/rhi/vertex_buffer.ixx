@@ -1,4 +1,4 @@
-#include <vulkan/vulkan.h>
+#include "include/common/macro.h"
 
 export module VertexBuffer;
 
@@ -6,7 +6,6 @@ import Buffer;
 import Vertex;
 import PhysicalDevice;
 import Device;
-import <vector>;
 
 namespace ToolEngine
 {
