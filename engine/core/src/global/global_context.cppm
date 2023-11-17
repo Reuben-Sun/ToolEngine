@@ -3,6 +3,7 @@ import Global_Context;
 import LogManager;
 import AssetManager;
 import InputManager;
+import BindingManager;
 import <memory>;
 import <string>;
 
