@@ -31,7 +31,7 @@ namespace ToolEngine
 		m_surface = m_window.createSurface(*m_instance);
 		m_physical_device = std::make_unique<PhysicalDevice>(*m_instance, m_surface);
 		m_device = std::make_unique<Device>(*m_instance, *m_physical_device, m_surface);
-		g_global_context.m_binding_manager = std::make_unique<BindingManager>(*m_device);
+		g_global_context.m_binding_manager = std::make_unique<BindingManager>(*m_device, *m_physical_device);
 		VkExtent2D app_extent = { m_window.getProperties().extent.width, m_window.getProperties().extent.height };
 		// create swap chain image resources
 		m_swap_chain = std::make_unique<SwapChain>(*m_device, *m_physical_device, m_surface, app_extent);
@@ -121,6 +121,8 @@ namespace ToolEngine
 		OPTICK_POP();
 
 		m_command_buffers->resetCommandBuffer(current_frame_index);
+
+		g_global_context.m_binding_manager->preprocess(render_scene);
 
 		m_blit_pipeline->renderTick(*m_command_buffers, *m_frame_buffers[image_index], current_frame_index, render_scene);
 

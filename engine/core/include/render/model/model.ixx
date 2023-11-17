@@ -8,6 +8,7 @@ namespace ToolEngine
 {
 	export struct Model
 	{
+		std::string name;
 		std::vector<Vertex> vertices;
 		std::vector<Index> indices;
 		Transform transform;
