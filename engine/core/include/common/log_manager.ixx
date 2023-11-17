@@ -19,8 +19,11 @@ namespace ToolEngine
 			Fatal
 		};
 
-		LogManager();
-		~LogManager();
+		static LogManager& getInstance()
+		{
+			static LogManager instance;
+			return instance;
+		}
 
 		template<typename... Args>
 		void log(LogLevel level, Args&&... args)
@@ -55,6 +58,8 @@ namespace ToolEngine
 		}
 
 	private:
+		LogManager();
+		~LogManager();
 		std::shared_ptr<spdlog::logger> m_logger;
 	};
 }

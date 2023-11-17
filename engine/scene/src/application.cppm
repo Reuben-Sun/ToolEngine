@@ -7,6 +7,7 @@ import Window;
 import Global_Context;
 import Render;
 import Scene;
+import LogManager;
 import <memory>;
 import <string>;
 
