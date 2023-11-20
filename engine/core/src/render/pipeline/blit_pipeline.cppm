@@ -47,6 +47,10 @@ namespace ToolEngine
 
         command_buffer.setScissor(frame_index, m_swap_chain.getExtent(), 0, 1);
 
+        // global ubo
+        const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
+        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
+
         uint32_t vertex_buffer_count = render_scene.models.size();
         for(int i = 0; i < vertex_buffer_count; i++)
         {
@@ -59,9 +63,7 @@ namespace ToolEngine
             updateGlobalUniformBuffer(render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
-            // TODO: each draw call have a descriptor sets
-            const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
-            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
+            // TODO: per mesh ubo
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
 
