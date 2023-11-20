@@ -33,7 +33,6 @@ namespace ToolEngine
 		std::unique_ptr<DescriptorPool> m_descriptor_pool;
 		std::unordered_map<std::string, std::unique_ptr<VertexBuffer>> model_name_to_vertex_buffer;
 		std::unordered_map<std::string, std::unique_ptr<IndexBuffer>> model_name_to_index_buffer;
-		std::unique_ptr<UniformBuffer> m_global_uniform_buffer;
 	};
 	
 }
