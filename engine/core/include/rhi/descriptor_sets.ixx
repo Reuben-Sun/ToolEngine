@@ -16,7 +16,7 @@ namespace ToolEngine
 		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool);
 		~DescriptorSets();
 		void updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image);
-		VkDescriptorSet* getHandlePtr(uint32_t frames_index) { return &m_descriptor_set; }
+		VkDescriptorSet* getHandlePtr() { return &m_descriptor_set; }
 	private:
 		VkDescriptorSet m_descriptor_set;
 		Device& m_device;
