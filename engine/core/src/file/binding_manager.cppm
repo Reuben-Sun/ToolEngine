@@ -5,6 +5,7 @@ import DescriptorPool;
 import RenderScene;
 import Model;
 import PhysicalDevice;
+import UniformBuffer;
 
 namespace ToolEngine
 {
@@ -12,6 +13,7 @@ namespace ToolEngine
 		: m_device(device), m_physical_device(physical_device)
 	{
 		m_descriptor_pool = std::make_unique<DescriptorPool>(m_device);
+		m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 	}
 
 	BindingManager::~BindingManager()

@@ -1,6 +1,6 @@
 #include "include/common/macro.h"
 
-import DescriptorSets;
+import DescriptorSet;
 import UniformBuffer;
 import DescriptorSetLayout;
 import Device;
@@ -8,7 +8,7 @@ import TextureImage;
 
 namespace ToolEngine
 {
-    DescriptorSets::DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool)
+    DescriptorSet::DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool)
         : m_device(device), m_descriptor_set_layout(descriptor_set_layout), m_descriptor_pool(descriptor_pool)
     {
         VkDescriptorSetAllocateInfo alloc_info{};
@@ -22,10 +22,10 @@ namespace ToolEngine
             LOG_ERROR("failed to allocate descriptor sets!");
         }
     }
-    DescriptorSets::~DescriptorSets()
+    DescriptorSet::~DescriptorSet()
     {
     }
-    void DescriptorSets::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image)
+    void DescriptorSet::updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image)
     {
         std::array<VkWriteDescriptorSet, 2> descriptor_writes{};
         

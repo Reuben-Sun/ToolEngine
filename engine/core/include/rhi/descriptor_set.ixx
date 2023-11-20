@@ -1,6 +1,6 @@
 #include "include/common/macro.h"
 
-export module DescriptorSets;
+export module DescriptorSet;
 
 import DescriptorPool;
 import DescriptorSetLayout;
@@ -10,11 +10,11 @@ import TextureImage;
 
 namespace ToolEngine
 {
-	export class DescriptorSets
+	export class DescriptorSet
 	{
 	public:
-		DescriptorSets(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool);
-		~DescriptorSets();
+		DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool);
+		~DescriptorSet();
 		void updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image);
 		VkDescriptorSet* getHandlePtr() { return &m_descriptor_set; }
 	private:

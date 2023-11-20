@@ -28,7 +28,7 @@ namespace ToolEngine
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, g_global_context.m_binding_manager->getDescriptorPool());
+        m_descriptor_sets = std::make_unique<DescriptorSet>(m_device, *m_descriptor_set_layout, g_global_context.m_binding_manager->getDescriptorPool());
         for (int i = 0; i < m_frames_in_flight_count; ++i)
         {
             m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image);
