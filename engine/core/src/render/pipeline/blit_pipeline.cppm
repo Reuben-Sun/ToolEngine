@@ -24,11 +24,11 @@ namespace ToolEngine
         m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         createPipeline();
 
-        m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_uniform_buffer);
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -55,7 +55,7 @@ namespace ToolEngine
             
             VkDeviceSize offsets[] = { 0 };
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-            updateUniformBuffer(render_scene, i);
+            updateGlobalUniformBuffer(render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
             // TODO: each draw call have a descriptor sets
@@ -187,12 +187,12 @@ namespace ToolEngine
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, m_state);
     }
 
-    void BlitPipeline::updateUniformBuffer(RenderScene& render_scene, uint32_t model_index)
+    void BlitPipeline::updateGlobalUniformBuffer(RenderScene& render_scene, uint32_t model_index)
     {
         UniformBufferObject ubo{};
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
-        m_uniform_buffer->updateBuffer(ubo);
+        m_global_uniform_buffer->updateBuffer(ubo);
     }
 }
