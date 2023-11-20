@@ -33,7 +33,7 @@ namespace ToolEngine
         descriptor_writes[0].dstSet = m_descriptor_set;
         descriptor_writes[0].dstBinding = 0;
         descriptor_writes[0].dstArrayElement = 0;
-        descriptor_writes[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        descriptor_writes[0].descriptorType = DescriptorTypeMap[DescriptorType::ConstantBuffer];
         descriptor_writes[0].descriptorCount = 1;
         descriptor_writes[0].pBufferInfo = ubo_buffer.getDescriptor();
 
@@ -41,7 +41,7 @@ namespace ToolEngine
         descriptor_writes[1].dstSet = m_descriptor_set;
         descriptor_writes[1].dstBinding = 1;
         descriptor_writes[1].dstArrayElement = 0;
-        descriptor_writes[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        descriptor_writes[1].descriptorType = DescriptorTypeMap[DescriptorType::Sampler];
         descriptor_writes[1].descriptorCount = 1;
         descriptor_writes[1].pImageInfo = texture_image.getDescriptor();
 

@@ -143,9 +143,9 @@ namespace ToolEngine
 		OPTICK_EVENT();
 		vkCmdBindIndexBuffer(m_command_buffers[current_frame], buffer.getHandle(), offset, index_type);
 	}
-	void CommandBuffer::bindDescriptorSets(uint32_t current_frame, VkPipelineBindPoint bind_point, VkPipelineLayout layout, VkDescriptorSet* descriptor_sets, uint32_t first_set_index, uint32_t descriptor_set_count)
+	void CommandBuffer::bindDescriptorSets(uint32_t current_frame, VkPipelineBindPoint bind_point, VkPipelineLayout layout, const std::vector<VkDescriptorSet> descriptor_sets, uint32_t first_set_index, uint32_t descriptor_set_count)
 	{
 		OPTICK_EVENT();
-		vkCmdBindDescriptorSets(m_command_buffers[current_frame], bind_point, layout, first_set_index, descriptor_set_count, descriptor_sets, 0, nullptr);
+		vkCmdBindDescriptorSets(m_command_buffers[current_frame], bind_point, layout, first_set_index, descriptor_set_count, descriptor_sets.data(), 0, nullptr);
 	}
 }
