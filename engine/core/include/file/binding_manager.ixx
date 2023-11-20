@@ -9,9 +9,6 @@ import Vertex;
 import VertexBuffer;
 import Index;
 import IndexBuffer;
-import <string>;
-import <memory>;
-import <unordered_map>;
 
 namespace ToolEngine
 {

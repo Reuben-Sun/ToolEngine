@@ -49,8 +49,6 @@ namespace ToolEngine
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
 		std::unique_ptr<DescriptorSets> m_descriptor_sets;
-		std::vector<std::unique_ptr<VertexBuffer>> m_vertex_buffers;
-		std::vector<std::unique_ptr<IndexBuffer>> m_index_buffers;
 		std::unique_ptr<UniformBuffer> m_uniform_buffer;
 		std::unique_ptr<TextureImage> m_texture_image;
 

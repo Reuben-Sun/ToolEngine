@@ -5,6 +5,8 @@ export module CommandBuffer;
 import Device;
 import RenderPass;
 import FrameBuffer;
+import VertexBuffer;
+import IndexBuffer;
 
 namespace ToolEngine
 {
@@ -26,8 +28,8 @@ namespace ToolEngine
 		void setScissor(uint32_t current_frame, VkExtent2D extent, uint32_t first_scissor_index, uint32_t scissor_count);
 		void draw(uint32_t current_frame, uint32_t vertex_count, uint32_t instance_count, uint32_t first_vertex_index, uint32_t first_instance_index);
 		void draw(uint32_t current_frame, uint32_t index_count, uint32_t instance_count, uint32_t first_index, uint32_t vertex_offset, uint32_t first_instance);
-		void bindVertexBuffer(uint32_t current_frame, VkBuffer* buffer, VkDeviceSize* offset, uint32_t first_binding_index, uint32_t binding_count);
-		void bindIndexBuffer(uint32_t current_frame, VkBuffer buffer, VkDeviceSize offset, VkIndexType index_type);
+		void bindVertexBuffer(uint32_t current_frame, VertexBuffer& buffer, VkDeviceSize* offset, uint32_t first_binding_index, uint32_t binding_count);
+		void bindIndexBuffer(uint32_t current_frame, IndexBuffer& buffer, VkDeviceSize offset, VkIndexType index_type);
 		void bindDescriptorSets(uint32_t current_frame, VkPipelineBindPoint bind_point, VkPipelineLayout layout, VkDescriptorSet* descriptor_sets, uint32_t first_set_index, uint32_t descriptor_set_count);
 	private:
 		std::vector<VkCommandBuffer> m_command_buffers;
