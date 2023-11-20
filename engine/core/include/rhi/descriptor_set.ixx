@@ -31,14 +31,12 @@ namespace ToolEngine
 	export class DescriptorSet
 	{
 	public:
-		DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, DescriptorPool& descriptor_pool);
+		DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, UniformBuffer& ubo_buffer);
 		~DescriptorSet();
-		void updateDescriptorSets(UniformBuffer& ubo_buffer, TextureImage& texture_image);
 		VkDescriptorSet getHandle() { return m_descriptor_set; }
 	private:
 		VkDescriptorSet m_descriptor_set;
 		Device& m_device;
 		DescriptorSetLayout& m_descriptor_set_layout;
-		DescriptorPool& m_descriptor_pool;
 	};
 }
