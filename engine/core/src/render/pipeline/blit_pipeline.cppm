@@ -21,7 +21,8 @@ namespace ToolEngine
         : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
         // pipeline init
-        m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
+        m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 0);
+        m_per_mesh_uniform_descrptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 1);
         createPipeline();
 
         m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
@@ -162,10 +163,11 @@ namespace ToolEngine
         dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
         dynamicState.pDynamicStates = dynamicStates.data();
 
+        const std::vector<VkDescriptorSetLayout> descriptor_set_layouts = { m_global_uniform_descriptor_set_layout->getHandle(), m_per_mesh_uniform_descrptor_set_layout->getHandle() };
         VkPipelineLayoutCreateInfo pipeline_layout_info{};
         pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipeline_layout_info.setLayoutCount = 1;
-        pipeline_layout_info.pSetLayouts = m_global_uniform_descriptor_set_layout->getHandlePtr();
+        pipeline_layout_info.pSetLayouts = descriptor_set_layouts.data();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
         m_forward_pass = std::make_unique<ForwardPass>(m_device, m_physical_device, m_swap_chain.getFormat());

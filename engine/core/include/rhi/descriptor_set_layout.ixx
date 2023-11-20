@@ -9,11 +9,10 @@ namespace ToolEngine
 	export class DescriptorSetLayout
 	{
 	public:
-		DescriptorSetLayout(Device& device);
+		DescriptorSetLayout(Device& device, uint32_t binding_index);
 		~DescriptorSetLayout();
 
 		VkDescriptorSetLayout getHandle() const { return m_descriptor_set_layout; }
-		const VkDescriptorSetLayout* getHandlePtr() { return &m_descriptor_set_layout; }
 	private:
 		VkDescriptorSetLayout m_descriptor_set_layout{ VK_NULL_HANDLE };
 		Device& m_device;

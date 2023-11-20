@@ -12,11 +12,12 @@ namespace ToolEngine
     DescriptorSet::DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, UniformBuffer& ubo_buffer)
         : m_device(device), m_descriptor_set_layout(descriptor_set_layout)
     {
+        std::vector<VkDescriptorSetLayout> layouts = { m_descriptor_set_layout.getHandle() };
         VkDescriptorSetAllocateInfo alloc_info{};
         alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
         alloc_info.descriptorPool = g_global_context.m_binding_manager->getDescriptorPool().getHandle();
         alloc_info.descriptorSetCount = 1;
-        alloc_info.pSetLayouts = m_descriptor_set_layout.getHandlePtr();
+        alloc_info.pSetLayouts = layouts.data();
 
         if (vkAllocateDescriptorSets(m_device.getHandle(), &alloc_info, &m_descriptor_set) != VK_SUCCESS) 
         {
