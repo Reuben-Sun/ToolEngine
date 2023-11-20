@@ -189,7 +189,7 @@ namespace ToolEngine
 
     void BlitPipeline::updateGlobalUniformBuffer(RenderScene& render_scene, uint32_t model_index)
     {
-        UniformBufferObject ubo{};
+        GlobalUniformBufferObject ubo{};
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();

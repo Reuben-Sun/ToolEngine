@@ -8,9 +8,9 @@ import Device;
 
 namespace ToolEngine
 {
-	export struct UniformBufferObject
+	export struct GlobalUniformBufferObject
 	{
-		glm::mat4 model_matrix;
+		glm::mat4 model_matrix;		// TODO: move to per mesh ubo
 		glm::mat4 view_matrix;
 		glm::mat4 projection_matrix;
 	};
@@ -20,7 +20,7 @@ namespace ToolEngine
 	public:
 		UniformBuffer(Device& device, PhysicalDevice& physical_device);
 		virtual ~UniformBuffer();
-		void updateBuffer(UniformBufferObject ubo);
+		void updateBuffer(GlobalUniformBufferObject ubo);
 		VkBuffer getHandle() const { return m_buffer; }
 		VkDescriptorBufferInfo* getDescriptor()
 		{
