@@ -47,8 +47,8 @@ namespace ToolEngine
 		PipelineState m_state;
 		std::unique_ptr<ForwardPass> m_forward_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
-		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
-		std::unique_ptr<DescriptorSet> m_descriptor_set;
+		std::unique_ptr<DescriptorSetLayout> m_global_uniform_descriptor_set_layout;
+		std::unique_ptr<DescriptorSet> m_global_uniform_descriptor_set;
 		std::unique_ptr<UniformBuffer> m_uniform_buffer;
 		std::unique_ptr<TextureImage> m_texture_image;
 

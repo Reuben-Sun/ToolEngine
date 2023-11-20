@@ -21,14 +21,14 @@ namespace ToolEngine
         : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
         // pipeline init
-        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
+        m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         createPipeline();
 
         m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_descriptor_set_layout, *m_uniform_buffer);
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_uniform_buffer);
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -59,7 +59,7 @@ namespace ToolEngine
             command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
             // TODO: each draw call have a descriptor sets
-            const std::vector<VkDescriptorSet> descriptorsets = { m_descriptor_set->getHandle() };
+            const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
             command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
@@ -165,7 +165,7 @@ namespace ToolEngine
         VkPipelineLayoutCreateInfo pipeline_layout_info{};
         pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipeline_layout_info.setLayoutCount = 1;
-        pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
+        pipeline_layout_info.pSetLayouts = m_global_uniform_descriptor_set_layout->getHandlePtr();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
         m_forward_pass = std::make_unique<ForwardPass>(m_device, m_physical_device, m_swap_chain.getFormat());
