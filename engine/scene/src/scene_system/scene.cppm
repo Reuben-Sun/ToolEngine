@@ -1,6 +1,6 @@
 #include "include/common/macro.h"
 import Scene;
-import Global_Context;
+import GlobalContext;
 import RenderScene;
 import GltfLoader;
 import Model;
@@ -25,6 +25,7 @@ namespace ToolEngine
 		transform.rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 		transform.scale = glm::vec3(1.0f, 1.0f, 1.0f);
 		Model model;
+		model.name = "Cube.gltf";
 		model.indices = loader->loaded_index_buffer;
 		model.vertices = loader->loaded_vertex_buffer;
 		model.transform = transform;
@@ -42,6 +43,7 @@ namespace ToolEngine
 		plane_transform.rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 		plane_transform.scale = glm::vec3(10.0f, 10.0f, 10.0f);
 		Model plane_model;
+		plane_model.name = "plane";
 		plane_model.indices = plane_index_buffer;
 		plane_model.vertices = plane_vertex_buffer;
 		plane_model.transform = plane_transform;

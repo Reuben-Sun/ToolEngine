@@ -1,7 +1,7 @@
 #include "include/common/macro.h"
 export module Scene;
 
-import Global_Context;
+import GlobalContext;
 import RenderScene;
 import GltfLoader;
 import CameraManager;

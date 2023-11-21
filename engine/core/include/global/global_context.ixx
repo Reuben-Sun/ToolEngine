@@ -1,4 +1,4 @@
-export module Global_Context;
+export module GlobalContext;
 
 import AssetManager;
 import InputManager;

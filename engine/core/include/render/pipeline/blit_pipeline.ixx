@@ -17,7 +17,7 @@ import CommandBuffer;
 import UniformBuffer;
 import DescriptorPool;
 import DescriptorSetLayout;
-import DescriptorSets;
+import DescriptorSet;
 import FrameBuffer;
 import ImageView;
 import TextureImage;
@@ -47,17 +47,16 @@ namespace ToolEngine
 		PipelineState m_state;
 		std::unique_ptr<ForwardPass> m_forward_pass;
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
-		std::unique_ptr<DescriptorSetLayout> m_descriptor_set_layout;
-		std::unique_ptr<DescriptorSets> m_descriptor_sets;
-		std::vector<std::unique_ptr<VertexBuffer>> m_vertex_buffers;
-		std::vector<std::unique_ptr<IndexBuffer>> m_index_buffers;
-		std::unique_ptr<UniformBuffer> m_uniform_buffer;
+		std::unique_ptr<DescriptorSetLayout> m_global_uniform_descriptor_set_layout;
+		std::unique_ptr<DescriptorSetLayout> m_per_mesh_uniform_descrptor_set_layout;
+		std::unique_ptr<DescriptorSet> m_global_uniform_descriptor_set;
+		std::unique_ptr<UniformBuffer> m_global_uniform_buffer;
 		std::unique_ptr<TextureImage> m_texture_image;
 
 		PhysicalDevice& m_physical_device;
 		SwapChain& m_swap_chain;
 
 		void createPipeline();
-		void updateUniformBuffer(RenderScene& render_scene, uint32_t model_index);
+		void updateGlobalUniformBuffer(RenderScene& render_scene, uint32_t model_index);
 	};
 }

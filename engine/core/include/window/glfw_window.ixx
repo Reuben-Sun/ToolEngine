@@ -6,7 +6,7 @@
 export module GLFW_Window;
 
 import Window;
-import Global_Context;
+import GlobalContext;
 import Instance;
 
 namespace ToolEngine

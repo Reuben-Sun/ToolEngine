@@ -2,7 +2,7 @@
 
 export module TextureImage;
 
-import Global_Context;
+import GlobalContext;
 import Buffer;
 import Image;
 import SingleTimeCommandBuffer;

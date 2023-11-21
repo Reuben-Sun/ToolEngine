@@ -1,7 +1,7 @@
 #include "include/common/macro.h"
 
 import ShaderModule;
-import Global_Context;
+import GlobalContext;
 import Device;
 
 namespace ToolEngine

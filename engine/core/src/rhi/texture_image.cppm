@@ -2,7 +2,7 @@
 #include "stb_image.h"
 
 import TextureImage;
-import Global_Context;
+import GlobalContext;
 import SingleTimeCommandBuffer;
 import PhysicalDevice;
 import BufferUtils;

@@ -12,13 +12,8 @@ import Sampler;
 import ShaderModule;
 import Device;
 import Vertex;
-import Global_Context;
+import GlobalContext;
 import BindingManager;
-import <glm/glm.hpp>;
-import <glm/gtc/matrix_transform.hpp>;
-import <array>;
-import <memory>;
-import <optick.h>;
 
 namespace ToolEngine
 {
@@ -26,22 +21,15 @@ namespace ToolEngine
         : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
         // pipeline init
-        m_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
+        m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 0);
+        m_per_mesh_uniform_descrptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 1);
         createPipeline();
-        
-        m_vertex_buffers = std::vector<std::unique_ptr<VertexBuffer>>{};
-        m_index_buffers = std::vector<std::unique_ptr<IndexBuffer>>{};
 
-        m_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_descriptor_sets = std::make_unique<DescriptorSets>(m_device, *m_descriptor_set_layout, g_global_context.m_binding_manager->getDescriptorPool());
-        for (int i = 0; i < m_frames_in_flight_count; ++i)
-        {
-            m_descriptor_sets->updateDescriptorSets(*m_uniform_buffer, *m_texture_image);
-        }
-        
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -59,22 +47,23 @@ namespace ToolEngine
 
         command_buffer.setScissor(frame_index, m_swap_chain.getExtent(), 0, 1);
 
+        // global ubo
+        const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
+        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
+
         uint32_t vertex_buffer_count = render_scene.models.size();
-        m_vertex_buffers.resize(vertex_buffer_count);
-        m_index_buffers.resize(vertex_buffer_count);
         for(int i = 0; i < vertex_buffer_count; i++)
         {
             Model& model = render_scene.models[i];
-            m_vertex_buffers[i] = std::make_unique<VertexBuffer>(m_device, m_physical_device, model.vertices);
-            m_index_buffers[i] = std::make_unique<IndexBuffer>(m_device, m_physical_device, model.indices);
-            VkBuffer vertex_buffers[] = { m_vertex_buffers[i]->getHandle() };
+            VertexBuffer& vertex_buffer = g_global_context.m_binding_manager->getVertexBuffer(model.name);
+            IndexBuffer& index_buffer = g_global_context.m_binding_manager->getIndexBuffer(model.name);
+            
             VkDeviceSize offsets[] = { 0 };
             uint32_t index_count = static_cast<uint32_t>(model.indices.size());
-            updateUniformBuffer(render_scene, i);
-            command_buffer.bindVertexBuffer(frame_index, vertex_buffers, offsets, 0, 1);
-            command_buffer.bindIndexBuffer(frame_index, m_index_buffers[i]->getHandle(), 0, VK_INDEX_TYPE_UINT16);
-            // TODO: each draw call have a descriptor sets
-            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), m_descriptor_sets->getHandlePtr(frame_index), 0, 1);
+            updateGlobalUniformBuffer(render_scene, i);
+            command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
+            command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
+            // TODO: per mesh ubo
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
 
@@ -176,10 +165,11 @@ namespace ToolEngine
         dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
         dynamicState.pDynamicStates = dynamicStates.data();
 
+        const std::vector<VkDescriptorSetLayout> descriptor_set_layouts = { m_global_uniform_descriptor_set_layout->getHandle(), m_per_mesh_uniform_descrptor_set_layout->getHandle() };
         VkPipelineLayoutCreateInfo pipeline_layout_info{};
         pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipeline_layout_info.setLayoutCount = 1;
-        pipeline_layout_info.pSetLayouts = m_descriptor_set_layout->getHandlePtr();
+        pipeline_layout_info.pSetLayouts = descriptor_set_layouts.data();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
         m_forward_pass = std::make_unique<ForwardPass>(m_device, m_physical_device, m_swap_chain.getFormat());
@@ -201,12 +191,12 @@ namespace ToolEngine
         m_pipeline = std::make_unique<GraphicsPipeline>(m_device, m_state);
     }
 
-    void BlitPipeline::updateUniformBuffer(RenderScene& render_scene, uint32_t model_index)
+    void BlitPipeline::updateGlobalUniformBuffer(RenderScene& render_scene, uint32_t model_index)
     {
-        UniformBufferObject ubo{};
+        GlobalUniformBufferObject ubo{};
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
-        m_uniform_buffer->updateBuffer(ubo);
+        m_global_uniform_buffer->updateBuffer(ubo);
     }
 }

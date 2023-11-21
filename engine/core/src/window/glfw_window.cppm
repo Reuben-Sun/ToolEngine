@@ -4,7 +4,7 @@
 #include "GLFW/glfw3native.h"
 
 import GLFW_Window;
-import Global_Context;
+import GlobalContext;
 import Instance;
 import InputManager;
 

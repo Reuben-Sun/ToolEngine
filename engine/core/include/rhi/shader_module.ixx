@@ -2,7 +2,7 @@
 
 export module ShaderModule;
 
-import Global_Context;
+import GlobalContext;
 import Device;
 
 namespace ToolEngine

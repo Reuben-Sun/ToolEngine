@@ -3,29 +3,24 @@
 import DescriptorSetLayout;
 import PipelineLayout;
 import Device;
+import DescriptorType;
 
 namespace ToolEngine
 {
 	// TODO: convert a array, store binding info
 	// binding info contain two prop, bind index and type(image or buffer)
-	DescriptorSetLayout::DescriptorSetLayout(Device& device): m_device(device)
+	DescriptorSetLayout::DescriptorSetLayout(Device& device, uint32_t binding_index): m_device(device)
 	{
 		// ubo
 		VkDescriptorSetLayoutBinding ubo_layout_binding{};
-		ubo_layout_binding.binding = 0;
+		ubo_layout_binding.binding = binding_index;
 		ubo_layout_binding.descriptorCount = 1;
-		ubo_layout_binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		ubo_layout_binding.descriptorType = DescriptorTypeMap[DescriptorType::ConstantBuffer];
 		ubo_layout_binding.pImmutableSamplers = nullptr;
 		ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
-		// texture binding
-		VkDescriptorSetLayoutBinding sampler_layout_binding{};
-		sampler_layout_binding.binding = 1;
-		sampler_layout_binding.descriptorCount = 1;
-		sampler_layout_binding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-		sampler_layout_binding.pImmutableSamplers = nullptr;
-		sampler_layout_binding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+		
 		// create info
-		std::array<VkDescriptorSetLayoutBinding, 2> bindings = { ubo_layout_binding, sampler_layout_binding };
+		std::array<VkDescriptorSetLayoutBinding, 1> bindings = { ubo_layout_binding };
 		VkDescriptorSetLayoutCreateInfo layout_info{};
 		layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
 		layout_info.bindingCount = static_cast<uint32_t>(bindings.size());
