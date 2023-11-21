@@ -49,8 +49,10 @@ namespace ToolEngine
 		std::unique_ptr<PipelineLayout> m_pipeline_layout;
 		std::unique_ptr<DescriptorSetLayout> m_global_uniform_descriptor_set_layout;
 		std::unique_ptr<DescriptorSetLayout> m_per_mesh_uniform_descrptor_set_layout;
-		std::unique_ptr<DescriptorSet> m_global_uniform_descriptor_set;
-		std::unique_ptr<UniformBuffer> m_global_uniform_buffer;
+		std::unique_ptr<DescriptorSet<GlobalUniformBufferObject>> m_global_uniform_descriptor_set;
+		std::unique_ptr<DescriptorSet<PerMeshUniformBufferObject>> m_per_mesh_uniform_descriptor_set;
+		std::unique_ptr<UniformBuffer<GlobalUniformBufferObject>> m_global_uniform_buffer;
+		std::unique_ptr<UniformBuffer<PerMeshUniformBufferObject>> m_per_mesh_uniform_buffer;
 		std::unique_ptr<TextureImage> m_texture_image;
 
 		PhysicalDevice& m_physical_device;

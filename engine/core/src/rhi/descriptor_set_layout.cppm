@@ -9,7 +9,7 @@ namespace ToolEngine
 {
 	// TODO: convert a array, store binding info
 	// binding info contain two prop, bind index and type(image or buffer)
-	DescriptorSetLayout::DescriptorSetLayout(Device& device, uint32_t binding_index): m_device(device)
+	DescriptorSetLayout::DescriptorSetLayout(Device& device, uint32_t binding_index): m_device(device), m_binding_index(binding_index)
 	{
 		// ubo
 		VkDescriptorSetLayoutBinding ubo_layout_binding{};

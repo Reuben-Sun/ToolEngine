@@ -12,8 +12,16 @@ import Sampler;
 import ShaderModule;
 import Device;
 import Vertex;
+import Index;
 import GlobalContext;
 import BindingManager;
+import PhysicalDevice;
+import DescriptorSet;
+import CommandBuffer;
+import FrameBuffer;
+import VertexBuffer;
+import IndexBuffer;
+import GraphicsPipeline;
 
 namespace ToolEngine
 {
@@ -25,12 +33,14 @@ namespace ToolEngine
         m_per_mesh_uniform_descrptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 1);
         createPipeline();
 
-        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
+        m_global_uniform_buffer = std::make_unique<UniformBuffer<GlobalUniformBufferObject>>(m_device, m_physical_device, 0);
+        m_per_mesh_uniform_buffer = std::make_unique<UniformBuffer<PerMeshUniformBufferObject>>(m_device, m_physical_device, 1);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
-	}
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet<GlobalUniformBufferObject>>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
+        m_per_mesh_uniform_descriptor_set = std::make_unique<DescriptorSet<PerMeshUniformBufferObject>>(m_device, *m_per_mesh_uniform_descrptor_set_layout, *m_per_mesh_uniform_buffer);
+    }
     BlitPipeline::~BlitPipeline()
     {
         
@@ -48,8 +58,8 @@ namespace ToolEngine
         command_buffer.setScissor(frame_index, m_swap_chain.getExtent(), 0, 1);
 
         // global ubo
-        const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
-        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
+        const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle(), m_per_mesh_uniform_descriptor_set->getHandle() };
+        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 2);
 
         uint32_t vertex_buffer_count = render_scene.models.size();
         for(int i = 0; i < vertex_buffer_count; i++)
@@ -63,7 +73,6 @@ namespace ToolEngine
             updateGlobalUniformBuffer(render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
-            // TODO: per mesh ubo
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
 
@@ -168,7 +177,7 @@ namespace ToolEngine
         const std::vector<VkDescriptorSetLayout> descriptor_set_layouts = { m_global_uniform_descriptor_set_layout->getHandle(), m_per_mesh_uniform_descrptor_set_layout->getHandle() };
         VkPipelineLayoutCreateInfo pipeline_layout_info{};
         pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipeline_layout_info.setLayoutCount = 1;
+        pipeline_layout_info.setLayoutCount = descriptor_set_layouts.size();
         pipeline_layout_info.pSetLayouts = descriptor_set_layouts.data();
 
         m_pipeline_layout = std::make_unique<PipelineLayout>(m_device, pipeline_layout_info);
@@ -194,9 +203,11 @@ namespace ToolEngine
     void BlitPipeline::updateGlobalUniformBuffer(RenderScene& render_scene, uint32_t model_index)
     {
         GlobalUniformBufferObject ubo{};
-        ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
         m_global_uniform_buffer->updateBuffer(ubo);
+        PerMeshUniformBufferObject per_mesh_ubo{};
+        per_mesh_ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
+        m_per_mesh_uniform_buffer->updateBuffer(per_mesh_ubo);
     }
 }
