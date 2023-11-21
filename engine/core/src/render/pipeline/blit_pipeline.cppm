@@ -25,12 +25,11 @@ namespace ToolEngine
         m_per_mesh_uniform_descrptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 1);
         createPipeline();
 
-        m_global_uniform_buffer = std::make_unique<UniformBuffer<GlobalUniformBufferObject>>(m_device, m_physical_device);
-        m_per_mesh_uniform_buffer = std::make_unique<UniformBuffer<PerMeshUniformBufferObject>>(m_device, m_physical_device);
+        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
 
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet<GlobalUniformBufferObject>>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -199,8 +198,5 @@ namespace ToolEngine
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
         m_global_uniform_buffer->updateBuffer(ubo);
-        PerMeshUniformBufferObject per_mesh_ubo{};
-        per_mesh_ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
-        //m_per_mesh_uniform_buffer->updateBuffer(per_mesh_ubo);
     }
 }
