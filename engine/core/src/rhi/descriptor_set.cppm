@@ -5,7 +5,8 @@ import UniformBuffer;
 import DescriptorSetLayout;
 import Device;
 import TextureImage;
-import Global_Context;
+import GlobalContext;
+import DescriptorType;
 
 namespace ToolEngine
 {

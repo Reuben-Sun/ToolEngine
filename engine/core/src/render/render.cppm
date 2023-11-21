@@ -16,7 +16,7 @@ import SwapChain;
 import RenderPass;
 import PhysicalDevice;
 import Device;
-import Global_Context;
+import GlobalContext;
 import BindingManager;
 import GLFW_Window;
 import BlitPipeline;

@@ -1,5 +1,5 @@
 #include "include/common/macro.h"
-import Global_Context;
+import GlobalContext;
 
 import AssetManager;
 import InputManager;

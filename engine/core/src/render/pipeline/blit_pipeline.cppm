@@ -12,7 +12,7 @@ import Sampler;
 import ShaderModule;
 import Device;
 import Vertex;
-import Global_Context;
+import GlobalContext;
 import BindingManager;
 
 namespace ToolEngine

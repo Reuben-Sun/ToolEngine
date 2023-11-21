@@ -3,6 +3,7 @@
 import DescriptorSetLayout;
 import PipelineLayout;
 import Device;
+import DescriptorType;
 
 namespace ToolEngine
 {
@@ -14,7 +15,7 @@ namespace ToolEngine
 		VkDescriptorSetLayoutBinding ubo_layout_binding{};
 		ubo_layout_binding.binding = binding_index;
 		ubo_layout_binding.descriptorCount = 1;
-		ubo_layout_binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		ubo_layout_binding.descriptorType = DescriptorTypeMap[DescriptorType::ConstantBuffer];
 		ubo_layout_binding.pImmutableSamplers = nullptr;
 		ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
 		

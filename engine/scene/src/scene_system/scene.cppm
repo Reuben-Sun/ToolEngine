@@ -1,6 +1,6 @@
 #include "include/common/macro.h"
 import Scene;
-import Global_Context;
+import GlobalContext;
 import RenderScene;
 import GltfLoader;
 import Model;

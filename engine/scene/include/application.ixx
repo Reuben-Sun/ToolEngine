@@ -3,7 +3,7 @@
 export module Application;
 import Timer;
 import GLFW_Window;
-import Global_Context;
+import GlobalContext;
 import Render;
 import Scene;
 
