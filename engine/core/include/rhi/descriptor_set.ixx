@@ -13,7 +13,7 @@ namespace ToolEngine
 	export class DescriptorSet
 	{
 	public:
-		DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, UniformBuffer& ubo_buffer);
+		DescriptorSet(Device& device, DescriptorSetLayout& descriptor_set_layout, UniformBuffer& ubo_buffer, UniformBuffer& permesh_ubo_buffer);
 		~DescriptorSet();
 		VkDescriptorSet getHandle() { return m_descriptor_set; }
 	private:

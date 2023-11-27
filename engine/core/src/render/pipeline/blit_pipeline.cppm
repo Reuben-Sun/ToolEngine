@@ -21,15 +21,14 @@ namespace ToolEngine
         : m_device(device), m_frames_in_flight_count(frames_in_flight_count), m_physical_device(physical_device), m_swap_chain(swap_chain)
 	{
         // pipeline init
-        m_global_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 0);
-        m_per_mesh_uniform_descrptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device, 1);
+        m_uniform_descriptor_set_layout = std::make_unique<DescriptorSetLayout>(m_device);
         createPipeline();
 
-        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device);
-
+        m_global_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device, UniformBufferType::Global);
+        m_permesh_uniform_buffer = std::make_unique<UniformBuffer>(m_device, m_physical_device, UniformBufferType::PerMesh);
         m_texture_image = std::make_unique<TextureImage>(m_device, m_physical_device, "CalibrationFloorDiffuse.png");
         
-        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_global_uniform_descriptor_set_layout, *m_global_uniform_buffer);
+        m_global_uniform_descriptor_set = std::make_unique<DescriptorSet>(m_device, *m_uniform_descriptor_set_layout, *m_global_uniform_buffer, *m_permesh_uniform_buffer);
 	}
     BlitPipeline::~BlitPipeline()
     {
@@ -47,9 +46,6 @@ namespace ToolEngine
 
         command_buffer.setScissor(frame_index, m_swap_chain.getExtent(), 0, 1);
 
-        // global ubo
-        const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
-        command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1);
 
         uint32_t vertex_buffer_count = render_scene.models.size();
         for(int i = 0; i < vertex_buffer_count; i++)
@@ -63,7 +59,9 @@ namespace ToolEngine
             updateGlobalUniformBuffer(render_scene, i);
             command_buffer.bindVertexBuffer(frame_index, vertex_buffer, offsets, 0, 1);
             command_buffer.bindIndexBuffer(frame_index, index_buffer, 0, VK_INDEX_TYPE_UINT16);
-            // TODO: per mesh ubo
+            uint32_t dynamic_offset = m_permesh_uniform_buffer->getAlignmentSize() * i;
+            const std::vector<VkDescriptorSet> descriptorsets = { m_global_uniform_descriptor_set->getHandle() };
+            command_buffer.bindDescriptorSets(frame_index, VK_PIPELINE_BIND_POINT_GRAPHICS, m_pipeline_layout->getHandle(), descriptorsets, 0, 1, dynamic_offset);
             command_buffer.draw(frame_index, index_count, 1, 0, 0, 0);
         }
 
@@ -165,7 +163,7 @@ namespace ToolEngine
         dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
         dynamicState.pDynamicStates = dynamicStates.data();
 
-        const std::vector<VkDescriptorSetLayout> descriptor_set_layouts = { m_global_uniform_descriptor_set_layout->getHandle(), m_per_mesh_uniform_descrptor_set_layout->getHandle() };
+        const std::vector<VkDescriptorSetLayout> descriptor_set_layouts = { m_uniform_descriptor_set_layout->getHandle() };
         VkPipelineLayoutCreateInfo pipeline_layout_info{};
         pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipeline_layout_info.setLayoutCount = 1;
@@ -197,6 +195,9 @@ namespace ToolEngine
         ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
         ubo.view_matrix = render_scene.render_camera.getViewMatrix();
         ubo.projection_matrix = render_scene.render_camera.getProjectionMatrix();
-        m_global_uniform_buffer->updateBuffer(ubo);
+        m_global_uniform_buffer->updateBuffer(&ubo);
+        PerMeshUniformBufferObject per_mesh_ubo{};
+        per_mesh_ubo.model_matrix = render_scene.models[model_index].transform.getModelMatrix();
+        m_permesh_uniform_buffer->updateBuffer(&per_mesh_ubo);
     }
 }
